@@ -11,6 +11,7 @@ import Firebase
 struct temperatureView: View {
     @State private var selectedFruit = ""
     @State private var temperatureValues: [(Date, Double)] = []
+    @State private var fruits: [String] = []
     
     private let db = Firestore.firestore()
     private let user = Auth.auth().currentUser
@@ -18,7 +19,7 @@ struct temperatureView: View {
     var body: some View {
         VStack {
             Picker("Select a fruit", selection: $selectedFruit) {
-                ForEach(uniqueFruits(), id: \.self) { fruit in
+                ForEach(fruits, id: \.self) { fruit in
                     Text(fruit)
                 }
             }
@@ -29,32 +30,38 @@ struct temperatureView: View {
             }, label: {
                 Text("Show temperature Values")
             })
+            .disabled(selectedFruit.isEmpty)
             .padding()
             
             if !temperatureValues.isEmpty {
                 temperatureLineChartView(data: temperatureValues)
+                    .frame(height: 300)
                     .padding()
             }
         }
+        .onAppear {
+            loadFruits()
+        }
     }
     
-    private func uniqueFruits() -> [String] {
-        var fruits: [String] = []
+    private func loadFruits() {
         db.collection("soil_data")
             .whereField("userId", isEqualTo: user?.uid ?? "")
             .getDocuments { querySnapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let fruit = document.data()["fruit"] as? String ?? ""
-                        if !fruits.contains(fruit) {
-                            fruits.append(fruit)
-                        }
+                    return
+                }
+                guard let documents = querySnapshot?.documents else { return }
+                var uniqueFruits: [String] = []
+                for document in documents {
+                    let fruit = document.data()["fruit"] as? String ?? ""
+                    if !uniqueFruits.contains(fruit) && !fruit.isEmpty {
+                        uniqueFruits.append(fruit)
                     }
                 }
+                self.fruits = uniqueFruits.sorted()
             }
-        return fruits
     }
     
     private func gettemperatureValues() {
@@ -66,12 +73,13 @@ struct temperatureView: View {
             .getDocuments { querySnapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let temperatureValue = document.data()["Temperature"] as? Double ?? 0.0
-                        let timestamp = document.data()["Timestamp"] as? Timestamp ?? Timestamp()
-                        temperatureValues.append((timestamp.dateValue(), temperatureValue))
-                    }
+                    return
+                }
+                guard let documents = querySnapshot?.documents else { return }
+                for document in documents {
+                    let temperatureValue = document.data()["Temperature"] as? Double ?? 0.0
+                    let timestamp = document.data()["Timestamp"] as? Timestamp ?? Timestamp()
+                    temperatureValues.append((timestamp.dateValue(), temperatureValue))
                 }
             }
     }
@@ -98,19 +106,24 @@ struct temperatureLineChartView: View {
                         path.addLine(to: CGPoint(x: geometry.size.width, y: y))
                     }
                 }
-                .stroke(Color.gray, style: StrokeStyle(lineWidth: 1, dash: [5]))
+                .stroke(Color.gray.opacity(0.3), style: StrokeStyle(lineWidth: 1, dash: [5]))
                 
                 // Line chart
                 Path { path in
-                    guard !data.isEmpty else { return }
+                    guard data.count > 0 else { return }
                     let minData = data.map { $0.1 }.min() ?? 0
                     let maxData = data.map { $0.1 }.max() ?? 1
-                    let xScale = geometry.size.width / CGFloat(data.count - 1)
-                    let yScale = geometry.size.height / CGFloat(maxData - minData)
-                    path.move(to: CGPoint(x: 0, y: (data[0].1 - minData) * yScale))
+                    let dataRange = maxData - minData
+                    
+                    let xScale = data.count > 1 ? geometry.size.width / CGFloat(data.count - 1) : 0
+                    let yScale = dataRange > 0 ? geometry.size.height / CGFloat(dataRange) : 0
+                    
+                    let firstY = dataRange > 0 ? geometry.size.height - (data[0].1 - minData) * yScale : geometry.size.height / 2
+                    path.move(to: CGPoint(x: 0, y: firstY))
+                    
                     for i in 1..<data.count {
                         let x = CGFloat(i) * xScale
-                        let y = (data[i].1 - minData) * yScale
+                        let y = dataRange > 0 ? geometry.size.height - (data[i].1 - minData) * yScale : geometry.size.height / 2
                         path.addLine(to: CGPoint(x: x, y: y))
                     }
                 }

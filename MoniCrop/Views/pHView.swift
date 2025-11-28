@@ -12,6 +12,8 @@ struct pHView: View {
     @State private var selectedFruit = ""
     @State private var selectedID = ""
     @State private var pHValues: [(Date, Double)] = []
+    @State private var fruits: [String] = []
+    @State private var ids: [String] = []
     
     private let db = Firestore.firestore()
     private let user = Auth.auth().currentUser
@@ -19,14 +21,18 @@ struct pHView: View {
     var body: some View {
         VStack {
             Picker("Select a fruit", selection: $selectedFruit) {
-                ForEach(uniqueFruits(), id: \.self) { fruit in
+                ForEach(fruits, id: \.self) { fruit in
                     Text(fruit)
                 }
             }
             .padding()
+            .onChange(of: selectedFruit) { _ in
+                loadIDsForFruit()
+                selectedID = ""
+            }
             
             Picker("Select an ID", selection: $selectedID) {
-                ForEach(uniqueIDsForFruit(selectedFruit), id: \.self) { id in
+                ForEach(ids, id: \.self) { id in
                     Text(id)
                 }
             }
@@ -38,54 +44,63 @@ struct pHView: View {
             }, label: {
                 Text("Show pH Values")
             })
+            .disabled(selectedID.isEmpty)
             .padding()
             
             if !pHValues.isEmpty {
                 pHLineChartView(data: pHValues)
+                    .frame(height: 300)
                     .padding()
             }
         }
+        .onAppear {
+            loadFruits()
+        }
     }
     
-    private func uniqueFruits() -> [String] {
-        var fruits: [String] = []
+    private func loadFruits() {
         db.collection("soil_data")
             .whereField("userId", isEqualTo: user?.uid ?? "")
             .getDocuments { querySnapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let fruit = document.data()["fruit"] as? String ?? ""
-                        if !fruits.contains(fruit) {
-                            fruits.append(fruit)
-                        }
+                    return
+                }
+                guard let documents = querySnapshot?.documents else { return }
+                var uniqueFruits: [String] = []
+                for document in documents {
+                    let fruit = document.data()["fruit"] as? String ?? ""
+                    if !uniqueFruits.contains(fruit) && !fruit.isEmpty {
+                        uniqueFruits.append(fruit)
                     }
                 }
+                self.fruits = uniqueFruits.sorted()
             }
-        return fruits
     }
     
-    private func uniqueIDsForFruit(_ fruit: String) -> [String] {
-        var ids: [String] = []
-        if !fruit.isEmpty {
-            db.collection("soil_data")
-                .whereField("userId", isEqualTo: user?.uid ?? "")
-                .whereField("fruit", isEqualTo: fruit)
-                .getDocuments { querySnapshot, error in
-                    if let error = error {
-                        print("Error getting documents: \(error)")
-                    } else {
-                        for document in querySnapshot!.documents {
-                            let id = document.documentID
-                            if !ids.contains(id) {
-                                ids.append(id)
-                            }
-                        }
+    private func loadIDsForFruit() {
+        guard !selectedFruit.isEmpty else {
+            ids = []
+            return
+        }
+        db.collection("soil_data")
+            .whereField("userId", isEqualTo: user?.uid ?? "")
+            .whereField("fruit", isEqualTo: selectedFruit)
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    return
+                }
+                guard let documents = querySnapshot?.documents else { return }
+                var uniqueIDs: [String] = []
+                for document in documents {
+                    let id = document.documentID
+                    if !uniqueIDs.contains(id) {
+                        uniqueIDs.append(id)
                     }
                 }
-        }
-        return ids
+                self.ids = uniqueIDs.sorted()
+            }
     }
     
     private func getpHValues() {
@@ -98,12 +113,13 @@ struct pHView: View {
             .getDocuments { querySnapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let pHValue = document.data()["pH"] as? Double ?? 0.0
-                        let timestamp = document.data()["Timestamp"] as? Timestamp ?? Timestamp()
-                        pHValues.append((timestamp.dateValue(), pHValue))
-                    }
+                    return
+                }
+                guard let documents = querySnapshot?.documents else { return }
+                for document in documents {
+                    let pHValue = document.data()["pH"] as? Double ?? 0.0
+                    let timestamp = document.data()["Timestamp"] as? Timestamp ?? Timestamp()
+                    pHValues.append((timestamp.dateValue(), pHValue))
                 }
             }
     }
@@ -130,19 +146,24 @@ struct pHLineChartView: View {
                         path.addLine(to: CGPoint(x: geometry.size.width, y: y))
                     }
                 }
-                .stroke(Color.gray, style: StrokeStyle(lineWidth: 1, dash: [5]))
+                .stroke(Color.gray.opacity(0.3), style: StrokeStyle(lineWidth: 1, dash: [5]))
                 
                 // Line chart
                 Path { path in
-                    guard !data.isEmpty else { return }
+                    guard data.count > 0 else { return }
                     let minData = data.map { $0.1 }.min() ?? 0
                     let maxData = data.map { $0.1 }.max() ?? 1
-                    let xScale = geometry.size.width / CGFloat(data.count - 1)
-                    let yScale = geometry.size.height / CGFloat(maxData - minData)
-                    path.move(to: CGPoint(x: 0, y: (data[0].1 - minData) * yScale))
+                    let dataRange = maxData - minData
+                    
+                    let xScale = data.count > 1 ? geometry.size.width / CGFloat(data.count - 1) : 0
+                    let yScale = dataRange > 0 ? geometry.size.height / CGFloat(dataRange) : 0
+                    
+                    let firstY = dataRange > 0 ? geometry.size.height - (data[0].1 - minData) * yScale : geometry.size.height / 2
+                    path.move(to: CGPoint(x: 0, y: firstY))
+                    
                     for i in 1..<data.count {
                         let x = CGFloat(i) * xScale
-                        let y = (data[i].1 - minData) * yScale
+                        let y = dataRange > 0 ? geometry.size.height - (data[i].1 - minData) * yScale : geometry.size.height / 2
                         path.addLine(to: CGPoint(x: x, y: y))
                     }
                 }

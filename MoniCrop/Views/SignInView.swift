@@ -74,25 +74,40 @@ struct SignInPage: View {
     }
     
     func verify() {
-        if self.email != "" && self.pwd != "" {
-            Auth.auth().signIn(withEmail: self.email, password: self.pwd) { (result, error) in
-                if error != nil {
-                    self.error = error!.localizedDescription
-                    self.alert.toggle()
-                    return
-                }
-                // If the user is authenticated successfully, change the view to HomeView()
-                isAuthenticated = true
-                
-                // Set a boolean flag in UserDefaults to indicate that the user is authenticated
-                UserDefaults.standard.set(true, forKey: "status")
-                // Post a notification to let other parts of the app know that the authentication status has changed
-                NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
-            }
-        } else {
+        // Validate input
+        guard !email.isEmpty && !pwd.isEmpty else {
             self.error = "Please fill all the contents properly"
             self.alert.toggle()
+            return
         }
+        
+        // Validate email format
+        guard isValidEmail(email) else {
+            self.error = "Please enter a valid email address"
+            self.alert.toggle()
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: self.email, password: self.pwd) { (result, error) in
+            if let error = error {
+                self.error = error.localizedDescription
+                self.alert.toggle()
+                return
+            }
+            // If the user is authenticated successfully, change the view to HomeView()
+            isAuthenticated = true
+            
+            // Set a boolean flag in UserDefaults to indicate that the user is authenticated
+            UserDefaults.standard.set(true, forKey: "status")
+            // Post a notification to let other parts of the app know that the authentication status has changed
+            NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+        }
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
     }
 }
 

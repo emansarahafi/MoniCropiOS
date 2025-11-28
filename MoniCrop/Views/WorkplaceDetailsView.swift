@@ -47,20 +47,21 @@ struct WorkplaceDetailsPage: View {
                 db.whereField("userId", isEqualTo: userID).getDocuments { (querySnapshot, error) in
                     if let error = error {
                         print("Error getting documents: \(error)")
-                    } else {
-                        for document in querySnapshot!.documents {
-                            if let name = document.data()["name"] as? String {
-                                self.workplaceName = name
-                            }
-                            if let foundingTimestamp = document.data()["foundingDate"] as? Timestamp {
-                                self.foundingDate = foundingTimestamp.dateValue()
-                            }
-                            if let joinedTimestamp = document.data()["joinedDate"] as? Timestamp {
-                                self.joinedDate = joinedTimestamp.dateValue()
-                            }
-                            if let items = document.data()["items"] as? [String] {
-                                self.items = items
-                            }
+                        return
+                    }
+                    guard let documents = querySnapshot?.documents else { return }
+                    for document in documents {
+                        if let name = document.data()["name"] as? String {
+                            self.workplaceName = name
+                        }
+                        if let foundingTimestamp = document.data()["foundingDate"] as? Timestamp {
+                            self.foundingDate = foundingTimestamp.dateValue()
+                        }
+                        if let joinedTimestamp = document.data()["joinedDate"] as? Timestamp {
+                            self.joinedDate = joinedTimestamp.dateValue()
+                        }
+                        if let items = document.data()["items"] as? [String] {
+                            self.items = items
                         }
                     }
                 }

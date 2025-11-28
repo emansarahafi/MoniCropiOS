@@ -106,7 +106,7 @@ struct MenuView: View {
                     Button {
                     }
                     label: {
-                        NavigationLink(destination: EmptyView()) {
+                        NavigationLink(destination: ViewDataPage()) {
                             Text("View Data")
                         }}.foregroundColor(.black)
                             .font(.headline)

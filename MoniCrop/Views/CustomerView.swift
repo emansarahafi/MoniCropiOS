@@ -52,6 +52,22 @@ struct CustomerFeedbackPage: View {
         .padding()
     }
     private func submitFeedback() {
+        // Validate email
+        guard !email.isEmpty else {
+            print("Email is required")
+            return
+        }
+        
+        guard isValidEmail(email) else {
+            print("Please enter a valid email address")
+            return
+        }
+        
+        guard !opinion.isEmpty else {
+            print("Feedback is required")
+            return
+        }
+        
         guard let userId = Auth.auth().currentUser?.uid else {
             print("User not authenticated")
             return
@@ -59,14 +75,14 @@ struct CustomerFeedbackPage: View {
         
         let feedbackText = "\(email) says: \(opinion)"
         
-        // Send feedback to Telegram channel
-        let telegramChatId = "@MoniCropFeedback"
-        let telegramApiKey = "5391208108:AAGz6gTUOycK1v-61407-6wqJaOvHqhm7EU"
+        // Send feedback to Telegram channel using Config
         let telegramMessage = "User \(userId) submitted feedback: \(feedbackText)"
         
         // Send message to Telegram
-        let telegramURL = URL(string: "https://api.telegram.org/bot\(telegramApiKey)/sendMessage?chat_id=\(telegramChatId)&text=\(telegramMessage)")
-        URLSession.shared.dataTask(with: telegramURL!).resume()
+        if let encodedMessage = telegramMessage.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+           let telegramURL = URL(string: "https://api.telegram.org/bot\(Config.telegramBotToken)/sendMessage?chat_id=\(Config.telegramChatID)&text=\(encodedMessage)") {
+            URLSession.shared.dataTask(with: telegramURL).resume()
+        }
         
         // Write feedback to Firestore
         let db = Firestore.firestore()
@@ -84,6 +100,12 @@ struct CustomerFeedbackPage: View {
         // Clear feedback text
         email = ""
         opinion = ""
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
     }
 }
 

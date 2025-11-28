@@ -72,27 +72,51 @@ struct FirstSignUpPage: View {
         )
     }
     func register() {
-        if self.email != "" {
-            if self.pwd == self.cpwd {
-                Auth.auth().createUser(withEmail: self.email, password: self.pwd) { (res, err) in
-                    if err != nil {
-                        self.error = err!.localizedDescription
-                        self.alert.toggle()
-                        return
-                    }
-                    isRegistered = true
-                    
-                    UserDefaults.standard.set(true, forKey: "status")
-                    NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
-                }
-            } else {
-                self.error = "Password mismatch"
-                self.alert.toggle()
-            }
-        } else {
+        // Validate email is not empty
+        guard !email.isEmpty else {
             self.error = "Please fill all the contents properly"
             self.alert.toggle()
+            return
         }
+        
+        // Validate email format
+        guard isValidEmail(email) else {
+            self.error = "Please enter a valid email address"
+            self.alert.toggle()
+            return
+        }
+        
+        // Validate password strength
+        guard pwd.count >= 6 else {
+            self.error = "Password must be at least 6 characters"
+            self.alert.toggle()
+            return
+        }
+        
+        // Validate passwords match
+        guard pwd == cpwd else {
+            self.error = "Password mismatch"
+            self.alert.toggle()
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: self.email, password: self.pwd) { (res, err) in
+            if let err = err {
+                self.error = err.localizedDescription
+                self.alert.toggle()
+                return
+            }
+            isRegistered = true
+            
+            UserDefaults.standard.set(true, forKey: "status")
+            NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+        }
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
     }
 
 }
@@ -150,13 +174,12 @@ struct SecondSignUpPage: View {
                     .font(.system(size: 20))
                 TextField("Insert Position", text: $position) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
                     .font(.system(size: 20))
-                Button {
-                }
-            label: {
-                NavigationLink(destination: HamburgerMenu()) {
+                Button(action: {
+                    saveUserData()
+                }) {
                     Text("Sign Up")
                         .frame(maxWidth: .infinity)
-                }}.buttonStyle(.borderedProminent)
+                }.buttonStyle(.borderedProminent)
                     .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
                     .foregroundColor(.white)
                     .font(.system(size: 20))
@@ -171,38 +194,46 @@ struct SecondSignUpPage: View {
         }
     }
     func saveUserData() {
+        // Validate required fields
+        guard !fname.isEmpty, !lname.isEmpty, !wname.isEmpty, !position.isEmpty else {
+            print("Please fill all required fields")
+            return
+        }
+        
+        // Validate account type selection
+        guard selection != "Select your account type" else {
+            print("Please select an account type")
+            return
+        }
+        
         // Get the current user's ID and email
-            guard let userID = Auth.auth().currentUser?.uid, let userEmail = Auth.auth().currentUser?.email else {
-                // Handle the case where there is no logged in user
-                return
-            }
-            
-            // Get a reference to the "users" collection and the document with the user's ID
-            let userRef = Firestore.firestore().collection("users").document(userID)
-            
-            // Set the document data with the user's details
-            userRef.setData([
-                "email": userEmail,
-                "firstName": fname,
-                "middleName": mname,
-                "lastName": lname,
-                "dob": date,
-                "accountType": selection,
-                "workplaceName": wname,
-                "position": position
-            ]) { error in
-                if let error = error {
-                    // Handle the case where there was an error saving the data
-                    print("Error saving user data: \(error.localizedDescription)")
-                } else {
-                    // Handle the case where the data was successfully saved
-                    print("User data saved successfully!")
-                    
-                    // Navigate to the next screen
-                    isSaved = true
-                }
+        guard let userID = Auth.auth().currentUser?.uid, let userEmail = Auth.auth().currentUser?.email else {
+            print("No user is currently signed in")
+            return
+        }
+        
+        // Get a reference to the "users" collection and the document with the user's ID
+        let userRef = Firestore.firestore().collection("users").document(userID)
+        
+        // Set the document data with the user's details
+        userRef.setData([
+            "email": userEmail,
+            "firstName": fname,
+            "middleName": mname,
+            "lastName": lname,
+            "dob": date,
+            "accountType": selection,
+            "workplaceName": wname,
+            "position": position
+        ]) { error in
+            if let error = error {
+                print("Error saving user data: \(error.localizedDescription)")
+            } else {
+                print("User data saved successfully!")
+                isSaved = true
             }
         }
+    }
 }
 
 struct SignUpView_Previews: PreviewProvider {
