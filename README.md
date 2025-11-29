@@ -2,7 +2,9 @@
 
 A new release of the previous MoniCrop iOS application, but now connected to Firebase.
 
-![COSC 348   CMPE 495A Wireframes (2)](https://github.com/emansarahafi/MoniCropiOSFirebase/assets/85173630/77e168c6-23a3-4bea-9b30-5c912ad237d7)
+[View interactive prototype on Figma](https://www.figma.com/proto/tVz1lMvEEfc3UZvJ6FqLNd/COSC-348---CMPE-495A-Wireframes?node-id=1724-4579&p=f&t=abFzbCURSv0wED8h-1&scaling=scale-down&content-scaling=fixed&page-id=1255%3A9069&starting-point-node-id=1724%3A4579)
+
+![COSC 348   CMPE 495A Wireframes (3)](https://github.com/emansarahafi/MoniCropWebsite/assets/85173630/da259ddb-8702-4bd4-9bc2-c5d18071583c)
 
 ## Setup
 
@@ -86,3 +88,27 @@ sed -i.bak '33s/ABSL_CONST_INIT //' ~/Library/Developer/Xcode/DerivedData/MoniCr
 - Plant monitoring by fruit type and plant ID
 - Account management
 - Telegram bot integration for notifications
+
+## Related Projects
+
+This website is part of the **MoniCrop Smart Crop Monitoring System**:
+
+- **[MoniCrop Hardware](https://github.com/emansarahafi/MoniCropHardware)** - IoT sensors and hardware components
+- **[MoniCrop Website](https://github.com/emansarahafi/MoniCropWebsite)** - Functional Website
+
+## Citation
+
+If you use this work, please cite:
+
+```bibtex
+@article{Afi2023,
+  author = "Eman Sarah Afi",
+  title = "{Development of a Smart Crop Monitoring System}",
+  year = "2023",
+  month = "10",
+  url = "https://aubh.figshare.com/articles/thesis/_b_Development_of_a_Smart_Crop_Monitoring_System_b_/30580751",
+  doi = "10.58014/aubh.24314056.v2"
+}
+```
+
+**Published thesis**: [Development of a Smart Crop Monitoring System](https://aubh.figshare.com/articles/thesis/_b_Development_of_a_Smart_Crop_Monitoring_System_b_/30580751) (DOI: 10.58014/aubh.24314056.v2)
