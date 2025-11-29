@@ -49,6 +49,11 @@ Track key agricultural metrics in real-time:
 - **Language**: Swift
 - **Architecture**: MVVM pattern with `@StateObject` and `@EnvironmentObject`
 
+### Branches
+
+- **basic-version**: Original implementation with local data storage
+- **firebase-version**: Enhanced version with Firebase backend integration for authentication and real-time data synchronization
+
 ## Screenshots
 
 ![COSC348 - Poster Presentation Final Draft](https://github.com/emansarahafi/MoniCropiOS/assets/85173630/39233a7a-ab99-4489-85b7-138c18ee0463)
