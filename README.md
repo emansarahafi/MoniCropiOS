@@ -2,9 +2,9 @@
 
 A new release of the previous MoniCrop iOS application, but now connected to Firebase.
 
-[View interactive prototype on Figma](https://www.figma.com/proto/tVz1lMvEEfc3UZvJ6FqLNd/COSC-348---CMPE-495A-Wireframes?node-id=1724-4579&p=f&t=abFzbCURSv0wED8h-1&scaling=scale-down&content-scaling=fixed&page-id=1255%3A9069&starting-point-node-id=1724%3A4579)
+[View interactive prototype on Figma](https://www.figma.com/proto/tVz1lMvEEfc3UZvJ6FqLNd/COSC-348---CMPE-495A-Wireframes?node-id=1451-5057&p=f&t=GpWxWu3EK2lZuChZ-1&scaling=scale-down&content-scaling=fixed&page-id=1408%3A4502&starting-point-node-id=1451%3A5057&show-proto-sidebar=1)
 
-![COSC 348   CMPE 495A Wireframes (3)](https://github.com/emansarahafi/MoniCropWebsite/assets/85173630/da259ddb-8702-4bd4-9bc2-c5d18071583c)
+![COSC 348   CMPE 495A Wireframes (3)](https://github.com/user-attachments/assets/062d432d-f660-4f28-b576-d768fa13a394)
 
 ## Setup
 
