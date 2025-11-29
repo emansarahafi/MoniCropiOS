@@ -31,6 +31,7 @@
 		718419B6293A5C2F00D77CE3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 718419B5293A5C2F00D77CE3 /* Preview Assets.xcassets */; };
 		7196BF972959FE1300D26CC6 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7196BF962959FE1300D26CC6 /* Components.swift */; };
 		71B1F04A29F05784004EA5F1 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B1F04929F05783004EA5F1 /* EditAccountView.swift */; };
+		71BA98D22EDB5F760068CAEF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BA98D12EDB5F760068CAEF /* Config.swift */; };
 		71D3744F2988365300755046 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D3744E2988365300755046 /* HomeView.swift */; };
 		71D9452029854E330092C58B /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D9451F29854E330092C58B /* ErrorView.swift */; };
 		71EA242C29855FDC0009F1A5 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA242B29855FDC0009F1A5 /* ItemViewModel.swift */; };
@@ -39,23 +40,6 @@
 		71FE2E6A2969EE6400128E61 /* CustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FE2E692969EE6400128E61 /* CustomerView.swift */; };
 		71FE2E702969EF0E00128E61 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FE2E6F2969EF0E00128E61 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		718419BC293A5C3000D77CE3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 718419A3293A5C2A00D77CE3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 718419AA293A5C2A00D77CE3;
-			remoteInfo = MoniCrop;
-		};
-		718419C6293A5C3000D77CE3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 718419A3293A5C2A00D77CE3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 718419AA293A5C2A00D77CE3;
-			remoteInfo = MoniCrop;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		71096C3329F0AA43004D5D3A /* Embed Frameworks */ = {
@@ -84,8 +68,6 @@
 		710A0B5029F48D6400E80BE1 /* potassiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = potassiumView.swift; sourceTree = "<group>"; };
 		710D6E452969D81C00DA4AEF /* ViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewData.swift; sourceTree = "<group>"; };
 		711728632EDA30B300DF9957 /* MoniCrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoniCrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		711728642EDA30B300DF9957 /* MoniCropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MoniCropTests.xctest; path = "/Users/emansarahafi/Downloads/MoniCropiOS/build/Debug-iphoneos/MoniCrop.app/PlugIns/MoniCropTests.xctest"; sourceTree = "<absolute>"; };
-		711728652EDA30B300DF9957 /* MoniCropUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MoniCropUITests.xctest; path = "/Users/emansarahafi/Downloads/MoniCropiOS/build/Debug-iphoneos/MoniCropUITests-Runner.app/PlugIns/MoniCropUITests.xctest"; sourceTree = "<absolute>"; };
 		7163A5ED29EF32D50015E232 /* ViewItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewItems.swift; sourceTree = "<group>"; };
 		7163A5EF29EF334E0015E232 /* LandingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		71692A3B29685063008E9DE8 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -95,6 +77,7 @@
 		718419B5293A5C2F00D77CE3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7196BF962959FE1300D26CC6 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		71B1F04929F05783004EA5F1 /* EditAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
+		71BA98D12EDB5F760068CAEF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		71D3744E2988365300755046 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		71D9451F29854E330092C58B /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		71EA242B29855FDC0009F1A5 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
@@ -112,20 +95,6 @@
 				71096C1F29F0914C004D5D3A /* FirebaseAuth in Frameworks */,
 				71096C2129F0914C004D5D3A /* FirebaseFirestore in Frameworks */,
 				71096C2329F0914C004D5D3A /* FirebaseFirestoreSwift in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		718419B8293A5C3000D77CE3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		718419C2293A5C3000D77CE3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +157,7 @@
 		718419AD293A5C2A00D77CE3 /* MoniCrop */ = {
 			isa = PBXGroup;
 			children = (
+				71BA98D12EDB5F760068CAEF /* Config.swift */,
 				718419AE293A5C2A00D77CE3 /* MoniCropApp.swift */,
 				710A0B4029F457F600E80BE1 /* GoogleService-Info.plist */,
 				710520B629843ADE002982EA /* Models */,
@@ -234,42 +204,6 @@
 			productReference = 711728632EDA30B300DF9957 /* MoniCrop.app */;
 			productType = "com.apple.product-type.application";
 		};
-		718419BA293A5C3000D77CE3 /* MoniCropTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 718419D2293A5C3000D77CE3 /* Build configuration list for PBXNativeTarget "MoniCropTests" */;
-			buildPhases = (
-				718419B7293A5C3000D77CE3 /* Sources */,
-				718419B8293A5C3000D77CE3 /* Frameworks */,
-				718419B9293A5C3000D77CE3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				718419BD293A5C3000D77CE3 /* PBXTargetDependency */,
-			);
-			name = MoniCropTests;
-			productName = MoniCropTests;
-			productReference = 711728642EDA30B300DF9957 /* MoniCropTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		718419C4293A5C3000D77CE3 /* MoniCropUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 718419D5293A5C3000D77CE3 /* Build configuration list for PBXNativeTarget "MoniCropUITests" */;
-			buildPhases = (
-				718419C1293A5C3000D77CE3 /* Sources */,
-				718419C2293A5C3000D77CE3 /* Frameworks */,
-				718419C3293A5C3000D77CE3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				718419C7293A5C3000D77CE3 /* PBXTargetDependency */,
-			);
-			name = MoniCropUITests;
-			productName = MoniCropUITests;
-			productReference = 711728652EDA30B300DF9957 /* MoniCropUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -278,18 +212,10 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					718419AA293A5C2A00D77CE3 = {
 						CreatedOnToolsVersion = 14.1;
-					};
-					718419BA293A5C3000D77CE3 = {
-						CreatedOnToolsVersion = 14.1;
-						TestTargetID = 718419AA293A5C2A00D77CE3;
-					};
-					718419C4293A5C3000D77CE3 = {
-						CreatedOnToolsVersion = 14.1;
-						TestTargetID = 718419AA293A5C2A00D77CE3;
 					};
 				};
 			};
@@ -312,8 +238,6 @@
 			projectRoot = "";
 			targets = (
 				718419AA293A5C2A00D77CE3 /* MoniCrop */,
-				718419BA293A5C3000D77CE3 /* MoniCropTests */,
-				718419C4293A5C3000D77CE3 /* MoniCropUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -329,25 +253,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		718419B9293A5C3000D77CE3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		718419C3293A5C3000D77CE3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		7191559529F430BE006A8601 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -389,6 +300,7 @@
 				71096C1C29F08DD1004D5D3A /* WorkplaceDetailsView.swift in Sources */,
 				71B1F04A29F05784004EA5F1 /* EditAccountView.swift in Sources */,
 				710A0B4529F484B700E80BE1 /* moistureView.swift in Sources */,
+				71BA98D22EDB5F760068CAEF /* Config.swift in Sources */,
 				718419AF293A5C2A00D77CE3 /* MoniCropApp.swift in Sources */,
 				71FE2E702969EF0E00128E61 /* WelcomeView.swift in Sources */,
 				710520BE29843D26002982EA /* Item.swift in Sources */,
@@ -398,34 +310,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		718419B7293A5C3000D77CE3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		718419C1293A5C3000D77CE3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		718419BD293A5C3000D77CE3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 718419AA293A5C2A00D77CE3 /* MoniCrop */;
-			targetProxy = 718419BC293A5C3000D77CE3 /* PBXContainerItemProxy */;
-		};
-		718419C7293A5C3000D77CE3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 718419AA293A5C2A00D77CE3 /* MoniCrop */;
-			targetProxy = 718419C6293A5C3000D77CE3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		718419CD293A5C3000D77CE3 /* Debug */ = {
@@ -462,8 +347,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7K4G6B8W29;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -483,6 +370,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -522,8 +410,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7K4G6B8W29;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -536,6 +426,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -550,9 +441,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MoniCrop/Preview Content\"";
-				DEVELOPMENT_TEAM = 7K4G6B8W29;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MoniCrop;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -579,9 +472,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MoniCrop/Preview Content\"";
-				DEVELOPMENT_TEAM = 7K4G6B8W29;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MoniCrop;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -597,78 +492,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		718419D3293A5C3000D77CE3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7K4G6B8W29;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MoniCrop.MoniCropTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoniCrop.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MoniCrop";
-			};
-			name = Debug;
-		};
-		718419D4293A5C3000D77CE3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7K4G6B8W29;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MoniCrop.MoniCropTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoniCrop.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MoniCrop";
-			};
-			name = Release;
-		};
-		718419D6293A5C3000D77CE3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7K4G6B8W29;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MoniCrop.MoniCropUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MoniCrop;
-			};
-			name = Debug;
-		};
-		718419D7293A5C3000D77CE3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7K4G6B8W29;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MoniCrop.MoniCropUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MoniCrop;
 			};
 			name = Release;
 		};
@@ -689,24 +512,6 @@
 			buildConfigurations = (
 				718419D0293A5C3000D77CE3 /* Debug */,
 				718419D1293A5C3000D77CE3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		718419D2293A5C3000D77CE3 /* Build configuration list for PBXNativeTarget "MoniCropTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				718419D3293A5C3000D77CE3 /* Debug */,
-				718419D4293A5C3000D77CE3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		718419D5293A5C3000D77CE3 /* Build configuration list for PBXNativeTarget "MoniCropUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				718419D6293A5C3000D77CE3 /* Debug */,
-				718419D7293A5C3000D77CE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

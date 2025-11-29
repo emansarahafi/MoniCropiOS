@@ -68,7 +68,7 @@ struct SignInPage: View {
         }
         .background(
             NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true), isActive: $isAuthenticated) {
-                SignInPage()
+                EmptyView()
             }
         )
     }

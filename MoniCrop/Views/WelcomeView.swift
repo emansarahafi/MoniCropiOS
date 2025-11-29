@@ -189,12 +189,10 @@ struct MenuView: View {
                             print("Error signing out: \(error)")
                         }
                     }) {
-                        Text("Sign Out")
-                    }.foregroundColor(.black)
-                    .font(.headline)
-                    .background(NavigationLink(destination: LandingPage().navigationBarBackButtonHidden(true), isActive: $shouldShowLandingPage) { HomeView() })
-
-                }
+                    Text("Sign Out")
+                }.foregroundColor(.black)
+                .font(.headline)
+                .background(NavigationLink(destination: LandingPage().navigationBarBackButtonHidden(true), isActive: $shouldShowLandingPage) { EmptyView() })                }
                     .padding(.top, 30)
             }
         }

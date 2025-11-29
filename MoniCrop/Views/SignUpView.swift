@@ -67,7 +67,7 @@ struct FirstSignUpPage: View {
         }
         .background(
             NavigationLink(destination: SecondSignUpPage(), isActive: $isRegistered) {
-                FirstSignUpPage()
+                EmptyView()
             }
         )
     }
@@ -188,7 +188,7 @@ struct SecondSignUpPage: View {
             .padding()
             .background(
                 NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true), isActive: $isSaved) {
-                    SecondSignUpPage()
+                    EmptyView()
                 }
             )
         }
