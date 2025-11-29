@@ -1,6 +1,6 @@
 # MoniCrop iOS (Firebase Version)
 
-A new release of the previous MoniCrop iOS application, but now connected to Firebase.
+A new release of the previous [MoniCrop iOS application](https://github.com/emansarahafi/MoniCropiOS/tree/basic-version), but now connected to Firebase.
 
 [View interactive prototype on Figma](https://www.figma.com/proto/tVz1lMvEEfc3UZvJ6FqLNd/COSC-348---CMPE-495A-Wireframes?node-id=1451-5057&p=f&t=GpWxWu3EK2lZuChZ-1&scaling=scale-down&content-scaling=fixed&page-id=1408%3A4502&starting-point-node-id=1451%3A5057&show-proto-sidebar=1)
 
