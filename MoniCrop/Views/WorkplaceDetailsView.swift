@@ -24,7 +24,7 @@ struct WorkplaceDetailsPage: View {
                 .fontWeight(.bold)
             
             VStack {
-                Text("Workplace Name:\(workplaceName)")
+                Text("Workplace Name: \(workplaceName)")
                     .font(.headline)
                 Text("Founding Date: \(foundingDate, style: .date)")
                     .font(.subheadline)
@@ -51,7 +51,7 @@ struct WorkplaceDetailsPage: View {
                     }
                     guard let documents = querySnapshot?.documents else { return }
                     for document in documents {
-                        if let name = document.data()["name"] as? String {
+                        if let name = document.data()["workplaceName"] as? String {
                             self.workplaceName = name
                         }
                         if let foundingTimestamp = document.data()["foundingDate"] as? Timestamp {
@@ -60,7 +60,7 @@ struct WorkplaceDetailsPage: View {
                         if let joinedTimestamp = document.data()["joinedDate"] as? Timestamp {
                             self.joinedDate = joinedTimestamp.dateValue()
                         }
-                        if let items = document.data()["items"] as? [String] {
+                        if let items = document.data()["ownedItems"] as? [String] {
                             self.items = items
                         }
                     }

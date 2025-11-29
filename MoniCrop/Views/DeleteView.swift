@@ -37,13 +37,15 @@ struct DisableDeletePage: View {
                     
                     switch selectedAction {
                     case "Disable Account":
-                        currentUser.updateEmail(to: "") { error in
-                            if let error = error {
-                                print("Error disabling account: \(error.localizedDescription)")
-                                return
-                            }
-                            print("Account disabled.")
+                        // Sign out the user to "disable" their account
+                        do {
+                            try Auth.auth().signOut()
+                            UserDefaults.standard.set(false, forKey: "status")
+                            NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                            print("Account disabled (signed out).")
                             isActionPerformed = true
+                        } catch let signOutError {
+                            print("Error disabling account: \(signOutError.localizedDescription)")
                         }
                     case "Delete Account":
                         let credential = EmailAuthProvider.credential(withEmail: currentUser.email ?? "", password: password)

@@ -15,7 +15,7 @@ struct ItemsViewModel: Identifiable, Hashable {
     let id = UUID()
     var item: Items
     var image: String {
-        return item.image
+        return item.image.lowercased()
     }
     var name: String {
         return item.name
