@@ -78,14 +78,14 @@ sed -i.bak '33s/ABSL_CONST_INIT //' ~/Library/Developer/Xcode/DerivedData/MoniCr
   - Auth views: SignIn, SignUp, ForgotPassword
   - Main views: Home, Landing, Account, Customer, etc.
 - **ViewModels/**: View models for data management
-- **Assets.xcassets/**: Image assets (fruit icons, app logo)
+- **Assets.xcassets/**: Image assets (crop icons, app logo)
 
 ## Features
 
 - Firebase Authentication (email/password)
 - Firestore database integration for soil data and user management
 - Real-time sensor data visualization with labeled graphs
-- Plant monitoring by fruit type and plant ID
+- Plant monitoring by crop type and plant ID
 - Account management
 - Telegram bot integration for notifications
 
