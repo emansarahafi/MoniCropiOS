@@ -43,26 +43,24 @@ struct SignInView: View {
                     .font(.system(size: 20))
             }
             Button(action: { verify() }) {
-                            Text("Sign in")
-                        }.buttonStyle(.borderedProminent)
+                            Text("Sign in").frame(maxWidth: .infinity)
+                        }
+                            .buttonStyle(.borderedProminent)
                             .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
                             .foregroundColor(.white)
                             .font(.system(size: 20))
                             .padding(.top)
-            Button {
+            NavigationLink(destination: ForgotPasswordView()) {
+                Text("Forgot Your Password?").underline()
             }
-            label: {
-                    NavigationLink(destination: ForgotPasswordView()) {
-                    Text("Forgot Your Password?").underline()
-                }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                        .font(.system(size: 20))
-            Button {
+            .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+            .font(.system(size: 20))
+
+            NavigationLink(destination: FirstSignUpView()) {
+                Text("Sign Up Instead")
             }
-            label: {
-                    NavigationLink(destination: FirstSignUpView()) {
-                    Text("Sign Up Instead")
-                }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                        .font(.system(size: 20))
+            .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+            .font(.system(size: 20))
         }
             .padding()
             .padding(.top, 100)
@@ -83,7 +81,6 @@ struct SignInView: View {
             // Root view will switch via `@AppStorage("status")` in App; set `isLoggedIn` on success.
         }
         }
-    }
     
     func verify() {
         // Validate input

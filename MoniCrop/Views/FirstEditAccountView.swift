@@ -20,6 +20,9 @@ struct FirstEditAccountView: View {
     @State var cpwd: String = ""
     @State var showError: Bool = false
     @State var errorMessage: String = ""
+    @State private var navigate = false
+    @State private var showAlert = false
+    @State private var alertMessage: String = ""
 
     var body: some View {
         VStack {
@@ -30,9 +33,10 @@ struct FirstEditAccountView: View {
                 .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                 .font(.title)
                 .fontWeight(.bold)
+            
+            VStack(alignment: .leading) {
             Text("Email Address")
                 .font(.system(size: 20))
-                .padding()
             TextField("Insert Email", text: $email)
                 .keyboardType(.emailAddress).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
                 .font(.system(size: 20))
@@ -43,72 +47,70 @@ struct FirstEditAccountView: View {
                 .font(.system(size: 20))
             ReSecureTextFieldView(text: $cpwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
                 .font(.system(size: 20))
-            
-            if showError {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .font(.system(size: 14))
-                    .padding(.top, 5)
             }
             
-            Button {
-                validateAndProceed()
+            // show inline error no longer used; show alert instead
+
+            Button(action: {
+                if validate() {
+                    navigate = true
+                } else {
+                    showAlert = true
+                }
+            }) {
+                Text("Next")
+                    .frame(maxWidth: .infinity)
             }
-            label: {
-                NavigationLink(destination: chooseDestination()) {
-                    Text("Next")
-                        .frame(maxWidth: .infinity)
-                }}.buttonStyle(.borderedProminent)
-                        .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.top)
+            .buttonStyle(.borderedProminent)
+            .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
+            .foregroundColor(.white)
+            .font(.system(size: 20))
+            .padding(.top)
+            .alert("Validation", isPresented: $showAlert) {
+                Button("OK") {}
+            } message: {
+                Text(alertMessage)
+            }
         }
         .padding()
         .padding(.top, 50)
+        .navigationDestination(isPresented: $navigate) {
+            SecondEditAccountView(onComplete: onComplete).environmentObject(usersVM)
+        }
     }
     
-    private func validateAndProceed() {
+    private func validate() -> Bool {
         // Reset error state
         showError = false
         errorMessage = ""
-        
+        alertMessage = ""
+
         // Validate passwords match
         if !pwd.isEmpty && pwd != cpwd {
-            showError = true
-            errorMessage = "Passwords do not match"
-            return
+            alertMessage = "Passwords do not match"
+            return false
         }
-        
+
         // Validate password length if provided
         if !pwd.isEmpty && pwd.count < 6 {
-            showError = true
-            errorMessage = "Password must be at least 6 characters"
-            return
+            alertMessage = "Password must be at least 6 characters"
+            return false
         }
-        
+
         // Validate email format if provided
         if !email.isEmpty && !isValidEmail(email) {
-            showError = true
-            errorMessage = "Please enter a valid email address"
-            return
+            alertMessage = "Please enter a valid email address"
+            return false
         }
+
+        return true
     }
     
     private func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPredicate.evaluate(with: email)
-    }
-    
-    @ViewBuilder
-    func chooseDestination() -> some View {
-        if (!email.isEmpty && !isValidEmail(email)) || (!pwd.isEmpty && pwd != cpwd) || (!pwd.isEmpty && pwd.count < 6) {
-            FirstEditAccountView(onComplete: onComplete).environmentObject(usersVM)
-        } else {
-            SecondEditAccountView(onComplete: onComplete).environmentObject(usersVM)
-        }
-    }
+    }    
 }
 
 struct FirstEditAccountView_Previews: PreviewProvider {

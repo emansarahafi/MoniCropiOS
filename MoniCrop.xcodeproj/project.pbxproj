@@ -197,7 +197,6 @@
 					804FCBD53FD285502240E444 /* SecureTextFieldView.swift */,
 					B8B8D731F1DDB2D415008BAB /* TemperatureLineChartView.swift */,
 				71D9451F29854E330092C58B /* ErrorView.swift */,
-				71D9451F29854E330092C58B /* ErrorView.swift */,
 				71D3744E2988365300755046 /* HomeView.swift */,
 					710A0B4229F480FB00E80BE1 /* PHView.swift */,
 					710A0B4429F484B700E80BE1 /* MoistureView.swift */,

@@ -24,23 +24,63 @@ struct AccountView: View {
     }
 
     var body: some View {
-        Form {
-            Section(header: Text("Profile Picture").font(.system(size: 20))) {
-                CircularProfileImageView(imageState: imageState)
-            }
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                HStack(alignment: .center, spacing: 16) {
+                    CircularProfileImageView(imageState: imageState)
+                        .frame(width: 96, height: 96)
+                        .shadow(radius: 4)
 
-            Section(header: Text("User's Contact Details").font(.system(size: 20))) {
-                Text(user.fname).font(.system(size: 20))
-                Text(user.mname).font(.system(size: 20))
-                Text(user.lname).font(.system(size: 20))
-                Text(user.date, format: Date.FormatStyle().year().month().day()).font(.system(size: 20))
-                Text(user.gender).font(.system(size: 20))
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("\(user.fname) \(user.lname)")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Text(user.email ?? "No email")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    Spacer()
+                }
+
+                VStack(alignment: .leading, spacing: 12) {
+                    Group {
+                        Label("First name", systemImage: "person.fill")
+                            .font(.headline)
+                        Text(user.fname).font(.body)
+
+                        Label("Middle name", systemImage: "person")
+                            .font(.headline)
+                        Text(user.mname).font(.body)
+
+                        Label("Last name", systemImage: "person.fill")
+                            .font(.headline)
+                        Text(user.lname).font(.body)
+
+                        Label("Date of birth", systemImage: "calendar")
+                            .font(.headline)
+                        Text(user.date, format: Date.FormatStyle().year().month().day())
+                            .font(.body)
+
+                        Label("Gender", systemImage: "g.circle")
+                            .font(.headline)
+                        Text(user.gender).font(.body)
+                    }
+                }
+                .padding(.top, 6)
+
+                Spacer()
+            }
+            .padding()
+        }
+        .navigationTitle("User Details")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { self.presentEditProfileSheet.toggle() }) {
+                    Text("Edit")
+                }
+                .buttonStyle(.bordered)
             }
         }
-        .navigationBarTitle("User Details")
-        .navigationBarItems(trailing: editButton {
-            self.presentEditProfileSheet.toggle()
-        })
         .onAppear { print("AccountView.onAppear() for User Details") }
         .onDisappear { print("AccountView.onDisappear()") }
         .sheet(isPresented: self.$presentEditProfileSheet) {

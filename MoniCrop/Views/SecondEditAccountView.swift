@@ -19,6 +19,10 @@ struct SecondEditAccountView: View {
     @State var isLoading: Bool = false
     @State var showError: Bool = false
     @State var errorMessage: String = ""
+    @State private var navigateToMenu = false
+    @State private var showSuccess = false
+    @State private var showFailure = false
+    @State private var failureMessage = ""
 
     var body: some View {
         VStack {
@@ -58,18 +62,31 @@ struct SecondEditAccountView: View {
                     .padding(.top, 5)
             }
 
+            // hidden navigation link controlled by update success
+
             Button {
                 updateAccount()
+            } label: {
+                Text("Update Account")
+                    .frame(maxWidth: .infinity)
             }
-            label: {
-                NavigationLink(destination: HamburgerMenuView()) {
-                    Text("Update Account")
-                        .frame(maxWidth: .infinity)
-                }}.buttonStyle(.borderedProminent)
-                        .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.top)
+            .buttonStyle(.borderedProminent)
+            .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
+            .foregroundColor(.white)
+            .font(.system(size: 20))
+            .padding(.top)
+            .alert("Saved", isPresented: $showSuccess) {
+                Button("Continue") {
+                    navigateToMenu = true
+                }
+            } message: {
+                Text("Account updated successfully.")
+            }
+            .alert("Error", isPresented: $showFailure) {
+                Button("OK") {}
+            } message: {
+                Text(self.failureMessage)
+            }
             Button {
                 // Signal deletion intent to caller (e.g. parent sheet)
                 onComplete?(.delete)
@@ -81,6 +98,9 @@ struct SecondEditAccountView: View {
             .padding(.top)
         }
         .padding()
+        .navigationDestination(isPresented: $navigateToMenu) {
+            HamburgerMenuView()
+        }
     }
 
     private func updateAccount() {
@@ -90,32 +110,32 @@ struct SecondEditAccountView: View {
 
         // Validate required fields
         guard !fname.isEmpty else {
-            showError = true
-            errorMessage = "First name is required"
+            failureMessage = "First name is required"
+            showFailure = true
             return
         }
 
         guard !lname.isEmpty else {
-            showError = true
-            errorMessage = "Last name is required"
+            failureMessage = "Last name is required"
+            showFailure = true
             return
         }
 
         guard !wname.isEmpty else {
-            showError = true
-            errorMessage = "Workplace name is required"
+            failureMessage = "Workplace name is required"
+            showFailure = true
             return
         }
 
         guard !position.isEmpty else {
-            showError = true
-            errorMessage = "Position is required"
+            failureMessage = "Position is required"
+            showFailure = true
             return
         }
 
         guard let user = Auth.auth().currentUser else {
-            showError = true
-            errorMessage = "No user is currently signed in"
+            failureMessage = "No user is currently signed in"
+            showFailure = true
             return
         }
 
@@ -134,10 +154,12 @@ struct SecondEditAccountView: View {
         ], merge: true) { error in
             isLoading = false
             if let error = error {
-                showError = true
-                errorMessage = "Error updating account: \(error.localizedDescription)"
+                failureMessage = "Error updating account: \(error.localizedDescription)"
+                showFailure = true
             } else {
-                print("Account updated successfully")
+                DispatchQueue.main.async {
+                    showSuccess = true
+                }
             }
         }
     }

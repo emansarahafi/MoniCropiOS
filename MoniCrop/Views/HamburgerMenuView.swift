@@ -21,7 +21,7 @@ struct HamburgerMenuView: View {
                 }
             }
 
-        return NavigationView {
+        return NavigationStack {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     MainView()
@@ -36,17 +36,19 @@ struct HamburgerMenuView: View {
                 }
                     .gesture(drag)
             }
-                .navigationBarItems(leading: (
-                    Button(action: {
-                        withAnimation {
-                            self.showMenu.toggle()
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            withAnimation {
+                                self.showMenu.toggle()
+                            }
+                        }) {
+                            Image(systemName: "line.horizontal.3")
+                                .foregroundColor(.black)
+                                .imageScale(.large)
                         }
-                    }) {
-                        Image(systemName: "line.horizontal.3")
-                            .foregroundColor(.black)
-                            .imageScale(.large)
                     }
-                ))
+                }
         }
     }
 }

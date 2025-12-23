@@ -10,17 +10,31 @@ import SwiftUI
 struct CellItemView: View {
     let item: ItemsViewModel
     var body: some View {
-        HStack {
+        HStack(alignment: .center, spacing: 16) {
             Image(item.image)
-            .resizable()
-            .scaledToFit()
-            .frame(width: 100, height: 100)
-            VStack (alignment: .leading){
-                Text("Item: \(item.name)").bold()
-                Text("Date: \(item.date)").bold()
-                Text("Price: \(item.price)").bold()
+                .resizable()
+                .scaledToFill()
+                .frame(width: 84, height: 84)
+                .clipped()
+                .cornerRadius(8)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(item.name)
+                    .font(.headline)
+                    .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                Text(item.date)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                Text(item.price)
+                    .font(.subheadline)
+                    .foregroundColor(.primary)
             }
+            Spacer()
         }
+        .padding(12)
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 }
 

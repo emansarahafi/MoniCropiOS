@@ -13,7 +13,7 @@ struct HomeView: View {
     @State var status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
         var body: some View{
             
-            NavigationView{
+            NavigationStack{
                 
                 VStack{
                     

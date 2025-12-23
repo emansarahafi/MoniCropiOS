@@ -20,6 +20,7 @@ struct FirstSignUpView: View {
     @State var isRegistered = false
     @State private var showSuccess = false
     @State private var showFailure = false
+    @State private var navigateToSecond = false
 
     var body: some View {
         NavigationStack {
@@ -41,12 +42,14 @@ struct FirstSignUpView: View {
                         .keyboardType(.emailAddress).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
                         .font(.system(size: 20))
                 }
+
                 VStack (alignment: .leading) {
                     Text("Password")
                         .font(.system(size: 20))
                     SecureTextFieldView(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
                         .font(.system(size: 20))
                 }
+
                 VStack (alignment: .leading){
                     Text("Confirm Password")
                         .font(.system(size: 20))
@@ -54,8 +57,9 @@ struct FirstSignUpView: View {
                         .font(.system(size: 20))
                 }
             }
+
             Button(action: { register() }) {
-                            Text("Sign Up")
+                            Text("Sign Up").frame(maxWidth: .infinity)
                         }.buttonStyle(.borderedProminent)
                             .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
                             .foregroundColor(.white)
@@ -78,7 +82,11 @@ struct FirstSignUpView: View {
                 Text("Account created successfully.")
             }
         }
+        .navigationDestination(isPresented: $isRegistered) {
+            SecondSignUpView().navigationBarBackButtonHidden(true)
+        }
     }
+    
     func register() {
         // Validate email is not empty
         guard !email.isEmpty else {

@@ -21,78 +21,96 @@ struct DisableDeleteView: View {
     var body: some View {
         NavigationStack {
             VStack {
-            Picker(selection: $selectedAction, label: Text("Choose Action")) {
-                Text("Disable Account").tag("Disable Account")
-                Text("Delete Account").tag("Delete Account")
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            Text("Please enter the password to confirm:")
-                .font(.system(size: 20))
-            SecureTextFieldView(text: $password).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                .font(.system(size: 20))
-            
-            Text("Kindly note that if you choose: \nDisable: The account will be disabled & the user can reactivate it at any moment by logging again. \nDelete: The account will be deleted instantly.")
-                .multilineTextAlignment(.leading)
-                .font(.system(size: 20))
+                Text("Disable or Delete Account")
+                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .font(.title)
+                .fontWeight(.bold)
                 .padding()
-            
-                    Button(action: {
-                    guard let currentUser = Auth.auth().currentUser else { return }
+
+                VStack(alignment: .leading, spacing: 12) {
+                
+                    Picker(selection: $selectedAction, label: Text("Choose Action")) {
+                        Text("Disable Account").tag("Disable Account")
+                        Text("Delete Account").tag("Delete Account")
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+
+                    Text("Please enter the password to confirm:")
+                        .font(.system(size: 20))
                     
-                    switch selectedAction {
-                    case "Disable Account":
-                        // Sign out the user to "disable" their account
-                        do {
-                            try Auth.auth().signOut()
-                            // defer root-switch until user acknowledges
-                            actionMessage = "Account disabled (signed out)."
-                            didPerformAction = true
-                        } catch let signOutError {
-                            failureMessage = "Error disabling account: \(signOutError.localizedDescription)"
-                            showFailure = true
-                        }
-                    case "Delete Account":
-                        let credential = EmailAuthProvider.credential(withEmail: currentUser.email ?? "", password: password)
-                        currentUser.reauthenticate(with: credential) { authDataResult, error in
-                            if let error = error {
-                                failureMessage = "Error reauthenticating user: \(error.localizedDescription)"
-                                showFailure = true
-                                return
-                            }
-                            currentUser.delete { error in
-                                if let error = error {
-                                    failureMessage = "Error deleting account: \(error.localizedDescription)"
+                    SecureTextFieldView(text: $password).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                        .font(.system(size: 20))
+                    
+                    Text("Kindly note that if you choose: \nDisable: The account will be disabled & the user can reactivate it at any moment by logging again. \nDelete: The account will be deleted instantly.")
+                        .multilineTextAlignment(.leading)
+                        .font(.system(size: 20))
+                        .padding()
+                    
+                            Button(action: {
+                            guard let currentUser = Auth.auth().currentUser else { return }
+                            
+                            switch selectedAction {
+                            case "Disable Account":
+                                // Sign out the user to "disable" their account
+                                do {
+                                    try Auth.auth().signOut()
+                                    // defer root-switch until user acknowledges
+                                    actionMessage = "Account disabled (signed out)."
+                                    didPerformAction = true
+                                } catch let signOutError {
+                                    failureMessage = "Error disabling account: \(signOutError.localizedDescription)"
                                     showFailure = true
-                                    return
                                 }
-                                actionMessage = "Account deleted."
-                                didPerformAction = true
+                            case "Delete Account":
+                                let credential = EmailAuthProvider.credential(withEmail: currentUser.email ?? "", password: password)
+                                currentUser.reauthenticate(with: credential) { authDataResult, error in
+                                    if let error = error {
+                                        failureMessage = "Error reauthenticating user: \(error.localizedDescription)"
+                                        showFailure = true
+                                        return
+                                    }
+                                    currentUser.delete { error in
+                                        if let error = error {
+                                            failureMessage = "Error deleting account: \(error.localizedDescription)"
+                                            showFailure = true
+                                            return
+                                        }
+                                        actionMessage = "Account deleted."
+                                        didPerformAction = true
+                                    }
+                                }
+                            default:
+                                break
+                            }
+                            
+                        }) {
+                            Text("Perform Action")
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
+                        .foregroundColor(.white)
+                        .font(.system(size: 18))
+                        .padding(.top)
+                        .alert(actionMessage, isPresented: $didPerformAction) {
+                            Button("OK") {
+                                // switch root view now that user acknowledged
+                                isLoggedIn = false
+                                UserDefaults.standard.set(false, forKey: "status")
+                                NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
                             }
                         }
-                    default:
-                        break
+                        .alert("Error", isPresented: $showFailure) {
+                            Button("OK") {}
+                        } message: {
+                            Text(self.failureMessage)
+                        }
+                }
+                    .onAppear {
+                        guard let currentUser = Auth.auth().currentUser else { return }
+                        selectedAction = currentUser.isEmailVerified ? "Disable Account" : "Delete Account"
                     }
-                    
-                }) {
-                    Text("Perform Action")
-                }
-                .alert(actionMessage, isPresented: $didPerformAction) {
-                    Button("OK") {
-                        // switch root view now that user acknowledged
-                        isLoggedIn = false
-                        UserDefaults.standard.set(false, forKey: "status")
-                        NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
-                    }
-                }
-                .alert("Error", isPresented: $showFailure) {
-                    Button("OK") {}
-                } message: {
-                    Text(self.failureMessage)
-                }
-            }
-            .onAppear {
-                guard let currentUser = Auth.auth().currentUser else { return }
-                selectedAction = currentUser.isEmailVerified ? "Disable Account" : "Delete Account"
             }
         }
     }
@@ -101,20 +119,8 @@ struct DisableDeleteView: View {
 
 struct DeleteView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Choose Action")
-                .font(.headline)
-            Picker(selection: .constant("Disable Account"), label: Text("Choose Action")) {
-                Text("Disable Account").tag("Disable Account")
-                Text("Delete Account").tag("Delete Account")
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            Text("Please enter the password to confirm:")
-                .font(.system(size: 20))
-            SecureField("Password", text: .constant(""))
-                .textFieldStyle(.roundedBorder)
-            Button("Perform Action") {}
-                .buttonStyle(.borderedProminent)
+        NavigationStack {
+            DisableDeleteView()
         }
         .padding()
         .previewLayout(.sizeThatFits)

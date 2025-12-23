@@ -28,74 +28,90 @@ struct SecondSignUpView: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
-            Group {
-                Text("First Name")
-                    .font(.system(size: 20))
-                TextField("Insert First Name", text: $fname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                    .font(.system(size: 20))
-                Text("Middle Name")
-                    .font(.system(size: 20))
-                TextField("Insert Middle Name", text: $mname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                    .font(.system(size: 20))
-                Text("Last Name")
-                    .font(.system(size: 20))
-                TextField("Insert Last Name", text: $lname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                    .font(.system(size: 20))
-            }
-            DatePicker("Date of Birth",
-                       selection: $date,
-                       in: ...Date(),
-                       displayedComponents: [.date])
-            .font(.system(size: 20))
-            .padding()
-            Group {
-                Text("Account type")
-                    .font(.system(size: 20))
-                Picker("Account type", selection: $selection) {
-                    ForEach(options, id: \.self) {
-                        Text($0)
-                    }
+            VStack(alignment: .leading, spacing: 12) {
+                Group {
+                    Text("First Name")
+                        .font(.system(size: 20))
+                    TextField("Insert First Name", text: $fname)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.words)
+                        .font(.system(size: 20))
+
+                    Text("Middle Name")
+                        .font(.system(size: 20))
+                    TextField("Insert Middle Name", text: $mname)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.words)
+                        .font(.system(size: 20))
+
+                    Text("Last Name")
+                        .font(.system(size: 20))
+                    TextField("Insert Last Name", text: $lname)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.words)
+                        .font(.system(size: 20))
                 }
-                .pickerStyle(.menu)
-                .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.system(size: 20))
-                Text("Workplace Name")
+
+                DatePicker("Date of Birth",
+                           selection: $date,
+                           in: ...Date(),
+                           displayedComponents: [.date])
                     .font(.system(size: 20))
-                TextField("Insert Workplace Name", text: $wname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                    .padding(.vertical, 8)
+
+                Group {
+                    Text("Account type")
+                        .font(.system(size: 20))
+                    Picker("Account type", selection: $selection) {
+                        ForEach(options, id: \.self) { Text($0) }
+                    }
+                    .pickerStyle(.menu)
+                    .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
                     .font(.system(size: 20))
-                Text("Position")
-                    .font(.system(size: 20))
-                TextField("Insert Position", text: $position) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                    .font(.system(size: 20))
-                Button(action: {
-                    saveUserData()
-                }) {
-                    Text("Sign Up")
-                        .frame(maxWidth: .infinity)
-                }.buttonStyle(.borderedProminent)
+
+                    Text("Workplace Name")
+                        .font(.system(size: 20))
+                    TextField("Insert Workplace Name", text: $wname)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.words)
+                        .font(.system(size: 20))
+
+                    Text("Position")
+                        .font(.system(size: 20))
+                    TextField("Insert Position", text: $position)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.words)
+                        .font(.system(size: 20))
+
+                    Button(action: { saveUserData() }) {
+                        Text("Sign Up")
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                    }
+                    .buttonStyle(.borderedProminent)
                     .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
                     .foregroundColor(.white)
                     .font(.system(size: 20))
                     .padding(.top)
+                }
+                .padding()
+                .alert("Saved", isPresented: $showSuccess) {
+                    Button("Continue") {
+                        isSaved = true
+                        isLoggedIn = true
+                        UserDefaults.standard.set(true, forKey: "status")
+                        NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                    }
+                } message: {
+                    Text("Your account information was saved.")
+                }
+                .alert("Error", isPresented: $showFailure) {
+                    Button("OK") {}
+                } message: {
+                    Text(self.error)
+                }
             }
             .padding()
-            .alert("Saved", isPresented: $showSuccess) {
-                Button("Continue") {
-                    isSaved = true
-                    isLoggedIn = true
-                    UserDefaults.standard.set(true, forKey: "status")
-                    NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
-                }
-            } message: {
-                Text("Your account information was saved.")
-            }
-            .alert("Error", isPresented: $showFailure) {
-                Button("OK") {}
-            } message: {
-                Text(self.error)
-            }
-        }
         }
     }
     func saveUserData() {

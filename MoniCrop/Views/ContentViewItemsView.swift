@@ -16,14 +16,18 @@ struct ContentViewItemsView: View {
                 .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                 .font(.title)
                 .fontWeight(.bold)
-            List { ForEach(appData.listOfItems) { item in
-                CellItemView(item: item)
+
+            List {
+                ForEach(appData.listOfItems) { item in
+                    CellItemView(item: item)
+                        .listRowBackground(Color.clear)
+                        .padding(.vertical, 4)
                 }
-                .background(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .scrollContentBackground(.hidden)
-                .foregroundColor(Color.black)
             }
-            .padding()
+            .listStyle(PlainListStyle())
+            .scrollContentBackground(.hidden)
+            .background(Color(UIColor.systemGroupedBackground))
+            .padding(.top, 8)
             .onAppear {
                 appData.loadData()
             }

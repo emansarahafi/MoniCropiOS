@@ -14,11 +14,8 @@ struct ErrorView : View {
     var body: some View{
         
         GeometryReader{_ in
-            
             VStack{
-                
                 HStack{
-                    
                     Text(self.error == "RESET" ? "Message" : "Error")
                         .font(.title)
                         .fontWeight(.bold)

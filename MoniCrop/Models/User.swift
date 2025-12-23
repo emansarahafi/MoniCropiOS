@@ -12,6 +12,7 @@ struct User: Identifiable {
     var fname: String = "First"
     var mname: String = "Middle"
     var lname: String = "Last"
+    var email: String? = nil
     var date: Date = Date()
     var gender: String = "Not specified"
 }
