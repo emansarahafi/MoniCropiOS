@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct SecondEditAccountView: View {
+    var onComplete: ((EditAction) -> Void)? = nil
     @State var date = Date()
     @State var fname: String = ""
     @State var mname: String = ""
@@ -70,13 +71,14 @@ struct SecondEditAccountView: View {
                         .font(.system(size: 20))
                         .padding(.top)
             Button {
+                // Signal deletion intent to caller (e.g. parent sheet)
+                onComplete?(.delete)
+            } label: {
+                Text("Disable or Delete Your Account")
             }
-            label: {
-                NavigationLink(destination: DisableDeleteView()) {
-                    Text("Disable or Delete Your Account")
-                }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                        .font(.system(size: 20))
-                        .padding(.top)
+            .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+            .font(.system(size: 20))
+            .padding(.top)
         }
         .padding()
     }

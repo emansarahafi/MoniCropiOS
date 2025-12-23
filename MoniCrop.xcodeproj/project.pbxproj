@@ -7,20 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		710520BE29843D26002982EA /* Items.swift */ = {isa = PBXBuildFile; fileRef = 710520BD29843D26002982EA /* Items.swift */; };
+		72AABBCCDD11223344556678 /* UsersViewModel.swift */ = {isa = PBXBuildFile; fileRef = 72AABBCCDD11223344556677 /* UsersViewModel.swift */; };
+		73AABBCCDD11223344556678 /* User.swift */ = {isa = PBXBuildFile; fileRef = 73AABBCCDD11223344556677 /* User.swift */; };
+		74AABBCCDD11223344556678 /* Profile.swift */ = {isa = PBXBuildFile; fileRef = 74AABBCCDD11223344556677 /* Profile.swift */; };
+		75AABBCCDD11223344556678 /* CircularProfileImageView.swift */ = {isa = PBXBuildFile; fileRef = 75AABBCCDD11223344556677 /* CircularProfileImageView.swift */; };
+		710520BE29843D26002982EA /* Item.swift */ = {isa = PBXBuildFile; fileRef = 710520BD29843D26002982EA /* Item.swift */; };
 		71096C1C29F08DD1004D5D3A /* WorkplaceDetailsView.swift */ = {isa = PBXBuildFile; fileRef = 71096C1B29F08DD1004D5D3A /* WorkplaceDetailsView.swift */; };
 		71096C1F29F0914C004D5D3A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71096C1E29F0914C004D5D3A /* FirebaseAuth */; };
 		71096C2129F0914C004D5D3A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 71096C2029F0914C004D5D3A /* FirebaseFirestore */; };
 		71096C2329F0914C004D5D3A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71096C2229F0914C004D5D3A /* FirebaseFirestoreSwift */; };
 		710A0B4129F457F600E80BE1 /* GoogleService-Info.plist */ = {isa = PBXBuildFile; fileRef = 710A0B4029F457F600E80BE1 /* GoogleService-Info.plist */; };
-		710A0B4329F480FB00E80BE1 /* pHView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4229F480FB00E80BE1 /* pHView.swift */; };
-		710A0B4529F484B700E80BE1 /* moistureView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4429F484B700E80BE1 /* moistureView.swift */; };
-		710A0B4729F48ABB00E80BE1 /* conductivityView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4629F48ABB00E80BE1 /* conductivityView.swift */; };
-		710A0B4929F48B6700E80BE1 /* temperatureView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4829F48B6700E80BE1 /* temperatureView.swift */; };
-		710A0B4B29F48BE800E80BE1 /* distanceView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4A29F48BE800E80BE1 /* distanceView.swift */; };
-		710A0B4D29F48C5300E80BE1 /* nitrogenView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4C29F48C5300E80BE1 /* nitrogenView.swift */; };
-		710A0B4F29F48CC900E80BE1 /* phosphorusView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4E29F48CC900E80BE1 /* phosphorusView.swift */; };
-		710A0B5129F48D6400E80BE1 /* potassiumView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B5029F48D6400E80BE1 /* potassiumView.swift */; };
+		710A0B4329F480FB00E80BE1 /* PHView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4229F480FB00E80BE1 /* PHView.swift */; };
+		710A0B4529F484B700E80BE1 /* MoistureView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4429F484B700E80BE1 /* MoistureView.swift */; };
+		710A0B4729F48ABB00E80BE1 /* ConductivityView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4629F48ABB00E80BE1 /* ConductivityView.swift */; };
+		710A0B4929F48B6700E80BE1 /* TemperatureView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4829F48B6700E80BE1 /* TemperatureView.swift */; };
+		710A0B4B29F48BE800E80BE1 /* DistanceView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4A29F48BE800E80BE1 /* DistanceView.swift */; };
+		710A0B4D29F48C5300E80BE1 /* NitrogenView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4C29F48C5300E80BE1 /* NitrogenView.swift */; };
+		710A0B4F29F48CC900E80BE1 /* PhosphorusView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B4E29F48CC900E80BE1 /* PhosphorusView.swift */; };
+		710A0B5129F48D6400E80BE1 /* PotassiumView.swift */ = {isa = PBXBuildFile; fileRef = 710A0B5029F48D6400E80BE1 /* PotassiumView.swift */; };
 		710D6E462969D81C00DA4AEF /* ViewDataView.swift */ = {isa = PBXBuildFile; fileRef = 710D6E452969D81C00DA4AEF /* ViewDataView.swift */; };
 		7163A5EE29EF32D50015E232 /* ViewItemsView.swift */ = {isa = PBXBuildFile; fileRef = 7163A5ED29EF32D50015E232 /* ViewItemsView.swift */; };
 		7163A5F029EF334E0015E232 /* LandingView.swift */ = {isa = PBXBuildFile; fileRef = 7163A5EF29EF334E0015E232 /* LandingView.swift */; };
@@ -38,6 +42,27 @@
 		71EBD89029F5665A00C05B12 /* DisableDeleteView.swift */ = {isa = PBXBuildFile; fileRef = 71EBD88F29F5665A00C05B12 /* DisableDeleteView.swift */; };
 		71FE2E662969DB2A00128E61 /* ForgotPasswordView.swift */ = {isa = PBXBuildFile; fileRef = 71FE2E652969DB2A00128E61 /* ForgotPasswordView.swift */; };
 		71FE2E6A2969EE6400128E61 /* CustomerFeedbackView.swift */ = {isa = PBXBuildFile; fileRef = 71FE2E692969EE6400128E61 /* CustomerFeedbackView.swift */; };
+		0000000000008D0721CEC3E4 /* AboutUsView.swift */ = {isa = PBXBuildFile; fileRef = 8D0721CEC3E33EBC18988B26 /* AboutUsView.swift */; };
+		0000000000002CC6AA81ED27 /* AccountView.swift */ = {isa = PBXBuildFile; fileRef = 2CC6AA81ED26DBC78DF34B4D /* AccountView.swift */; };
+		000000000000C94178824135 /* CellItemView.swift */ = {isa = PBXBuildFile; fileRef = C94178824134450704AE59BD /* CellItemView.swift */; };
+		000000000000E3051D80664C /* ConductivityLineChartView.swift */ = {isa = PBXBuildFile; fileRef = E3051D80664B676DFE4A9E99 /* ConductivityLineChartView.swift */; };
+		0000000000003AE2D3BBCD5F /* ConfirmationView.swift */ = {isa = PBXBuildFile; fileRef = 3AE2D3BBCD5E82937065C549 /* ConfirmationView.swift */; };
+		0000000000000A5B720D205F /* ContentViewItemsView.swift */ = {isa = PBXBuildFile; fileRef = 0A5B720D205EBB6663A51B24 /* ContentViewItemsView.swift */; };
+		00000000000003F12F7656F0 /* DistanceLineChartView.swift */ = {isa = PBXBuildFile; fileRef = 03F12F7656EF6B92F49BF8F4 /* DistanceLineChartView.swift */; };
+		0000000000004CF9C46E22D5 /* FruitPickerView.swift */ = {isa = PBXBuildFile; fileRef = 4CF9C46E22D49B9E8FC16D3D /* FruitPickerView.swift */; };
+		0000000000006FDDDA6C64DE /* HamburgerMenuView.swift */ = {isa = PBXBuildFile; fileRef = 6FDDDA6C64DD8473787139C2 /* HamburgerMenuView.swift */; };
+		00000000000088FB6B6190E1 /* MainView.swift */ = {isa = PBXBuildFile; fileRef = 88FB6B6190E033C9C862B4E9 /* MainView.swift */; };
+		0000000000009B432D9CA434 /* MenuView.swift */ = {isa = PBXBuildFile; fileRef = 9B432D9CA433316FA44CF878 /* MenuView.swift */; };
+		0000000000009651D1B66EDB /* MoistureLineChartView.swift */ = {isa = PBXBuildFile; fileRef = 9651D1B66EDAEBC5DC05910B /* MoistureLineChartView.swift */; };
+		000000000000C73A41FEEEE8 /* NitrogenLineChartView.swift */ = {isa = PBXBuildFile; fileRef = C73A41FEEEE7E3CCB0FF5B8F /* NitrogenLineChartView.swift */; };
+		000000000000D5A94CF49B22 /* PHLineChartView.swift */ = {isa = PBXBuildFile; fileRef = D5A94CF49B2100DEF83964A1 /* PHLineChartView.swift */; };
+		0000000000002478878BD37F /* PhosphorusLineChartView.swift */ = {isa = PBXBuildFile; fileRef = 2478878BD37EB58E1CFE3769 /* PhosphorusLineChartView.swift */; };
+		000000000000ECD8D3D2A1FC /* PotassiumLineChartView.swift */ = {isa = PBXBuildFile; fileRef = ECD8D3D2A1FB860007CD8B51 /* PotassiumLineChartView.swift */; };
+		0000000000006523C985CAD5 /* ReSecureTextFieldView.swift */ = {isa = PBXBuildFile; fileRef = 6523C985CAD46DC1311A0B0D /* ReSecureTextFieldView.swift */; };
+		0000000000000AEC652A6414 /* SecondEditAccountView.swift */ = {isa = PBXBuildFile; fileRef = 0AEC652A641374B9C2E585CD /* SecondEditAccountView.swift */; };
+		00000000000010C37B0B66F4 /* SecondSignUpView.swift */ = {isa = PBXBuildFile; fileRef = 10C37B0B66F3485FA7A3A668 /* SecondSignUpView.swift */; };
+		000000000000804FCBD53FD3 /* SecureTextFieldView.swift */ = {isa = PBXBuildFile; fileRef = 804FCBD53FD285502240E444 /* SecureTextFieldView.swift */; };
+		000000000000B8B8D731F1DE /* TemperatureLineChartView.swift */ = {isa = PBXBuildFile; fileRef = B8B8D731F1DDB2D415008BAB /* TemperatureLineChartView.swift */; };
 
 /* End PBXBuildFile section */
 
@@ -55,17 +80,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		710520BD29843D26002982EA /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		72AABBCCDD11223344556677 /* UsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewModel.swift; sourceTree = "<group>"; };
+		73AABBCCDD11223344556677 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		74AABBCCDD11223344556677 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		75AABBCCDD11223344556677 /* CircularProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProfileImageView.swift; sourceTree = "<group>"; };
+		710520BD29843D26002982EA /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		71096C1B29F08DD1004D5D3A /* WorkplaceDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkplaceDetailsView.swift; sourceTree = "<group>"; };
 		710A0B4029F457F600E80BE1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		710A0B4229F480FB00E80BE1 /* pHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pHView.swift; sourceTree = "<group>"; };
-		710A0B4429F484B700E80BE1 /* moistureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moistureView.swift; sourceTree = "<group>"; };
-		710A0B4629F48ABB00E80BE1 /* conductivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = conductivityView.swift; sourceTree = "<group>"; };
-		710A0B4829F48B6700E80BE1 /* temperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temperatureView.swift; sourceTree = "<group>"; };
-		710A0B4A29F48BE800E80BE1 /* distanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = distanceView.swift; sourceTree = "<group>"; };
-		710A0B4C29F48C5300E80BE1 /* nitrogenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nitrogenView.swift; sourceTree = "<group>"; };
-		710A0B4E29F48CC900E80BE1 /* phosphorusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = phosphorusView.swift; sourceTree = "<group>"; };
-		710A0B5029F48D6400E80BE1 /* potassiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = potassiumView.swift; sourceTree = "<group>"; };
+		710A0B4229F480FB00E80BE1 /* PHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHView.swift; sourceTree = "<group>"; };
+		710A0B4429F484B700E80BE1 /* MoistureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoistureView.swift; sourceTree = "<group>"; };
+		710A0B4629F48ABB00E80BE1 /* ConductivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConductivityView.swift; sourceTree = "<group>"; };
+		710A0B4829F48B6700E80BE1 /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
+		710A0B4A29F48BE800E80BE1 /* DistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceView.swift; sourceTree = "<group>"; };
+		710A0B4C29F48C5300E80BE1 /* NitrogenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NitrogenView.swift; sourceTree = "<group>"; };
+		710A0B4E29F48CC900E80BE1 /* PhosphorusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhosphorusView.swift; sourceTree = "<group>"; };
+		710A0B5029F48D6400E80BE1 /* PotassiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotassiumView.swift; sourceTree = "<group>"; };
 		710D6E452969D81C00DA4AEF /* ViewDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataView.swift; sourceTree = "<group>"; };
 		711728632EDA30B300DF9957 /* MoniCrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoniCrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7163A5ED29EF32D50015E232 /* ViewItemsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewItemsView.swift; sourceTree = "<group>"; };
@@ -84,6 +113,28 @@
 		71EBD88F29F5665A00C05B12 /* DisableDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableDeleteView.swift; sourceTree = "<group>"; };
 		71FE2E652969DB2A00128E61 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		71FE2E692969EE6400128E61 /* CustomerFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerFeedbackView.swift; sourceTree = "<group>"; };
+		8D0721CEC3E33EBC18988B26 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
+		2CC6AA81ED26DBC78DF34B4D /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		C94178824134450704AE59BD /* CellItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellItemView.swift; sourceTree = "<group>"; };
+		E3051D80664B676DFE4A9E99 /* ConductivityLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConductivityLineChartView.swift; sourceTree = "<group>"; };
+		3AE2D3BBCD5E82937065C549 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		0A5B720D205EBB6663A51B24 /* ContentViewItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewItemsView.swift; sourceTree = "<group>"; };
+		03F12F7656EF6B92F49BF8F4 /* DistanceLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceLineChartView.swift; sourceTree = "<group>"; };
+		4CF9C46E22D49B9E8FC16D3D /* FruitPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitPickerView.swift; sourceTree = "<group>"; };
+		6FDDDA6C64DD8473787139C2 /* HamburgerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerMenuView.swift; sourceTree = "<group>"; };
+		88FB6B6190E033C9C862B4E9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		9B432D9CA433316FA44CF878 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		9651D1B66EDAEBC5DC05910B /* MoistureLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoistureLineChartView.swift; sourceTree = "<group>"; };
+		C73A41FEEEE7E3CCB0FF5B8F /* NitrogenLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NitrogenLineChartView.swift; sourceTree = "<group>"; };
+		D5A94CF49B2100DEF83964A1 /* PHLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHLineChartView.swift; sourceTree = "<group>"; };
+		2478878BD37EB58E1CFE3769 /* PhosphorusLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhosphorusLineChartView.swift; sourceTree = "<group>"; };
+		ECD8D3D2A1FB860007CD8B51 /* PotassiumLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotassiumLineChartView.swift; sourceTree = "<group>"; };
+		6523C985CAD46DC1311A0B0D /* ReSecureTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReSecureTextFieldView.swift; sourceTree = "<group>"; };
+		0AEC652A641374B9C2E585CD /* SecondEditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondEditAccountView.swift; sourceTree = "<group>"; };
+		10C37B0B66F3485FA7A3A668 /* SecondSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSignUpView.swift; sourceTree = "<group>"; };
+		804FCBD53FD285502240E444 /* SecureTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextFieldView.swift; sourceTree = "<group>"; };
+		B8B8D731F1DDB2D415008BAB /* TemperatureLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureLineChartView.swift; sourceTree = "<group>"; };
+
 
 /* End PBXFileReference section */
 
@@ -104,7 +155,9 @@
 		710520B629843ADE002982EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				710520BD29843D26002982EA /* Items.swift */,
+				710520BD29843D26002982EA /* Item.swift */,
+				73AABBCCDD11223344556677 /* User.swift */,
+				74AABBCCDD11223344556677 /* Profile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -117,20 +170,43 @@
 				71692A3B29685063008E9DE8 /* FirstSignUpView.swift */,
 				71096C1B29F08DD1004D5D3A /* WorkplaceDetailsView.swift */,
 				71B1F04929F05783004EA5F1 /* FirstEditAccountView.swift */,
-				7163A5EF29EF334E0015E232 /* LandingView.swift */,
-				710D6E452969D81C00DA4AEF /* ViewDataView.swift */,
-				7163A5ED29EF32D50015E232 /* ViewItemsView.swift */,
+					7163A5EF29EF334E0015E232 /* LandingView.swift */,
+					8D0721CEC3E33EBC18988B26 /* AboutUsView.swift */,
+					2CC6AA81ED26DBC78DF34B4D /* AccountView.swift */,
+					C94178824134450704AE59BD /* CellItemView.swift */,
+					E3051D80664B676DFE4A9E99 /* ConductivityLineChartView.swift */,
+					3AE2D3BBCD5E82937065C549 /* ConfirmationView.swift */,
+					0A5B720D205EBB6663A51B24 /* ContentViewItemsView.swift */,
+					03F12F7656EF6B92F49BF8F4 /* DistanceLineChartView.swift */,
+					4CF9C46E22D49B9E8FC16D3D /* FruitPickerView.swift */,
+					6FDDDA6C64DD8473787139C2 /* HamburgerMenuView.swift */,
+					88FB6B6190E033C9C862B4E9 /* MainView.swift */,
+					9B432D9CA433316FA44CF878 /* MenuView.swift */,
+					710D6E452969D81C00DA4AEF /* ViewDataView.swift */,
+					7163A5ED29EF32D50015E232 /* ViewItemsView.swift */,
 					71FE2E692969EE6400128E61 /* CustomerFeedbackView.swift */,
+					75AABBCCDD11223344556677 /* CircularProfileImageView.swift */,
+					9651D1B66EDAEBC5DC05910B /* MoistureLineChartView.swift */,
+					C73A41FEEEE7E3CCB0FF5B8F /* NitrogenLineChartView.swift */,
+					D5A94CF49B2100DEF83964A1 /* PHLineChartView.swift */,
+					2478878BD37EB58E1CFE3769 /* PhosphorusLineChartView.swift */,
+					ECD8D3D2A1FB860007CD8B51 /* PotassiumLineChartView.swift */,
+					6523C985CAD46DC1311A0B0D /* ReSecureTextFieldView.swift */,
+					0AEC652A641374B9C2E585CD /* SecondEditAccountView.swift */,
+					10C37B0B66F3485FA7A3A668 /* SecondSignUpView.swift */,
+					804FCBD53FD285502240E444 /* SecureTextFieldView.swift */,
+					B8B8D731F1DDB2D415008BAB /* TemperatureLineChartView.swift */,
+				71D9451F29854E330092C58B /* ErrorView.swift */,
 				71D9451F29854E330092C58B /* ErrorView.swift */,
 				71D3744E2988365300755046 /* HomeView.swift */,
-				710A0B4229F480FB00E80BE1 /* pHView.swift */,
-				710A0B4429F484B700E80BE1 /* moistureView.swift */,
-				710A0B4629F48ABB00E80BE1 /* conductivityView.swift */,
-				710A0B4829F48B6700E80BE1 /* temperatureView.swift */,
-				710A0B4A29F48BE800E80BE1 /* distanceView.swift */,
-				710A0B4C29F48C5300E80BE1 /* nitrogenView.swift */,
-				710A0B4E29F48CC900E80BE1 /* phosphorusView.swift */,
-				710A0B5029F48D6400E80BE1 /* potassiumView.swift */,
+					710A0B4229F480FB00E80BE1 /* PHView.swift */,
+					710A0B4429F484B700E80BE1 /* MoistureView.swift */,
+					710A0B4629F48ABB00E80BE1 /* ConductivityView.swift */,
+					710A0B4829F48B6700E80BE1 /* TemperatureView.swift */,
+					710A0B4A29F48BE800E80BE1 /* DistanceView.swift */,
+					710A0B4C29F48C5300E80BE1 /* NitrogenView.swift */,
+					710A0B4E29F48CC900E80BE1 /* PhosphorusView.swift */,
+					710A0B5029F48D6400E80BE1 /* PotassiumView.swift */,
 					71EBD88F29F5665A00C05B12 /* DisableDeleteView.swift */,
 			);
 			path = Views;
@@ -140,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				71EA242B29855FDC0009F1A5 /* ItemsViewModel.swift */,
+				72AABBCCDD11223344556677 /* UsersViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -279,29 +356,54 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				710A0B4F29F48CC900E80BE1 /* phosphorusView.swift */,
+					710A0B4F29F48CC900E80BE1 /* PhosphorusView.swift */,
 					71FE2E6A2969EE6400128E61 /* CustomerFeedbackView.swift */,
 				71692A3C29685063008E9DE8 /* FirstSignUpView.swift */,
 				71D9452029854E330092C58B /* ErrorView.swift */,
-				710A0B4329F480FB00E80BE1 /* pHView.swift */,
-				710A0B4B29F48BE800E80BE1 /* distanceView.swift */,
-				710A0B5129F48D6400E80BE1 /* potassiumView.swift */,
+				710A0B4329F480FB00E80BE1 /* PHView.swift */,
+				710A0B4B29F48BE800E80BE1 /* DistanceView.swift */,
+				710A0B5129F48D6400E80BE1 /* PotassiumView.swift */,
 					71EBD89029F5665A00C05B12 /* DisableDeleteView.swift */,
-				7163A5EE29EF32D50015E232 /* ViewItemsView.swift */,
-				710A0B4D29F48C5300E80BE1 /* nitrogenView.swift */,
+					7163A5EE29EF32D50015E232 /* ViewItemsView.swift */,
+					0000000000008D0721CEC3E4 /* AboutUsView.swift */,
+					0000000000002CC6AA81ED27 /* AccountView.swift */,
+					000000000000C94178824135 /* CellItemView.swift */,
+					000000000000E3051D80664C /* ConductivityLineChartView.swift */,
+					0000000000003AE2D3BBCD5F /* ConfirmationView.swift */,
+					0000000000000A5B720D205F /* ContentViewItemsView.swift */,
+					00000000000003F12F7656F0 /* DistanceLineChartView.swift */,
+					0000000000004CF9C46E22D5 /* FruitPickerView.swift */,
+					0000000000006FDDDA6C64DE /* HamburgerMenuView.swift */,
+					00000000000088FB6B6190E1 /* MainView.swift */,
+					0000000000009B432D9CA434 /* MenuView.swift */,
+					0000000000009651D1B66EDB /* MoistureLineChartView.swift */,
+					000000000000C73A41FEEEE8 /* NitrogenLineChartView.swift */,
+					000000000000D5A94CF49B22 /* PHLineChartView.swift */,
+					0000000000002478878BD37F /* PhosphorusLineChartView.swift */,
+					000000000000ECD8D3D2A1FC /* PotassiumLineChartView.swift */,
+					0000000000006523C985CAD5 /* ReSecureTextFieldView.swift */,
+					0000000000000AEC652A6414 /* SecondEditAccountView.swift */,
+					00000000000010C37B0B66F4 /* SecondSignUpView.swift */,
+					000000000000804FCBD53FD3 /* SecureTextFieldView.swift */,
+					000000000000B8B8D731F1DE /* TemperatureLineChartView.swift */,
+				710A0B4D29F48C5300E80BE1 /* NitrogenView.swift */,
 				71EA242C29855FDC0009F1A5 /* ItemsViewModel.swift */,
 				71FE2E662969DB2A00128E61 /* ForgotPasswordView.swift */,
-				710A0B4729F48ABB00E80BE1 /* conductivityView.swift */,
+				710A0B4729F48ABB00E80BE1 /* ConductivityView.swift */,
 				7163A5F029EF334E0015E232 /* LandingView.swift */,
 				71D3744F2988365300755046 /* HomeView.swift */,
 				71096C1C29F08DD1004D5D3A /* WorkplaceDetailsView.swift */,
 				71B1F04A29F05784004EA5F1 /* FirstEditAccountView.swift */,
-				710A0B4529F484B700E80BE1 /* moistureView.swift */,
+				710A0B4529F484B700E80BE1 /* MoistureView.swift */,
 				71BA98D22EDB5F760068CAEF /* Config.swift */,
 				718419AF293A5C2A00D77CE3 /* MoniCropApp.swift */,
-				710520BE29843D26002982EA /* Items.swift */,
-				710A0B4929F48B6700E80BE1 /* temperatureView.swift */,
+				710520BE29843D26002982EA /* Item.swift */,
+				710A0B4929F48B6700E80BE1 /* TemperatureView.swift */,
 				710D6E462969D81C00DA4AEF /* ViewDataView.swift */,
+				72AABBCCDD11223344556678 /* UsersViewModel.swift */,
+				73AABBCCDD11223344556678 /* User.swift */,
+				74AABBCCDD11223344556678 /* Profile.swift */,
+				75AABBCCDD11223344556678 /* CircularProfileImageView.swift */,
 				71692A3E2968507D008E9DE8 /* SignInView.swift */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

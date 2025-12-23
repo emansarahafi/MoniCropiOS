@@ -8,7 +8,13 @@
 import SwiftUI
 import Firebase
 
+enum EditAction {
+    case delete
+}
+
 struct FirstEditAccountView: View {
+    var onComplete: ((EditAction) -> Void)? = nil
+    @EnvironmentObject var usersVM: UsersViewModel
     @State var email: String = ""
     @State var pwd: String = ""
     @State var cpwd: String = ""
@@ -98,15 +104,15 @@ struct FirstEditAccountView: View {
     @ViewBuilder
     func chooseDestination() -> some View {
         if (!email.isEmpty && !isValidEmail(email)) || (!pwd.isEmpty && pwd != cpwd) || (!pwd.isEmpty && pwd.count < 6) {
-            FirstEditAccountView()
+            FirstEditAccountView(onComplete: onComplete).environmentObject(usersVM)
         } else {
-            SecondEditAccountView()
+            SecondEditAccountView(onComplete: onComplete).environmentObject(usersVM)
         }
     }
 }
 
 struct FirstEditAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstEditAccountView()
+        FirstEditAccountView(onComplete: nil).environmentObject(UsersViewModel(user: User()))
     }
 }

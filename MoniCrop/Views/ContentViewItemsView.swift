@@ -35,8 +35,8 @@ struct ContentViewItemsView_Previews: PreviewProvider {
     static var previews: some View {
         let mock = ApplicationData()
         mock.listOfItems = [
-            ItemsViewModel(item: Items(image: "apple", name: "Apple", date: "2025-12-23", price: "$1.00")),
-            ItemsViewModel(item: Items(image: "carrot", name: "Carrot", date: "2025-12-22", price: "$0.50"))
+            ItemsViewModel(item: Item(image: "apple", name: "Apple", date: "2025-12-23", price: "$1.00")),
+            ItemsViewModel(item: Item(image: "carrot", name: "Carrot", date: "2025-12-22", price: "$0.50"))
         ]
         return ContentViewItemsView().environmentObject(mock)
     }

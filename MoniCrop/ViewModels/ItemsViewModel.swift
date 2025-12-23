@@ -13,7 +13,7 @@ import FirebaseAuth
 
 struct ItemsViewModel: Identifiable, Hashable {
     let id = UUID()
-    var item: Items
+    var item: Item
     var image: String {
         return item.image.lowercased()
     }
@@ -48,14 +48,14 @@ class ApplicationData: ObservableObject {
                     return
                 }
 
-                let items = documents.map { document -> Items in
+                    let items = documents.map { document -> Item in
                     let data = document.data()
                     let image = data["image"] as? String ?? ""
                     let name = data["name"] as? String ?? ""
                     let date = data["date"] as? String ?? ""
                     let price = data["price"] as? String ?? ""
 
-                    return Items(image: image, name: name, date: date, price: price)
+                    return Item(image: image, name: name, date: date, price: price)
                 }
 
                 DispatchQueue.main.async {
@@ -64,21 +64,3 @@ class ApplicationData: ObservableObject {
             }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

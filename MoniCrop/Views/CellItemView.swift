@@ -26,7 +26,7 @@ struct CellItemView: View {
 
 struct CellItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleItem = Items(image: "MoniCrop", name: "Sample", date: "2025-12-23", price: "$10")
+        let sampleItem = Item(image: "MoniCrop", name: "Sample", date: "2025-12-23", price: "$10")
         let vm = ItemsViewModel(item: sampleItem)
         return CellItemView(item: vm)
             .previewLayout(.sizeThatFits)
