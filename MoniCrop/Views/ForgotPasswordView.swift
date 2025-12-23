@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 
-struct ForgotPasswordPage: View {
+struct ForgotPasswordView: View {
     @State var email: String = ""
     @State var pwd: String = ""
     @State var newpwd: String = ""
@@ -64,8 +64,8 @@ struct ForgotPasswordPage: View {
     }
 }
 
-struct ForgotPasswordPage_Previews: PreviewProvider {
+struct ForgotPasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ForgotPasswordPage()
+        ForgotPasswordView()
     }
 }

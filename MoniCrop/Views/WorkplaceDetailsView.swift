@@ -1,5 +1,5 @@
 //
-//  WorkplaceView.swift
+//  WorkplaceDetailsView.swift
 //  MoniCrop
 //
 //  Created by Eman Sarah Afi on 1/7/23.
@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 
-struct WorkplaceDetailsPage: View {
+struct WorkplaceDetailsView: View {
 
     @State private var workplaceName: String = ""
     @State private var foundingDate: Date = Date()
@@ -71,8 +71,27 @@ struct WorkplaceDetailsPage: View {
 }
 
 
-struct WorkplaceView_Previews: PreviewProvider {
+struct WorkplaceDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkplaceDetailsPage()
+        VStack {
+            Text("Workplace Details")
+                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .font(.title)
+                .fontWeight(.bold)
+            VStack {
+                Text("Workplace Name: Sample Farm")
+                    .font(.headline)
+                Text("Founding Date: Jan 1, 2020")
+                    .font(.subheadline)
+                Text("Joined MoniCrop on: Jan 2, 2020")
+                    .font(.subheadline)
+                Text("Items: apple, carrot")
+                    .font(.subheadline)
+            }
+            .multilineTextAlignment(.center)
+            .font(.system(size: 20))
+            .padding()
+        }
+        .padding()
     }
 }

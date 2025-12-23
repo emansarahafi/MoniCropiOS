@@ -1,0 +1,103 @@
+//
+//  DisableDeleteView.swift
+//  MoniCrop
+//
+//  Created by Eman Sarah Afi on 1/7/23.
+//
+
+import SwiftUI
+import Firebase
+
+struct DisableDeleteView: View {
+    
+    @State private var selectedAction = "Disable Account"
+    @State private var password = ""
+    @State private var isActionPerformed = false
+    
+    var body: some View {
+        VStack {
+            Picker(selection: $selectedAction, label: Text("Choose Action")) {
+                Text("Disable Account").tag("Disable Account")
+                Text("Delete Account").tag("Delete Account")
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            Text("Please enter the password to confirm:")
+                .font(.system(size: 20))
+            SecureTextFieldView(text: $password).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                .font(.system(size: 20))
+            
+            Text("Kindly note that if you choose: \nDisable: The account will be disabled & the user can reactivate it at any moment by logging again. \nDelete: The account will be deleted instantly.")
+                .multilineTextAlignment(.leading)
+                .font(.system(size: 20))
+                .padding()
+            
+                    NavigationLink(destination: LandingView().navigationBarBackButtonHidden(true), isActive: $isActionPerformed) {
+                Button(action: {
+                    guard let currentUser = Auth.auth().currentUser else { return }
+                    
+                    switch selectedAction {
+                    case "Disable Account":
+                        // Sign out the user to "disable" their account
+                        do {
+                            try Auth.auth().signOut()
+                            UserDefaults.standard.set(false, forKey: "status")
+                            NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                            print("Account disabled (signed out).")
+                            isActionPerformed = true
+                        } catch let signOutError {
+                            print("Error disabling account: \(signOutError.localizedDescription)")
+                        }
+                    case "Delete Account":
+                        let credential = EmailAuthProvider.credential(withEmail: currentUser.email ?? "", password: password)
+                        currentUser.reauthenticate(with: credential) { authDataResult, error in
+                            if let error = error {
+                                print("Error reauthenticating user: \(error.localizedDescription)")
+                                return
+                            }
+                            currentUser.delete { error in
+                                if let error = error {
+                                    print("Error deleting account: \(error.localizedDescription)")
+                                    return
+                                }
+                                print("Account deleted.")
+                                isActionPerformed = true
+                            }
+                        }
+                    default:
+                        break
+                    }
+                    
+                }) {
+                    Text("Perform Action")
+                }
+            }
+        }
+        .onAppear {
+            guard let currentUser = Auth.auth().currentUser else { return }
+            selectedAction = currentUser.isEmailVerified ? "Disable Account" : "Delete Account"
+        }
+    }
+}
+
+
+struct DeleteView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Choose Action")
+                .font(.headline)
+            Picker(selection: .constant("Disable Account"), label: Text("Choose Action")) {
+                Text("Disable Account").tag("Disable Account")
+                Text("Delete Account").tag("Delete Account")
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            Text("Please enter the password to confirm:")
+                .font(.system(size: 20))
+            SecureField("Password", text: .constant(""))
+                .textFieldStyle(.roundedBorder)
+            Button("Perform Action") {}
+                .buttonStyle(.borderedProminent)
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
+    }
+}

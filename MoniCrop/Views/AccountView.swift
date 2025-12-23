@@ -1,5 +1,5 @@
 //
-//  AccountPage.swift
+//  AccountView.swift
 //  MoniCrop
 //
 //  Created by Eman Sarah Afi on 1/7/23.
@@ -7,8 +7,25 @@
 
 import SwiftUI
 
-struct AccountPage: View {
+struct AccountView: View {
     // MARK: - State
+
+struct AccountView_Previews: PreviewProvider {
+    static var previews: some View {
+        // AccountView requires a `User` model and ProfileModel.ImageState in the app.
+        // Provide a simple static mock preview instead of instantiating the real view.
+        VStack(spacing: 8) {
+            Text("User Details Preview")
+                .font(.title)
+                .fontWeight(.bold)
+            Text("First Last")
+            Text("Joined: Jan 01, 1990")
+            Text("Gender: Not specified")
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
+    }
+}
     
     @Environment(\.presentationMode) var presentationMode
     @State var presentEditProfileSheet = false
@@ -69,12 +86,12 @@ struct AccountPage: View {
         .navigationBarItems(trailing: editButton {
           self.presentEditProfileSheet.toggle()
         })
-        .onAppear() {
-          print("AccountPage.onAppear() for User Details")
-        }
-        .onDisappear() {
-          print("AccountPage.onDisappear()")
-        }
+                .onAppear() {
+                    print("AccountView.onAppear() for User Details")
+                }
+                .onDisappear() {
+                    print("AccountView.onDisappear()")
+                }
         .sheet(isPresented: self.$presentEditProfileSheet) {
           EditProfileView(viewModel1: UserViewModel(user: user), mode: .edit) { result in
             if case .success(let action) = result, action == .delete {

@@ -19,11 +19,11 @@ struct HomeView: View {
                     
                     if self.status{
                         
-                        HamburgerMenu()
+                        HamburgerMenuView()
                     }
                     else{
                         
-                        LandingPage()
+                        LandingView()
                     }
                 }
                 .navigationBarBackButtonHidden(true)
@@ -39,6 +39,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        // Show landing state for preview to avoid reading app state
+        LandingView()
     }
 }

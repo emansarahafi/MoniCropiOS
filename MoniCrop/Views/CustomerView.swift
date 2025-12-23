@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-struct CustomerFeedbackPage: View {
+struct CustomerFeedbackView: View {
     @State private var email: String = ""
     @State private var opinion: String = ""
 
@@ -39,7 +39,7 @@ struct CustomerFeedbackPage: View {
             Button(action: {
                 submitFeedback()
             }, label: {
-                NavigationLink(destination: ConfirmationPage().navigationBarBackButtonHidden(true)) {
+                NavigationLink(destination: ConfirmationView().navigationBarBackButtonHidden(true)) {
                     Text("Submit")
                         .frame(maxWidth: .infinity)
                 }
@@ -109,41 +109,11 @@ struct CustomerFeedbackPage: View {
     }
 }
 
-struct ConfirmationPage: View {
 
-    var body: some View {
-        VStack {
-            Image(systemName: "checkmark")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .imageScale(.large)
-                .font(.system(size: 120))
-                .padding()
-            Text("Feedback Received!")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .fontWeight(.bold)
-                .font(.system(size: 50))
-                .padding()
-            .padding()
-            Button(action: {
-                // Action for Done button
-            }, label: {
-                NavigationLink(destination: HamburgerMenu().navigationBarBackButtonHidden(true)) {
-                    Text("Done")
-                        .frame(maxWidth: .infinity)
-                }
-            }).buttonStyle(.borderedProminent)
-                .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .foregroundColor(.white)
-                .font(.system(size: 20))
-                .padding(.top)
-        }
-        .padding()
-    }
-}
 
 
 struct CustomerView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomerFeedbackPage()
+        CustomerFeedbackView()
     }
 }

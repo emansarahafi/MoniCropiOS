@@ -1,0 +1,43 @@
+//
+//  ContentViewItemsView.swift
+//  MoniCrop
+//
+//  Created by Eman Sarah Afi on 12/23/25.
+//
+
+import SwiftUI
+
+struct ContentViewItemsView: View {
+    @EnvironmentObject var appData: ApplicationData
+
+    var body: some View {
+        VStack {
+            Text("View Items")
+                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .font(.title)
+                .fontWeight(.bold)
+            List { ForEach(appData.listOfItems) { item in
+                CellItemView(item: item)
+                }
+                .background(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .scrollContentBackground(.hidden)
+                .foregroundColor(Color.black)
+            }
+            .padding()
+            .onAppear {
+                appData.loadData()
+            }
+        }
+    }
+}
+
+struct ContentViewItemsView_Previews: PreviewProvider {
+    static var previews: some View {
+        let mock = ApplicationData()
+        mock.listOfItems = [
+            ItemsViewModel(item: Items(image: "apple", name: "Apple", date: "2025-12-23", price: "$1.00")),
+            ItemsViewModel(item: Items(image: "carrot", name: "Carrot", date: "2025-12-22", price: "$0.50"))
+        ]
+        return ContentViewItemsView().environmentObject(mock)
+    }
+}

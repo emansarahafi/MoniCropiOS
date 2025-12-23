@@ -1,5 +1,5 @@
 //
-//  ViewData.swift
+//  ViewDataView.swift
 //  MoniCrop
 //
 //  Created by Eman Sarah Afi on 1/7/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ViewDataPage: View {
+struct ViewDataView: View {
     init() {
         UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().unselectedItemTintColor = UIColor(red: 148/255, green: 178/255, blue: 2/255, alpha: 1)
@@ -22,28 +22,28 @@ struct ViewDataPage: View {
                 .fontWeight(.bold)
             
             TabView {
-                nitrogenView().tabItem({
+                NitrogenView().tabItem({
                     Label("Nitrogen Level", systemImage: "n.circle")
                 })
-                phosphorusView().tabItem({
+                PhosphorusView().tabItem({
                     Label("Phosphorus Level", systemImage: "p.circle")
                 })
-                potassiumView().tabItem({
+                PotassiumView().tabItem({
                     Label("Potassium Level", systemImage: "k.circle")
                 })
-                pHView().tabItem({
+                PHView().tabItem({
                     Label("pH Level", systemImage: "arrow.up.right")
                 })
-                conductivityView().tabItem({
+                ConductivityView().tabItem({
                     Label("Conductivity Level", systemImage: "arrow.up.forward.app")
                 })
-                moistureView().tabItem({
+                MoistureView().tabItem({
                     Label("Moisture Level", systemImage: "drop.fill")
                 })
-                distanceView().tabItem({
+                DistanceView().tabItem({
                     Label("Growth Speed Rate", systemImage: "speedometer")
                 })
-                temperatureView().tabItem({
+                TemperatureView().tabItem({
                     Label("Soil temperature", systemImage: "thermometer.high")
                 })
 
@@ -53,8 +53,18 @@ struct ViewDataPage: View {
     }
 }
 
-
-
-
-
-
+struct ViewDataView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Static mock of the tabs to avoid instantiating metric views that call Firebase
+        VStack(spacing: 12) {
+            Text("View Data")
+                .font(.title)
+                .fontWeight(.bold)
+            Text("Nitrogen | Phosphorus | Potassium | pH | Conductivity | Moisture | Distance | Temperature")
+                .font(.subheadline)
+                .multilineTextAlignment(.center)
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
+    }
+}

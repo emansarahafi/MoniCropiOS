@@ -1,80 +1,12 @@
 //
-//  WelcomeView.swift
+//  MenuView.swift
 //  MoniCrop
 //
-//  Created by Eman Sarah Afi on 1/7/23.
+//  Created by Eman Sarah Afi on 12/23/25.
 //
 
 import SwiftUI
 import Firebase
-
-struct HamburgerMenu: View {
-    @State var showMenu = false
-        
-        var body: some View {
-            
-            let drag = DragGesture()
-                .onEnded {
-                    if $0.translation.width < -100 {
-                        withAnimation {
-                            self.showMenu = false
-                        }
-                    }
-                }
-            
-            return NavigationView {
-                GeometryReader { geometry in
-                    ZStack(alignment: .leading) {
-                        MainPage()
-                            .frame(width: geometry.size.width, height: geometry.size.height)
-                            .offset(x: self.showMenu ? geometry.size.width/1.25 : 0)
-                            .disabled(self.showMenu ? true : false)
-                        if self.showMenu {
-                            MenuView()
-                                .frame(width: geometry.size.width/1.25)
-                                .transition(.move(edge: .leading))
-                        }
-                    }
-                        .gesture(drag)
-                }
-                    .navigationBarItems(leading: (
-                        Button(action: {
-                            withAnimation {
-                                self.showMenu.toggle()
-                            }
-                        }) {
-                            Image(systemName: "line.horizontal.3")
-                                .foregroundColor(.black)
-                                .imageScale(.large)
-                        }
-                    ))
-        }
-    }
-}
-
-struct MainPage: View {
-    var body: some View {
-        VStack(spacing: 50) {
-            Image("MoniCrop")
-                .frame(width: 50, height: 50)
-                .padding(.bottom, 200)
-            Text("Welcome")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
-                .fontWeight(.bold)
-            if let email = Auth.auth().currentUser?.email {
-                Text("Logged in as \(email)").foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                    .foregroundColor(Color.black)
-                    .font(.system(size: 20))
-            } else {
-                Text("Not logged in").foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                    .foregroundColor(Color.black)
-                    .font(.system(size: 20))
-            }
-        }
-        .padding()
-    }
-}
 
 struct MenuView: View {
     @Environment(\.openURL) var openURL
@@ -93,7 +25,7 @@ struct MenuView: View {
                     Button {
                     }
                     label: {
-                        NavigationLink(destination: ViewItemsPage()) {
+                        NavigationLink(destination: ViewItemsView()) {
                             Text("View Items")
                         }}.foregroundColor(.black)
                             .font(.headline)
@@ -106,7 +38,7 @@ struct MenuView: View {
                     Button {
                     }
                     label: {
-                        NavigationLink(destination: ViewDataPage()) {
+                        NavigationLink(destination: ViewDataView()) {
                             Text("View Data")
                         }}.foregroundColor(.black)
                             .font(.headline)
@@ -119,7 +51,7 @@ struct MenuView: View {
                     Button {
                     }
                     label: {
-                        NavigationLink(destination: WorkplaceDetailsPage()) {
+                        NavigationLink(destination: WorkplaceDetailsView()) {
                             Text("View Workplace Details")
                         }}.foregroundColor(.black)
                             .font(.headline)
@@ -132,7 +64,7 @@ struct MenuView: View {
                     Button {
                     }
                     label: {
-                        NavigationLink(destination: CustomerFeedbackPage()) {
+                        NavigationLink(destination: CustomerFeedbackView()) {
                             Text("Customer Feedback")
                         }}.foregroundColor(.black)
                             .font(.headline)
@@ -169,7 +101,7 @@ struct MenuView: View {
                     Button {
                     }
                     label: {
-                        NavigationLink(destination: FirstEditAccountPage()) {
+                        NavigationLink(destination: FirstEditAccountView()) {
                             Text("Edit Account")
                         }}.foregroundColor(.black)
                             .font(.headline)
@@ -192,7 +124,7 @@ struct MenuView: View {
                     Text("Sign Out")
                 }.foregroundColor(.black)
                 .font(.headline)
-                .background(NavigationLink(destination: LandingPage().navigationBarBackButtonHidden(true), isActive: $shouldShowLandingPage) { EmptyView() })                }
+                            .background(NavigationLink(destination: LandingView().navigationBarBackButtonHidden(true), isActive: $shouldShowLandingPage) { EmptyView() })                }
                     .padding(.top, 30)
             }
         }
@@ -202,3 +134,8 @@ struct MenuView: View {
     }
 }
 
+struct MenuView_Previews: PreviewProvider {
+    static var previews: some View {
+        MenuView()
+    }
+}

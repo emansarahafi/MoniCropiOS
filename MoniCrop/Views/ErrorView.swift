@@ -58,3 +58,19 @@ struct ErrorView : View {
     }
 }
 
+struct ErrorViewPreviewView: View {
+    @State var alert: Bool = true
+    @State var error: String = "Sample error message"
+    var body: some View {
+        ErrorView(alert: $alert, error: $error)
+    }
+}
+
+struct ErrorView_Previews: PreviewProvider {
+    static var previews: some View {
+        ErrorViewPreviewView()
+            .previewLayout(.sizeThatFits)
+            .padding()
+    }
+}
+

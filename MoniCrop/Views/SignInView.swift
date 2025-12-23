@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 
-struct SignInPage: View {
+struct SignInView: View {
     @State var email: String = ""
     @State var pwd: String = ""
     @State var alert = false
@@ -36,7 +36,7 @@ struct SignInPage: View {
             VStack (alignment: .leading){
                 Text("Password")
                     .font(.system(size: 20))
-                SecureTextField(text: self.$pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                SecureTextFieldView(text: self.$pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
                     .font(.system(size: 20))
             }
             Button(action: { verify() }) {
@@ -49,14 +49,14 @@ struct SignInPage: View {
             Button {
             }
             label: {
-                NavigationLink(destination: ForgotPasswordPage()) {
-                    Text("Forgot Your Password Page?").underline()
+                    NavigationLink(destination: ForgotPasswordView()) {
+                    Text("Forgot Your Password?").underline()
                 }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .font(.system(size: 20))
             Button {
             }
             label: {
-                NavigationLink(destination: FirstSignUpPage()) {
+                    NavigationLink(destination: FirstSignUpView()) {
                     Text("Sign Up Instead")
                 }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .font(.system(size: 20))
@@ -113,6 +113,6 @@ struct SignInPage: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInPage()
+        SignInView()
     }
 }

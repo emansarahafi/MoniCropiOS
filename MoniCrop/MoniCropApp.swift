@@ -27,7 +27,7 @@ struct MoniCropApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LandingPage()
+            LandingView()
         }
     }
 }
