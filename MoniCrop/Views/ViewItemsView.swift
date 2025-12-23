@@ -27,4 +27,3 @@ struct ViewItemsView_Previews: PreviewProvider {
         return ContentViewItemsView().environmentObject(mock)
     }
 }
-

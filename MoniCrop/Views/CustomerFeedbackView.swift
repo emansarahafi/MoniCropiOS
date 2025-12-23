@@ -1,5 +1,5 @@
 //
-//  CustomerView.swift
+//  CustomerFeedbackView.swift
 //  MoniCrop
 //
 //  Created by Eman Sarah Afi on 1/7/23.
@@ -112,7 +112,7 @@ struct CustomerFeedbackView: View {
 
 
 
-struct CustomerView_Previews: PreviewProvider {
+struct CustomerFeedbackView_Previews: PreviewProvider {
     static var previews: some View {
         CustomerFeedbackView()
     }

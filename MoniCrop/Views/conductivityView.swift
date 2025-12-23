@@ -149,5 +149,3 @@ struct ConductivityView_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
     }
 }
-
-

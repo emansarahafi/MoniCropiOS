@@ -73,4 +73,3 @@ struct ErrorView_Previews: PreviewProvider {
             .padding()
     }
 }
-

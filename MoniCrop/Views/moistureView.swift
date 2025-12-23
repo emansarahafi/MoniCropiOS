@@ -150,4 +150,3 @@ struct MoistureView_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
     }
 }
-
