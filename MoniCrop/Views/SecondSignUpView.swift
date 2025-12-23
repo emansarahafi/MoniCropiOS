@@ -21,9 +21,14 @@ struct SecondSignUpView: View {
     @State var position: String = ""
     @State var email: String = ""
     @State var isSaved = false
+    @AppStorage("status") private var isLoggedIn: Bool = false
+    @State private var showSuccess = false
+    @State private var showFailure = false
+    @State private var error = ""
 
     var body: some View {
-        VStack {
+        NavigationStack {
+            VStack {
             Group {
                 Text("First Name")
                     .font(.system(size: 20))
@@ -75,29 +80,43 @@ struct SecondSignUpView: View {
                     .padding(.top)
             }
             .padding()
-            .background(
-                NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true), isActive: $isSaved) {
-                    EmptyView()
+            .alert("Saved", isPresented: $showSuccess) {
+                Button("Continue") {
+                    isSaved = true
+                    isLoggedIn = true
+                    UserDefaults.standard.set(true, forKey: "status")
+                    NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
                 }
-            )
+            } message: {
+                Text("Your account information was saved.")
+            }
+            .alert("Error", isPresented: $showFailure) {
+                Button("OK") {}
+            } message: {
+                Text(self.error)
+            }
+        }
         }
     }
     func saveUserData() {
         // Validate required fields
         guard !fname.isEmpty, !lname.isEmpty, !wname.isEmpty, !position.isEmpty else {
-            print("Please fill all required fields")
+            self.error = "Please fill all required fields"
+            self.showFailure = true
             return
         }
         
         // Validate account type selection
         guard selection != "Select your account type" else {
-            print("Please select an account type")
+            self.error = "Please select an account type"
+            self.showFailure = true
             return
         }
         
         // Get the current user's ID and email
         guard let userID = Auth.auth().currentUser?.uid, let userEmail = Auth.auth().currentUser?.email else {
-            print("No user is currently signed in")
+            self.error = "No user is currently signed in"
+            self.showFailure = true
             return
         }
         
@@ -116,10 +135,13 @@ struct SecondSignUpView: View {
             "position": position
         ]) { error in
             if let error = error {
-                print("Error saving user data: \(error.localizedDescription)")
+                self.error = error.localizedDescription
+                self.showFailure = true
             } else {
-                print("User data saved successfully!")
-                isSaved = true
+                // show success alert then mark as saved to switch root
+                DispatchQueue.main.async {
+                    self.showSuccess = true
+                }
             }
         }
     }

@@ -14,10 +14,13 @@ struct SignInView: View {
     @State var pwd: String = ""
     @State var alert = false
     @State var error = ""
-    @State var isAuthenticated = false
+    @AppStorage("status") private var isLoggedIn: Bool = false
+    @State private var showSuccess = false
+    @State private var showFailure = false
     
     var body: some View {
-        VStack {
+        NavigationStack {
+            VStack {
             Image("MoniCrop")
                 .frame(width: 50, height: 50)
                 .padding(.bottom, 150)
@@ -61,46 +64,51 @@ struct SignInView: View {
                 }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .font(.system(size: 20))
         }
-        .padding()
-        .padding(.top, 100)
-        .alert(isPresented: $alert) {
-            Alert(title: Text("Error"), message: Text(self.error), dismissButton: .default(Text("OK")))
-        }
-        .background(
-            NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true), isActive: $isAuthenticated) {
-                EmptyView()
+            .padding()
+            .padding(.top, 100)
+            .alert("Error", isPresented: $showFailure) {
+                Button("OK") {}
+            } message: {
+                Text(self.error)
             }
-        )
+            .alert("Signed in", isPresented: $showSuccess) {
+                Button("OK") {
+                    isLoggedIn = true
+                    UserDefaults.standard.set(true, forKey: "status")
+                    NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                }
+            } message: {
+                Text("You have signed in successfully.")
+            }
+            // Root view will switch via `@AppStorage("status")` in App; set `isLoggedIn` on success.
+        }
+        }
     }
     
     func verify() {
         // Validate input
         guard !email.isEmpty && !pwd.isEmpty else {
             self.error = "Please fill all the contents properly"
-            self.alert.toggle()
+            self.showFailure = true
             return
         }
         
         // Validate email format
         guard isValidEmail(email) else {
             self.error = "Please enter a valid email address"
-            self.alert.toggle()
+            self.showFailure = true
             return
         }
         
         Auth.auth().signIn(withEmail: self.email, password: self.pwd) { (result, error) in
             if let error = error {
                 self.error = error.localizedDescription
-                self.alert.toggle()
+                self.showFailure = true
                 return
             }
             // If the user is authenticated successfully, change the view to HomeView()
-            isAuthenticated = true
-            
-            // Set a boolean flag in UserDefaults to indicate that the user is authenticated
-            UserDefaults.standard.set(true, forKey: "status")
-            // Post a notification to let other parts of the app know that the authentication status has changed
-            NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+            // Show success alert, then switch root when user confirms
+            showSuccess = true
         }
     }
     

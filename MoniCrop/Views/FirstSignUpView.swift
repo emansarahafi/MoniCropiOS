@@ -18,9 +18,12 @@ struct FirstSignUpView: View {
     @State var alert = false
     @State var error = ""
     @State var isRegistered = false
+    @State private var showSuccess = false
+    @State private var showFailure = false
 
     var body: some View {
-        VStack {
+        NavigationStack {
+            VStack {
             Image("MoniCrop")
                 .frame(width: 50, height: 50)
                 .padding(.bottom, 60)
@@ -60,56 +63,59 @@ struct FirstSignUpView: View {
                             .padding(.top)
         
         }
-        .padding()
-        .padding(.top, 70)
-        .alert(isPresented: $alert) {
-            Alert(title: Text("Error"), message: Text(self.error), dismissButton: .default(Text("OK")))
-        }
-            .background(
-            NavigationLink(destination: SecondSignUpView(), isActive: $isRegistered) {
-                EmptyView()
+            .padding()
+            .padding(.top, 70)
+            .alert("Error", isPresented: $showFailure) {
+                Button("OK") {}
+            } message: {
+                Text(self.error)
             }
-        )
+            .alert("Registered", isPresented: $showSuccess) {
+                Button("Continue") {
+                    isRegistered = true
+                }
+            } message: {
+                Text("Account created successfully.")
+            }
+        }
     }
     func register() {
         // Validate email is not empty
         guard !email.isEmpty else {
             self.error = "Please fill all the contents properly"
-            self.alert.toggle()
+            self.showFailure = true
             return
         }
         
         // Validate email format
         guard isValidEmail(email) else {
             self.error = "Please enter a valid email address"
-            self.alert.toggle()
+            self.showFailure = true
             return
         }
         
         // Validate password strength
         guard pwd.count >= 6 else {
             self.error = "Password must be at least 6 characters"
-            self.alert.toggle()
+            self.showFailure = true
             return
         }
         
         // Validate passwords match
         guard pwd == cpwd else {
             self.error = "Password mismatch"
-            self.alert.toggle()
+            self.showFailure = true
             return
         }
         
         Auth.auth().createUser(withEmail: self.email, password: self.pwd) { (res, err) in
             if let err = err {
                 self.error = err.localizedDescription
-                self.alert.toggle()
+                self.showFailure = true
                 return
             }
-            isRegistered = true
-            
-            UserDefaults.standard.set(true, forKey: "status")
-            NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+            // show success alert, then continue to second signup page
+            showSuccess = true
         }
     }
     

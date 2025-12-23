@@ -10,9 +10,10 @@ import Firebase
 
 struct MenuView: View {
     @Environment(\.openURL) var openURL
-    @State private var shouldShowLandingPage = false
+    // No local navigation needed; sign-out will update app root via AppStorage
     var body: some View {
-        VStack {
+        NavigationStack {
+            VStack {
             Text("Main Menu")
                 .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                 .font(.title)
@@ -116,21 +117,24 @@ struct MenuView: View {
                             try Auth.auth().signOut()
                             UserDefaults.standard.set(false, forKey: "status")
                             NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
-                            shouldShowLandingPage = true // set this state variable to true to show the landing page
+                            shouldShowLandingPage = true
                         } catch {
                             print("Error signing out: \(error)")
                         }
                     }) {
-                    Text("Sign Out")
-                }.foregroundColor(.black)
-                .font(.headline)
-                            .background(NavigationLink(destination: LandingView().navigationBarBackButtonHidden(true), isActive: $shouldShowLandingPage) { EmptyView() })                }
-                    .padding(.top, 30)
+                        Text("Sign Out")
+                    }
+                    .foregroundColor(.black)
+                    .font(.headline)
+                }
+                .padding(.top, 30)
+                }
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .edgesIgnoringSafeArea(.all)
+                // sign-out updates AppStorage("status") and switches root; no local navigation required
             }
         }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .edgesIgnoringSafeArea(.all)
     }
 }
 

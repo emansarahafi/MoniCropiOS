@@ -35,6 +35,11 @@ class ApplicationData: ObservableObject {
     private let itemsCollection = "items"
 
     func loadData() {
+        guard let userId = userId else {
+            print("No authenticated user id; skipping items load")
+            return
+        }
+
         db.collection(itemsCollection)
             .whereField("userId", isEqualTo: userId)
             .getDocuments { (querySnapshot, error) in

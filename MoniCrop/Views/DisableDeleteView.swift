@@ -12,10 +12,15 @@ struct DisableDeleteView: View {
     
     @State private var selectedAction = "Disable Account"
     @State private var password = ""
-    @State private var isActionPerformed = false
+    @AppStorage("status") private var isLoggedIn: Bool = false
+    @State private var didPerformAction = false
+    @State private var actionMessage: String = ""
+    @State private var showFailure = false
+    @State private var failureMessage = ""
     
     var body: some View {
-        VStack {
+        NavigationStack {
+            VStack {
             Picker(selection: $selectedAction, label: Text("Choose Action")) {
                 Text("Disable Account").tag("Disable Account")
                 Text("Delete Account").tag("Delete Account")
@@ -31,8 +36,7 @@ struct DisableDeleteView: View {
                 .font(.system(size: 20))
                 .padding()
             
-                    NavigationLink(destination: LandingView().navigationBarBackButtonHidden(true), isActive: $isActionPerformed) {
-                Button(action: {
+                    Button(action: {
                     guard let currentUser = Auth.auth().currentUser else { return }
                     
                     switch selectedAction {
@@ -40,27 +44,29 @@ struct DisableDeleteView: View {
                         // Sign out the user to "disable" their account
                         do {
                             try Auth.auth().signOut()
-                            UserDefaults.standard.set(false, forKey: "status")
-                            NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
-                            print("Account disabled (signed out).")
-                            isActionPerformed = true
+                            // defer root-switch until user acknowledges
+                            actionMessage = "Account disabled (signed out)."
+                            didPerformAction = true
                         } catch let signOutError {
-                            print("Error disabling account: \(signOutError.localizedDescription)")
+                            failureMessage = "Error disabling account: \(signOutError.localizedDescription)"
+                            showFailure = true
                         }
                     case "Delete Account":
                         let credential = EmailAuthProvider.credential(withEmail: currentUser.email ?? "", password: password)
                         currentUser.reauthenticate(with: credential) { authDataResult, error in
                             if let error = error {
-                                print("Error reauthenticating user: \(error.localizedDescription)")
+                                failureMessage = "Error reauthenticating user: \(error.localizedDescription)"
+                                showFailure = true
                                 return
                             }
                             currentUser.delete { error in
                                 if let error = error {
-                                    print("Error deleting account: \(error.localizedDescription)")
+                                    failureMessage = "Error deleting account: \(error.localizedDescription)"
+                                    showFailure = true
                                     return
                                 }
-                                print("Account deleted.")
-                                isActionPerformed = true
+                                actionMessage = "Account deleted."
+                                didPerformAction = true
                             }
                         }
                     default:
@@ -70,11 +76,24 @@ struct DisableDeleteView: View {
                 }) {
                     Text("Perform Action")
                 }
+                .alert(actionMessage, isPresented: $didPerformAction) {
+                    Button("OK") {
+                        // switch root view now that user acknowledged
+                        isLoggedIn = false
+                        UserDefaults.standard.set(false, forKey: "status")
+                        NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                    }
+                }
+                .alert("Error", isPresented: $showFailure) {
+                    Button("OK") {}
+                } message: {
+                    Text(self.failureMessage)
+                }
             }
-        }
-        .onAppear {
-            guard let currentUser = Auth.auth().currentUser else { return }
-            selectedAction = currentUser.isEmailVerified ? "Disable Account" : "Delete Account"
+            .onAppear {
+                guard let currentUser = Auth.auth().currentUser else { return }
+                selectedAction = currentUser.isEmailVerified ? "Disable Account" : "Delete Account"
+            }
         }
     }
 }

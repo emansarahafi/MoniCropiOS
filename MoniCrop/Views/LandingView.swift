@@ -10,7 +10,7 @@ import SwiftUI
 struct LandingView: View {
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Image("MoniCrop")
                     .frame(width: 50, height: 50)

@@ -24,10 +24,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct MoniCropApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
-    var body: some Scene {
-        WindowGroup {
-            LandingView()
-        }
+  @AppStorage("status") private var isLoggedIn: Bool = false
+
+  var body: some Scene {
+    WindowGroup {
+      if isLoggedIn {
+        HomeView()
+      } else {
+        LandingView()
+      }
     }
+  }
 }
