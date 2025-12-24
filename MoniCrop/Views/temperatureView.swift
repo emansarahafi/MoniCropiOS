@@ -25,6 +25,9 @@ struct TemperatureView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("temperaturePickerFruit")
+            .accessibilityLabel("Select crop item for temperature")
+            .accessibilityHint("Choose a crop to show temperature values")
             
             Button(action: {
                 gettemperatureValues()
@@ -33,6 +36,9 @@ struct TemperatureView: View {
             })
             .disabled(selectedFruit.isEmpty)
             .padding()
+            .accessibilityIdentifier("showTemperatureValuesButton")
+            .accessibilityLabel("Show temperature values")
+            .accessibilityHint("Displays temperature measurements for the selected crop")
             
             if !temperatureValues.isEmpty {
                 TemperatureLineChartView(data: temperatureValues)
@@ -100,9 +106,12 @@ struct TemperatureView_Previews: PreviewProvider {
             (Calendar.current.date(byAdding: .day, value: -1, to: now)!, 21.5),
             (now, 23.0)
         ]
-        return TemperatureLineChartView(data: sample)
-            .frame(height: 320)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        NavigationStack {
+            TemperatureLineChartView(data: sample)
+                .frame(height: 320)
+                .padding()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

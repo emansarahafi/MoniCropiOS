@@ -16,8 +16,14 @@ struct ReSecureTextFieldView: View {
         HStack {
             if isSecureField {
                 SecureField("Retype Password", text: $text)
+                    .textContentType(.password)
+                    .autocorrectionDisabled(true)
+                    .textInputAutocapitalization(.never)
             } else {
                 TextField(text, text: $text)
+                    .textContentType(.password)
+                    .autocorrectionDisabled(true)
+                    .textInputAutocapitalization(.never)
             }
         }.overlay(alignment: .trailing) {
             Image(systemName: isSecureField ? "eye.slash": "eye")
@@ -33,8 +39,11 @@ struct ReSecureTextFieldView_Previews: PreviewProvider {
         @State var value: String = ""
         var body: some View { ReSecureTextFieldView(text: $value).padding() }
     }
-    static var previews: some View {
-        Wrapper()
+        static var previews: some View {
+            NavigationStack {
+                Wrapper()
+            }
             .previewLayout(.sizeThatFits)
-    }
+            .padding()
+        }
 }

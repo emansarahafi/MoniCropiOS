@@ -14,7 +14,7 @@ struct PHLineChartView: View {
         VStack(spacing: 8) {
             Text("pH Level")
                 .font(.headline)
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .foregroundColor(Color.accent)
             
             HStack(alignment: .center, spacing: 8) {
                 VStack(alignment: .trailing, spacing: 0) {
@@ -22,8 +22,8 @@ struct PHLineChartView: View {
                     let maxData = data.map { $0.1 }.max() ?? 1
                     ForEach(0..<5) { i in
                         let value = maxData - (maxData - minData) * Double(i) / 4
-                        Text(String(format: "%.1f", value))
-                            .font(.system(size: 10))
+                        Text(String(format: "%.0f", value))
+                            .font(.caption)
                             .foregroundColor(.gray)
                             .frame(height: 50, alignment: .top)
                     }
@@ -62,7 +62,7 @@ struct PHLineChartView: View {
                                 path.addLine(to: CGPoint(x: x, y: y))
                             }
                         }
-                        .stroke(Color(red: 148/255, green: 178/255, blue: 2/255), lineWidth: 2.5)
+                        .stroke(Color.accent, lineWidth: 2.5)
                     }
                     .padding(4)
                 }
@@ -74,11 +74,11 @@ struct PHLineChartView: View {
                 HStack {
                     if !data.isEmpty {
                         Text(data.first?.0.formatted(date: .abbreviated, time: .omitted) ?? "")
-                            .font(.system(size: 10))
+                            .font(.caption)
                             .foregroundColor(.gray)
                         Spacer()
                         Text(data.last?.0.formatted(date: .abbreviated, time: .omitted) ?? "")
-                            .font(.system(size: 10))
+                            .font(.caption)
                             .foregroundColor(.gray)
                     }
                 }
@@ -89,6 +89,9 @@ struct PHLineChartView: View {
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("pH chart")
+        .accessibilityValue(data.isEmpty ? "No data" : "Latest: \(String(format: "%.1f", data.last!.1)) on \(data.last!.0.formatted(date: .abbreviated, time: .omitted))")
     }
 }
 

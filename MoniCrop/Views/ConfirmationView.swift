@@ -12,14 +12,14 @@ struct ConfirmationView: View {
     var body: some View {
         VStack {
             Image(systemName: "checkmark")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .foregroundColor(Color.accent)
                 .imageScale(.large)
-                .font(.system(size: 120))
+                .font(.system(.largeTitle))
                 .padding()
             Text("Feedback Received!")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .foregroundColor(Color.accent)
                 .fontWeight(.bold)
-                .font(.system(size: 50))
+                .titleStyle()
                 .padding()
             .padding()
             Button(action: {
@@ -29,11 +29,12 @@ struct ConfirmationView: View {
                     Text("Done")
                         .frame(maxWidth: .infinity)
                 }
-            }).buttonStyle(.borderedProminent)
-                .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .foregroundColor(.white)
-                .font(.system(size: 20))
+            }).primaryButtonStyle()
+                .bodyStyle()
                 .padding(.top)
+                .accessibilityLabel("Done - return to menu")
+                .accessibilityIdentifier("confirmationDoneButton")
+                .accessibilityHint("Returns to the main menu")
         }
         .padding()
     }
@@ -41,8 +42,10 @@ struct ConfirmationView: View {
 
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationView()
-            .previewLayout(.sizeThatFits)
-            .padding()
+        NavigationStack {
+            ConfirmationView()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

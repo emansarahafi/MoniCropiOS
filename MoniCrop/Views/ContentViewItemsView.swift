@@ -13,8 +13,8 @@ struct ContentViewItemsView: View {
     var body: some View {
         VStack {
             Text("View Items")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
+                .foregroundColor(Color.accent)
+                .titleStyle()
                 .fontWeight(.bold)
 
             List {
@@ -42,6 +42,8 @@ struct ContentViewItemsView_Previews: PreviewProvider {
             ItemsViewModel(item: Item(image: "apple", name: "Apple", date: "2025-12-23", price: "$1.00")),
             ItemsViewModel(item: Item(image: "carrot", name: "Carrot", date: "2025-12-22", price: "$0.50"))
         ]
-        return ContentViewItemsView().environmentObject(mock)
+        return NavigationStack {
+            ContentViewItemsView().environmentObject(mock)
+        }
     }
 }

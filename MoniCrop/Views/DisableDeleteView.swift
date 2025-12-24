@@ -22,9 +22,8 @@ struct DisableDeleteView: View {
         NavigationStack {
             VStack {
                 Text("Disable or Delete Account")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
-                .fontWeight(.bold)
+                .foregroundColor(Color.accent)
+                .titleStyle()
                 .padding()
 
                 VStack(alignment: .leading, spacing: 12) {
@@ -36,14 +35,14 @@ struct DisableDeleteView: View {
                     .pickerStyle(SegmentedPickerStyle())
 
                     Text("Please enter the password to confirm:")
-                        .font(.system(size: 20))
+                        .headerStyle()
                     
-                    SecureTextFieldView(text: $password).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                        .font(.system(size: 20))
+                    SecureTextFieldView(text: $password).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.never)
+                        .bodyStyle()
                     
                     Text("Kindly note that if you choose: \nDisable: The account will be disabled & the user can reactivate it at any moment by logging again. \nDelete: The account will be deleted instantly.")
                         .multilineTextAlignment(.leading)
-                        .font(.system(size: 20))
+                        .bodyStyle()
                         .padding()
                     
                             Button(action: {
@@ -88,11 +87,12 @@ struct DisableDeleteView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 12)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                        .foregroundColor(.white)
-                        .font(.system(size: 18))
+                        .primaryButtonStyle()
+                        .bodyStyle()
                         .padding(.top)
+                        .accessibilityLabel("Perform selected account action")
+                        .accessibilityIdentifier("performAccountAction")
+                        .accessibilityHint("Performs the currently selected account action, disable or delete")
                         .alert(actionMessage, isPresented: $didPerformAction) {
                             Button("OK") {
                                 // switch root view now that user acknowledged
@@ -122,7 +122,7 @@ struct DeleteView_Previews: PreviewProvider {
         NavigationStack {
             DisableDeleteView()
         }
-        .padding()
         .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

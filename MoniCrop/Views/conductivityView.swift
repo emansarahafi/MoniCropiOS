@@ -27,6 +27,9 @@ struct ConductivityView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("conductivityPickerFruit")
+            .accessibilityLabel("Select crop item for conductivity")
+            .accessibilityHint("Choose a crop to load available IDs")
             .onChange(of: selectedFruit) { _ in
                 loadIDsForFruit()
                 selectedID = ""
@@ -39,6 +42,9 @@ struct ConductivityView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("conductivityPickerID")
+            .accessibilityLabel("Select ID for conductivity")
+            .accessibilityHint("Choose an item identifier to show conductivity values")
             .disabled(selectedFruit.isEmpty)
             
             Button(action: {
@@ -48,6 +54,9 @@ struct ConductivityView: View {
             })
             .disabled(selectedID.isEmpty)
             .padding()
+            .accessibilityIdentifier("showConductivityValuesButton")
+            .accessibilityLabel("Show conductivity values")
+            .accessibilityHint("Displays conductivity measurements for the selected item")
             
             if !conductivityValues.isEmpty {
                 ConductivityLineChartView(data: conductivityValues)
@@ -143,9 +152,12 @@ struct ConductivityView_Previews: PreviewProvider {
             (Calendar.current.date(byAdding: .day, value: -1, to: now)!, 225.0),
             (now, 240.0)
         ]
-        return ConductivityLineChartView(data: sample)
-            .frame(height: 320)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        NavigationStack {
+            ConductivityLineChartView(data: sample)
+                .frame(height: 320)
+                .padding()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

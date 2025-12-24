@@ -27,6 +27,9 @@ struct DistanceView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("distancePickerFruit")
+            .accessibilityLabel("Select crop item for distance")
+            .accessibilityHint("Choose a crop to load available IDs")
             .onChange(of: selectedFruit) { _ in
                 loadIDsForFruit()
                 selectedID = ""
@@ -39,6 +42,9 @@ struct DistanceView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("distancePickerID")
+            .accessibilityLabel("Select ID for distance")
+            .accessibilityHint("Choose an item identifier to show distance values")
             .disabled(selectedFruit.isEmpty)
             
             Button(action: {
@@ -48,6 +54,9 @@ struct DistanceView: View {
             })
             .disabled(selectedID.isEmpty)
             .padding()
+            .accessibilityIdentifier("showDistanceValuesButton")
+            .accessibilityLabel("Show distance values")
+            .accessibilityHint("Displays distance measurements for the selected item")
             
             if !distanceValues.isEmpty {
                 DistanceLineChartView(data: distanceValues)
@@ -144,9 +153,12 @@ struct DistanceView_Previews: PreviewProvider {
             (Calendar.current.date(byAdding: .day, value: -1, to: now)!, 1.25),
             (now, 1.4)
         ]
-        return DistanceLineChartView(data: sample)
-            .frame(height: 320)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        NavigationStack {
+            DistanceLineChartView(data: sample)
+                .frame(height: 320)
+                .padding()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

@@ -18,17 +18,26 @@ struct ForgotPasswordView: View {
     var body: some View {
         VStack {
             Image("MoniCrop")
+                .accessibilityHidden(true)
                 .frame(width: 50, height: 50)
                 .padding(.bottom, 200)
             Text("Email Address")
+                .headerStyle()
             TextField("Insert Email", text: self.$email)
-                .keyboardType(.emailAddress).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                .keyboardType(.emailAddress)
+                .textFieldStyle(.roundedBorder)
+                .textInputAutocapitalization(.never)
+                .bodyStyle()
             Button(action: { reset() }) {
                 Text("Send Verification Link").frame(maxWidth: .infinity)
-                }.buttonStyle(.borderedProminent)
-                    .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                    .font(.system(size: 20))
+                }
+                .primaryButtonStyle()
+                .bodyStyle()
+                .autocorrectionDisabled(true)
                     .padding(.top)
+                    .accessibilityLabel("Send password reset link")
+                    .accessibilityIdentifier("sendResetLinkButton")
+                    .accessibilityHint("Sends a password reset link to the provided email address")
         }
         .padding()
     }
@@ -66,6 +75,10 @@ struct ForgotPasswordView: View {
 
 struct ForgotPasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ForgotPasswordView()
+        NavigationStack {
+            ForgotPasswordView()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

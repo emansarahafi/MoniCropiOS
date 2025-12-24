@@ -35,8 +35,10 @@ struct CircularProfileImageView: View {
 
 struct CircularProfileImageView_Previews: PreviewProvider {
     static var previews: some View {
-        CircularProfileImageView(imageState: .empty)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        NavigationStack {
+            CircularProfileImageView(imageState: .empty)
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }

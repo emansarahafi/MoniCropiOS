@@ -19,8 +19,8 @@ struct WorkplaceDetailsView: View {
     var body: some View {
         VStack {
             Text("Workplace Details")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
+                .foregroundColor(Color.accent)
+                .titleStyle()
                 .fontWeight(.bold)
             
             VStack {
@@ -34,7 +34,7 @@ struct WorkplaceDetailsView: View {
                     .font(.subheadline)
             }
             .multilineTextAlignment(.center)
-            .font(.system(size: 20))
+            .bodyStyle()
             .padding()
         }
         .padding()
@@ -70,13 +70,12 @@ struct WorkplaceDetailsView: View {
     }
 }
 
-
 struct WorkplaceDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Text("Workplace Details")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
+                .foregroundColor(Color.accent)
+                .titleStyle()
                 .fontWeight(.bold)
             VStack {
                 Text("Workplace Name: Sample Farm")
@@ -89,7 +88,7 @@ struct WorkplaceDetailsView_Previews: PreviewProvider {
                     .font(.subheadline)
             }
             .multilineTextAlignment(.center)
-            .font(.system(size: 20))
+            .bodyStyle()
             .padding()
         }
         .padding()

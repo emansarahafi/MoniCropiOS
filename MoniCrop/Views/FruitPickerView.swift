@@ -20,6 +20,11 @@ struct FruitPickerView: View {
                 Text(fruit)
             }
         }
+        .pickerStyle(.menu)
+        .padding()
+        .accessibilityIdentifier("fruitPicker")
+        .accessibilityLabel("Select fruit")
+        .accessibilityHint("Choose a fruit")
         .onAppear {
             guard let userId = Auth.auth().currentUser?.uid else {
                 // handle the case where the user is not logged in

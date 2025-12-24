@@ -27,6 +27,9 @@ struct NitrogenView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("nitrogenPickerFruit")
+            .accessibilityLabel("Select crop item for nitrogen")
+            .accessibilityHint("Choose a crop to load available IDs")
             .onChange(of: selectedFruit) { _ in
                 loadIDsForFruit()
                 selectedID = ""
@@ -39,6 +42,9 @@ struct NitrogenView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("nitrogenPickerID")
+            .accessibilityLabel("Select ID for nitrogen")
+            .accessibilityHint("Choose an item identifier to show nitrogen values")
             .disabled(selectedFruit.isEmpty)
             
             Button(action: {
@@ -48,6 +54,9 @@ struct NitrogenView: View {
             })
             .disabled(selectedID.isEmpty)
             .padding()
+            .accessibilityIdentifier("showNitrogenValuesButton")
+            .accessibilityLabel("Show nitrogen values")
+            .accessibilityHint("Displays nitrogen measurements for the selected item")
             
             if !nitrogenValues.isEmpty {
                 NitrogenLineChartView(data: nitrogenValues)
@@ -144,9 +153,12 @@ struct NitrogenView_Previews: PreviewProvider {
             (Calendar.current.date(byAdding: .day, value: -1, to: now)!, 12.0),
             (now, 14.0)
         ]
-        return NitrogenLineChartView(data: sample)
-            .frame(height: 320)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        NavigationStack {
+            NitrogenLineChartView(data: sample)
+                .frame(height: 320)
+                .padding()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

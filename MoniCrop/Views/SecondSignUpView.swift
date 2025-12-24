@@ -31,71 +31,78 @@ struct SecondSignUpView: View {
             VStack(alignment: .leading, spacing: 12) {
                 Group {
                     Text("First Name")
-                        .font(.system(size: 20))
+                        .headerStyle()
                     TextField("Insert First Name", text: $fname)
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.words)
-                        .font(.system(size: 20))
+                        .bodyStyle()
+                        .accessibilityIdentifier("secondSignUpFirstNameField")
 
                     Text("Middle Name")
-                        .font(.system(size: 20))
+                        .headerStyle()
                     TextField("Insert Middle Name", text: $mname)
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.words)
-                        .font(.system(size: 20))
+                        .bodyStyle()
+                        .accessibilityIdentifier("secondSignUpMiddleNameField")
 
                     Text("Last Name")
-                        .font(.system(size: 20))
+                        .headerStyle()
                     TextField("Insert Last Name", text: $lname)
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.words)
-                        .font(.system(size: 20))
+                        .bodyStyle()
+                        .accessibilityIdentifier("secondSignUpLastNameField")
                 }
 
                 DatePicker("Date of Birth",
                            selection: $date,
                            in: ...Date(),
                            displayedComponents: [.date])
-                    .font(.system(size: 20))
+                    .bodyStyle()
                     .padding(.vertical, 8)
 
                 Group {
                     Text("Account type")
-                        .font(.system(size: 20))
+                        .headerStyle()
                     Picker("Account type", selection: $selection) {
                         ForEach(options, id: \.self) { Text($0) }
                     }
                     .pickerStyle(.menu)
-                    .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                    .font(.system(size: 20))
+                    .tint(.accent)
+                    .bodyStyle()
+
 
                     Text("Workplace Name")
-                        .font(.system(size: 20))
+                        .headerStyle()
                     TextField("Insert Workplace Name", text: $wname)
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.words)
-                        .font(.system(size: 20))
+                        .bodyStyle()
+                        .accessibilityIdentifier("secondSignUpWorkplaceNameField")
 
                     Text("Position")
-                        .font(.system(size: 20))
+                        .headerStyle()
                     TextField("Insert Position", text: $position)
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.words)
-                        .font(.system(size: 20))
+                        .bodyStyle()
+                        .accessibilityIdentifier("secondSignUpPositionField")
 
                     Button(action: { saveUserData() }) {
                         Text("Sign Up")
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 12)
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                    .foregroundColor(.white)
-                    .font(.system(size: 20))
+                    .primaryButtonStyle()
+                    .bodyStyle()
                     .padding(.top)
+                    .accessibilityLabel("Complete sign up")
+                    .accessibilityIdentifier("completeSignUpButton")
+                    .accessibilityHint("Save account details and finish sign up")
                 }
                 .padding()
-                .alert("Saved", isPresented: $showSuccess) {
+                .alert("Success", isPresented: $showSuccess) {
                     Button("Continue") {
                         isSaved = true
                         isLoggedIn = true
@@ -165,8 +172,10 @@ struct SecondSignUpView: View {
 
 struct SecondSignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SecondSignUpView()
-            .previewLayout(.sizeThatFits)
-            .padding()
+        NavigationStack {
+            SecondSignUpView()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

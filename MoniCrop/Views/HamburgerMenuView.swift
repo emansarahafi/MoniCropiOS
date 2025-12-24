@@ -45,6 +45,8 @@ struct HamburgerMenuView: View {
                         }) {
                             Image(systemName: "line.horizontal.3")
                                 .foregroundColor(.black)
+                                .accessibilityLabel("Menu")
+                                .accessibilityIdentifier("hamburgerMenuButton")
                                 .imageScale(.large)
                         }
                     }
@@ -56,19 +58,22 @@ struct HamburgerMenuView: View {
 struct HamburgerMenuView_Previews: PreviewProvider {
     static var previews: some View {
         // Static mock preview: main content + menu overlay
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                VStack(spacing: 50) {
-                    Image("MoniCrop")
-                        .frame(width: 50, height: 50)
-                    Text("Main Content")
-                        .font(.title)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
+        NavigationStack {
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    VStack(spacing: 50) {
+                        Image("MoniCrop")
+                            .accessibilityHidden(true)
+                            .frame(width: 50, height: 50)
+                        Text("Main Content")
+                                .titleStyle()
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height)
 
-                MenuView()
-                    .frame(width: geometry.size.width / 1.5)
-                    .background(Color.white)
+                    MenuView()
+                        .frame(width: geometry.size.width / 1.5)
+                        .background(Color.white)
+                }
             }
         }
         .previewLayout(.sizeThatFits)

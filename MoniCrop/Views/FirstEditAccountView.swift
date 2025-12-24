@@ -27,26 +27,33 @@ struct FirstEditAccountView: View {
     var body: some View {
         VStack {
             Image("MoniCrop")
+                .accessibilityHidden(true)
                 .frame(width: 50, height: 50)
                 .padding(.bottom, 150)
             Text("Edit Account")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
+                .foregroundColor(Color.accent)
+                .titleStyle()
                 .fontWeight(.bold)
             
             VStack(alignment: .leading) {
             Text("Email Address")
-                .font(.system(size: 20))
+                .bodyStyle()
             TextField("Insert Email", text: $email)
-                .keyboardType(.emailAddress).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                .font(.system(size: 20))
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
+                .textFieldStyle(.roundedBorder)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled(true)
+                .bodyStyle()
+                .accessibilityLabel("Email address")
+                .accessibilityIdentifier("editEmailField")
             Text("Insert Password")
-                .font(.system(size: 20))
-            SecureTextFieldView(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                .bodyStyle()
+            SecureTextFieldView(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.never)
             Text("Confirm Password")
-                .font(.system(size: 20))
-            ReSecureTextFieldView(text: $cpwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                .font(.system(size: 20))
+                .bodyStyle()
+            ReSecureTextFieldView(text: $cpwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.never)
+                .bodyStyle()
             }
             
             // show inline error no longer used; show alert instead
@@ -61,11 +68,11 @@ struct FirstEditAccountView: View {
                 Text("Next")
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-            .foregroundColor(.white)
-            .font(.system(size: 20))
+            .primaryButtonStyle()
+            .bodyStyle()
             .padding(.top)
+            .accessibilityLabel("Next - validate account edits")
+            .accessibilityIdentifier("editAccountNextButton")
             .alert("Validation", isPresented: $showAlert) {
                 Button("OK") {}
             } message: {
@@ -115,6 +122,11 @@ struct FirstEditAccountView: View {
 
 struct FirstEditAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstEditAccountView(onComplete: nil).environmentObject(UsersViewModel(user: User()))
+        NavigationStack {
+            FirstEditAccountView(onComplete: nil)
+                .environmentObject(UsersViewModel(user: User()))
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

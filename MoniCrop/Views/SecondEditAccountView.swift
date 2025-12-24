@@ -28,37 +28,37 @@ struct SecondEditAccountView: View {
         VStack {
             Group {
                 Text("First Name")
-                    .font(.system(size: 20))
+                    .bodyStyle()
                 TextField("Insert First Name", text: $fname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                    .font(.system(size: 20))
+                    .bodyStyle()
                 Text("Middle Name")
-                    .font(.system(size: 20))
+                    .bodyStyle()
                 TextField("Insert Middle Name", text: $mname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                    .font(.system(size: 20))
+                    .bodyStyle()
                 Text("Last Name")
-                    .font(.system(size: 20))
+                    .bodyStyle()
                 TextField("Insert Last Name", text: $lname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                    .font(.system(size: 20))
+                    .bodyStyle()
             }
             DatePicker("Date of Birth",
                         selection: $date,
                         in: ...Date(),
                         displayedComponents: [.date])
-            .font(.system(size: 20))
+            .bodyStyle()
                         .padding()
             Text("Workplace Name")
-                .font(.system(size: 20))
+                .bodyStyle()
             TextField("Insert Workplace Name", text: $wname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                .font(.system(size: 20))
+                .bodyStyle()
             Text("Position")
-                .font(.system(size: 20))
+                .bodyStyle()
             TextField("Insert Position", text: $position) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                .font(.system(size: 20))
+                .bodyStyle()
 
             if showError {
                 Text(errorMessage)
                     .foregroundColor(.red)
-                    .font(.system(size: 14))
+                    .font(.footnote)
                     .padding(.top, 5)
             }
 
@@ -70,12 +70,13 @@ struct SecondEditAccountView: View {
                 Text("Update Account")
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-            .foregroundColor(.white)
-            .font(.system(size: 20))
+            .primaryButtonStyle()
+            .bodyStyle()
             .padding(.top)
-            .alert("Saved", isPresented: $showSuccess) {
+            .accessibilityIdentifier("updateAccountButton")
+            .accessibilityLabel("Update account")
+            .accessibilityHint("Saves your account changes and returns to the menu")
+            .alert("Success", isPresented: $showSuccess) {
                 Button("Continue") {
                     navigateToMenu = true
                 }
@@ -93,9 +94,12 @@ struct SecondEditAccountView: View {
             } label: {
                 Text("Disable or Delete Your Account")
             }
-            .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-            .font(.system(size: 20))
+            .foregroundColor(Color.accent)
+            .bodyStyle()
             .padding(.top)
+            .accessibilityIdentifier("disableDeleteAccountButton")
+            .accessibilityLabel("Disable or delete account")
+            .accessibilityHint("Choose to disable or delete your account")
         }
         .padding()
         .navigationDestination(isPresented: $navigateToMenu) {
@@ -167,8 +171,10 @@ struct SecondEditAccountView: View {
 
 struct SecondEditAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        SecondEditAccountView()
-            .previewLayout(.sizeThatFits)
-            .padding()
+        NavigationStack {
+            SecondEditAccountView()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

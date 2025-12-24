@@ -1,3 +1,4 @@
+// This is a comment to indicate the start of the patch
 //
 //  AccountView.swift
 //  MoniCrop
@@ -74,11 +75,17 @@ struct AccountView: View {
         }
         .navigationTitle("User Details")
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { self.presentEditProfileSheet.toggle() }) {
                     Text("Edit")
-                }
-                .buttonStyle(.bordered)
+                    }
+                    .primaryButtonStyle()
+                    .bodyStyle()
+                    .foregroundColor(.white)
+                    .tint(.accent)
+                    .accessibilityLabel("Edit profile")
+                    .accessibilityIdentifier("editProfileButton")
+                    .accessibilityHint("Opens edit profile sheet")
             }
         }
         .onAppear { print("AccountView.onAppear() for User Details") }
@@ -96,8 +103,10 @@ struct AccountView: View {
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView(imageState: .empty, user: User())
-            .padding()
-            .previewLayout(.sizeThatFits)
+        NavigationStack {
+            AccountView(imageState: .empty, user: User(fname: "Eman", mname: "S.", lname: "Afi", email: "eman@example.com", date: Date(timeIntervalSince1970: 0), gender: "Female"))
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }

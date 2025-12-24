@@ -17,8 +17,8 @@ struct ViewDataView: View {
     var body: some View {
         VStack {
             Text("View Data")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
+                .foregroundColor(Color.accent)
+                .titleStyle()
                 .fontWeight(.bold)
             
             TabView {
@@ -58,7 +58,7 @@ struct ViewDataView_Previews: PreviewProvider {
         // Static mock of the tabs to avoid instantiating metric views that call Firebase
         VStack(spacing: 12) {
             Text("View Data")
-                .font(.title)
+                .titleStyle()
                 .fontWeight(.bold)
             Text("Nitrogen | Phosphorus | Potassium | pH | Conductivity | Moisture | Distance | Temperature")
                 .font(.subheadline)

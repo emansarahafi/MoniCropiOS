@@ -22,45 +22,55 @@ struct SignInView: View {
         NavigationStack {
             VStack {
             Image("MoniCrop")
+                .accessibilityHidden(true)
                 .frame(width: 50, height: 50)
                 .padding(.bottom, 150)
             Text("Sign In")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
-                .fontWeight(.bold)
+                .foregroundColor(Color.accent)
+                .titleStyle()
             
             VStack (alignment: .leading){
                 Text("Email Address")
-                    .font(.system(size: 20))
+                    .headerStyle()
                 TextField("Insert Email", text: self.$email)
-                    .keyboardType(.emailAddress).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                    .font(.system(size: 20))
+                    .keyboardType(.emailAddress)
+                    .textFieldStyle(.roundedBorder)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled(true)
+                    .bodyStyle()
+                    .accessibilityIdentifier("signInEmailField")
             }
             VStack (alignment: .leading){
                 Text("Password")
-                    .font(.system(size: 20))
-                SecureTextFieldView(text: self.$pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                    .font(.system(size: 20))
+                    .headerStyle()
+                SecureTextFieldView(text: self.$pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.never)
+                    .bodyStyle()
+                    .accessibilityIdentifier("signInPasswordField")
             }
             Button(action: { verify() }) {
                             Text("Sign in").frame(maxWidth: .infinity)
                         }
-                            .buttonStyle(.borderedProminent)
-                            .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
+                            .primaryButtonStyle()
+                            .bodyStyle()
                             .padding(.top)
+                            .accessibilityLabel("Sign in")
+                            .accessibilityIdentifier("signInButton")
+                            .accessibilityHint("Sign in with your email and password")
             NavigationLink(destination: ForgotPasswordView()) {
                 Text("Forgot Your Password?").underline()
             }
-            .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-            .font(.system(size: 20))
+            .foregroundColor(Color.accent)
+            .bodyStyle()
+            .accessibilityLabel("Forgot password")
+            .accessibilityIdentifier("forgotPasswordLink")
 
             NavigationLink(destination: FirstSignUpView()) {
                 Text("Sign Up Instead")
             }
-            .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-            .font(.system(size: 20))
+            .foregroundColor(Color.accent)
+            .bodyStyle()
+            .accessibilityLabel("Sign up instead")
+            .accessibilityIdentifier("signUpLink")
         }
             .padding()
             .padding(.top, 100)
@@ -69,7 +79,7 @@ struct SignInView: View {
             } message: {
                 Text(self.error)
             }
-            .alert("Signed in", isPresented: $showSuccess) {
+            .alert("Success", isPresented: $showSuccess) {
                 Button("OK") {
                     isLoggedIn = true
                     UserDefaults.standard.set(true, forKey: "status")
@@ -118,6 +128,13 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        NavigationStack {
+            SignInView()
+        }
+        NavigationStack {
+            SignInView()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

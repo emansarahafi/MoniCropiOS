@@ -17,24 +17,35 @@ struct CustomerFeedbackView: View {
 
     var body: some View {
         VStack {
-            Image("MoniCrop")
+                Image("MoniCrop")
+                    .accessibilityHidden(true)
                 .frame(width: 50, height: 50)
                 .padding(.bottom, 150)
             Text("Customer Feedback")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
-                .fontWeight(.bold)
+                .foregroundColor(Color.accent)
+                .titleStyle()
                 .padding()
             VStack(alignment: .leading) {
                 Text("Email Address")
-                    .font(.system(size: 20))
+                    .bodyStyle()
                 TextField("Insert Email", text: $email)
-                    .keyboardType(.emailAddress).textFieldStyle(RoundedBorderTextFieldStyle()) .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textContentType(.emailAddress)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled(true)
+                    .accessibilityLabel("Feedback email address")
+                    .accessibilityIdentifier("feedbackEmailField")
             }
             VStack (alignment: .leading) {
                 Text("Feedback or Complaint")
-                    .font(.system(size: 20))
-                TextField("Insert Opinion", text: $opinion) .textFieldStyle(RoundedBorderTextFieldStyle()) .textContentType(.none)
+                    .bodyStyle()
+                TextField("Insert Opinion", text: $opinion)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textContentType(.none)
+                    .autocorrectionDisabled(true)
+                    .accessibilityLabel("Feedback text")
+                    .accessibilityIdentifier("feedbackTextField")
             }
             Button(action: {
                 submitFeedback()
@@ -43,11 +54,12 @@ struct CustomerFeedbackView: View {
                     Text("Submit")
                         .frame(maxWidth: .infinity)
                 }
-            }).buttonStyle(.borderedProminent)
-                .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .foregroundColor(.white)
-                .font(.system(size: 20))
+            }).primaryButtonStyle()
+                .bodyStyle()
                 .padding(.top)
+                .accessibilityIdentifier("submitFeedbackButton")
+                .accessibilityLabel("Submit feedback")
+                .accessibilityHint("Submit your feedback and proceed to confirmation")
         }
         .padding()
     }
@@ -114,6 +126,10 @@ struct CustomerFeedbackView: View {
 
 struct CustomerFeedbackView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomerFeedbackView()
+        NavigationStack {
+            CustomerFeedbackView()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

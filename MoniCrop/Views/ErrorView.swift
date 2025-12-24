@@ -17,7 +17,7 @@ struct ErrorView : View {
             VStack{
                 HStack{
                     Text(self.error == "RESET" ? "Message" : "Error")
-                        .font(.title)
+                        .titleStyle()
                         .fontWeight(.bold)
                         .foregroundColor(Color.black)
                     
@@ -41,8 +41,11 @@ struct ErrorView : View {
                         .padding(.vertical)
                         .frame(width: UIScreen.main.bounds.width - 120)
                 }
-                .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.system(size: 20))
+                .tint(.accent)
+                .bodyStyle()
+                .accessibilityIdentifier("errorAlertOkButton")
+                .accessibilityLabel(self.error == "RESET" ? "Ok" : "Cancel")
+                .accessibilityHint("Dismisses the message")
                 .padding(.top, 25)
                 
             }
@@ -65,7 +68,9 @@ struct ErrorViewPreviewView: View {
 
 struct ErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorViewPreviewView()
+        NavigationStack {
+            ErrorViewPreviewView()
+        }
             .previewLayout(.sizeThatFits)
             .padding()
     }

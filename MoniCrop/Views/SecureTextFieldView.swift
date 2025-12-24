@@ -16,8 +16,14 @@ struct SecureTextFieldView: View {
         HStack {
             if isSecureField {
                 SecureField("Insert Password", text: $text)
+                    .textContentType(.password)
+                    .autocorrectionDisabled(true)
+                    .textInputAutocapitalization(.never)
             } else {
                 TextField(text, text: $text)
+                    .textContentType(.password)
+                    .autocorrectionDisabled(true)
+                    .textInputAutocapitalization(.never)
             }
         }.overlay(alignment: .trailing) {
             Image(systemName: isSecureField ? "eye.slash": "eye")

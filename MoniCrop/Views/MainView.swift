@@ -12,20 +12,21 @@ struct MainView: View {
     var body: some View {
         VStack(spacing: 50) {
             Image("MoniCrop")
+                .accessibilityHidden(true)
                 .frame(width: 50, height: 50)
                 .padding(.bottom, 200)
             Text("Welcome")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
+                .foregroundColor(Color.accent)
+                .titleStyle()
                 .fontWeight(.bold)
             if let email = Auth.auth().currentUser?.email {
-                Text("Logged in as \(email)").foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                Text("Logged in as \(email)").foregroundColor(Color.accent)
                     .foregroundColor(Color.black)
-                    .font(.system(size: 20))
+                    .bodyStyle()
             } else {
-                Text("Not logged in").foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                Text("Not logged in").foregroundColor(Color.accent)
                     .foregroundColor(Color.black)
-                    .font(.system(size: 20))
+                    .bodyStyle()
             }
         }
         .padding()
@@ -34,18 +35,23 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 50) {
-            Image("MoniCrop")
-                .frame(width: 50, height: 50)
-                .padding(.bottom, 200)
-            Text("Welcome")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
-                .fontWeight(.bold)
-            Text("Not logged in")
-                .foregroundColor(Color.black)
-                .font(.system(size: 20))
+        NavigationStack {
+            VStack(spacing: 50) {
+                Image("MoniCrop")
+                    .accessibilityHidden(true)
+                    .frame(width: 50, height: 50)
+                    .padding(.bottom, 200)
+                Text("Welcome")
+                    .foregroundColor(Color.accent)
+                    .titleStyle()
+                    .fontWeight(.bold)
+                Text("Not logged in")
+                    .foregroundColor(Color.black)
+                    .bodyStyle()
+            }
+            .padding()
         }
+        .previewLayout(.sizeThatFits)
         .padding()
     }
 }

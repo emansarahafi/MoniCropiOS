@@ -23,50 +23,63 @@ struct FirstSignUpView: View {
     @State private var navigateToSecond = false
 
     var body: some View {
-        NavigationStack {
+        return NavigationStack {
             VStack {
-            Image("MoniCrop")
-                .frame(width: 50, height: 50)
-                .padding(.bottom, 60)
-            Text("Sign Up")
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.top, 50)
-            Group {
-                VStack (alignment: .leading){
-                    Text("Email Address")
-                        .font(.system(size: 20))
-                        .padding(.top, 10)
-                    TextField("Insert Email", text: $email)
-                        .keyboardType(.emailAddress).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                        .font(.system(size: 20))
+                Image("MoniCrop")
+                    .accessibilityHidden(true)
+                    .frame(width: 50, height: 50)
+                    .padding(.bottom, 60)
+
+                Text("Sign Up")
+                    .foregroundColor(Color.accent)
+                    .titleStyle()
+                    .padding(.top, 50)
+
+                Group {
+                    VStack(alignment: .leading) {
+                        Text("Email Address")
+                            .headerStyle()
+                            .padding(.top, 10)
+                        TextField("Insert Email", text: $email)
+                            .keyboardType(.emailAddress)
+                            .textFieldStyle(.roundedBorder)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled(true)
+                            .bodyStyle()
+                            .accessibilityIdentifier("signUpEmailField")
+                    }
+
+                    VStack(alignment: .leading) {
+                        Text("Password")
+                            .headerStyle()
+                        SecureTextFieldView(text: $pwd)
+                            .textFieldStyle(.roundedBorder)
+                            .textInputAutocapitalization(.never)
+                            .bodyStyle()
+                            .accessibilityIdentifier("signUpPasswordField")
+                    }
+
+                    VStack(alignment: .leading) {
+                        Text("Confirm Password")
+                            .headerStyle()
+                        ReSecureTextFieldView(text: $cpwd)
+                            .textFieldStyle(.roundedBorder)
+                            .textInputAutocapitalization(.never)
+                            .bodyStyle()
+                            .accessibilityIdentifier("signUpConfirmPasswordField")
+                    }
                 }
 
-                VStack (alignment: .leading) {
-                    Text("Password")
-                        .font(.system(size: 20))
-                    SecureTextFieldView(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                        .font(.system(size: 20))
+                Button(action: { register() }) {
+                    Text("Sign Up").frame(maxWidth: .infinity)
                 }
-
-                VStack (alignment: .leading){
-                    Text("Confirm Password")
-                        .font(.system(size: 20))
-                    ReSecureTextFieldView(text: $cpwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-                        .font(.system(size: 20))
-                }
+                .primaryButtonStyle()
+                .bodyStyle()
+                .padding(.top)
+                .accessibilityLabel("Sign up")
+                .accessibilityIdentifier("signUpButton")
+                .accessibilityHint("Create a new account with this email and password")
             }
-
-            Button(action: { register() }) {
-                            Text("Sign Up").frame(maxWidth: .infinity)
-                        }.buttonStyle(.borderedProminent)
-                            .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
-                            .padding(.top)
-        
-        }
             .padding()
             .padding(.top, 70)
             .alert("Error", isPresented: $showFailure) {
@@ -74,16 +87,16 @@ struct FirstSignUpView: View {
             } message: {
                 Text(self.error)
             }
-            .alert("Registered", isPresented: $showSuccess) {
+            .alert("Success", isPresented: $showSuccess) {
                 Button("Continue") {
                     isRegistered = true
                 }
             } message: {
                 Text("Account created successfully.")
             }
-        }
-        .navigationDestination(isPresented: $isRegistered) {
-            SecondSignUpView().navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isRegistered) {
+                SecondSignUpView().navigationBarBackButtonHidden(true)
+            }
         }
     }
     
@@ -127,7 +140,7 @@ struct FirstSignUpView: View {
         }
     }
     
-    private func isValidEmail(_ email: String) -> Bool {
+    func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPredicate.evaluate(with: email)
@@ -137,6 +150,10 @@ struct FirstSignUpView: View {
 
 struct FirstSignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstSignUpView()
+        NavigationStack {
+            FirstSignUpView()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

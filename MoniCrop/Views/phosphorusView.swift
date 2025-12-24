@@ -27,6 +27,9 @@ struct PhosphorusView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("phosphorusPickerFruit")
+            .accessibilityLabel("Select crop item for phosphorus")
+            .accessibilityHint("Choose a crop to load available IDs")
             .onChange(of: selectedFruit) { _ in
                 loadIDsForFruit()
                 selectedID = ""
@@ -39,6 +42,9 @@ struct PhosphorusView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("phosphorusPickerID")
+            .accessibilityLabel("Select ID for phosphorus")
+            .accessibilityHint("Choose an item identifier to show phosphorus values")
             .disabled(selectedFruit.isEmpty)
 
             Button(action: {
@@ -48,6 +54,9 @@ struct PhosphorusView: View {
             })
             .disabled(selectedID.isEmpty)
             .padding()
+            .accessibilityIdentifier("showPhosphorusValuesButton")
+            .accessibilityLabel("Show phosphorus values")
+            .accessibilityHint("Displays phosphorus measurements for the selected item")
 
             if !phosphorusValues.isEmpty {
                 PhosphorusLineChartView(data: phosphorusValues)
@@ -144,9 +153,12 @@ struct PhosphorusView_Previews: PreviewProvider {
             (Calendar.current.date(byAdding: .day, value: -1, to: now)!, 22.0),
             (now, 24.0)
         ]
-        return PhosphorusLineChartView(data: sample)
-            .frame(height: 320)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        NavigationStack {
+            PhosphorusLineChartView(data: sample)
+                .frame(height: 320)
+                .padding()
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

@@ -63,6 +63,7 @@
 		00000000000010C37B0B66F4 /* SecondSignUpView.swift */ = {isa = PBXBuildFile; fileRef = 10C37B0B66F3485FA7A3A668 /* SecondSignUpView.swift */; };
 		000000000000804FCBD53FD3 /* SecureTextFieldView.swift */ = {isa = PBXBuildFile; fileRef = 804FCBD53FD285502240E444 /* SecureTextFieldView.swift */; };
 		000000000000B8B8D731F1DE /* TemperatureLineChartView.swift */ = {isa = PBXBuildFile; fileRef = B8B8D731F1DDB2D415008BAB /* TemperatureLineChartView.swift */; };
+		F2A1B2C3D4E5F67890123457 /* Style.swift */ = {isa = PBXBuildFile; fileRef = F2A1B2C3D4E5F67890123456 /* Style.swift */; };
 
 /* End PBXBuildFile section */
 
@@ -134,6 +135,7 @@
 		10C37B0B66F3485FA7A3A668 /* SecondSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSignUpView.swift; sourceTree = "<group>"; };
 		804FCBD53FD285502240E444 /* SecureTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextFieldView.swift; sourceTree = "<group>"; };
 		B8B8D731F1DDB2D415008BAB /* TemperatureLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureLineChartView.swift; sourceTree = "<group>"; };
+		F2A1B2C3D4E5F67890123456 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 
 
 /* End PBXFileReference section */
@@ -196,6 +198,7 @@
 					10C37B0B66F3485FA7A3A668 /* SecondSignUpView.swift */,
 					804FCBD53FD285502240E444 /* SecureTextFieldView.swift */,
 					B8B8D731F1DDB2D415008BAB /* TemperatureLineChartView.swift */,
+					F2A1B2C3D4E5F67890123456 /* Style.swift */,
 				71D9451F29854E330092C58B /* ErrorView.swift */,
 				71D3744E2988365300755046 /* HomeView.swift */,
 					710A0B4229F480FB00E80BE1 /* PHView.swift */,
@@ -356,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 					710A0B4F29F48CC900E80BE1 /* PhosphorusView.swift */,
+					F2A1B2C3D4E5F67890123457 /* Style.swift */,
 					71FE2E6A2969EE6400128E61 /* CustomerFeedbackView.swift */,
 				71692A3C29685063008E9DE8 /* FirstSignUpView.swift */,
 				71D9452029854E330092C58B /* ErrorView.swift */,

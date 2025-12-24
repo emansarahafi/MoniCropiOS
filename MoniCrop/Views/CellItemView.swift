@@ -21,7 +21,7 @@ struct CellItemView: View {
             VStack(alignment: .leading, spacing: 6) {
                 Text(item.name)
                     .font(.headline)
-                    .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                    .foregroundColor(Color.accent)
                 Text(item.date)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
@@ -42,8 +42,10 @@ struct CellItemView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleItem = Item(image: "MoniCrop", name: "Sample", date: "2025-12-23", price: "$10")
         let vm = ItemsViewModel(item: sampleItem)
-        return CellItemView(item: vm)
-            .previewLayout(.sizeThatFits)
-            .padding()
+        NavigationStack {
+            CellItemView(item: vm)
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

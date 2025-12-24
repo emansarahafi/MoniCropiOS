@@ -14,7 +14,7 @@ struct PhosphorusLineChartView: View {
         VStack(spacing: 8) {
             Text("Phosphorus (mg/kg)")
                 .font(.headline)
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .foregroundColor(Color.accent)
             
             HStack(alignment: .center, spacing: 8) {
                 VStack(alignment: .trailing, spacing: 0) {
@@ -23,7 +23,7 @@ struct PhosphorusLineChartView: View {
                     ForEach(0..<5) { i in
                         let value = maxData - (maxData - minData) * Double(i) / 4
                         Text(String(format: "%.0f", value))
-                            .font(.system(size: 10))
+                            .font(.caption)
                             .foregroundColor(.gray)
                             .frame(height: 50, alignment: .top)
                     }
@@ -62,7 +62,7 @@ struct PhosphorusLineChartView: View {
                                 path.addLine(to: CGPoint(x: x, y: y))
                             }
                         }
-                        .stroke(Color(red: 148/255, green: 178/255, blue: 2/255), lineWidth: 2.5)
+                        .stroke(Color.accent, lineWidth: 2.5)
                     }
                     .padding(4)
                 }
@@ -74,11 +74,11 @@ struct PhosphorusLineChartView: View {
                 HStack {
                     if !data.isEmpty {
                         Text(data.first?.0.formatted(date: .abbreviated, time: .omitted) ?? "")
-                            .font(.system(size: 10))
+                            .font(.caption)
                             .foregroundColor(.gray)
                         Spacer()
                         Text(data.last?.0.formatted(date: .abbreviated, time: .omitted) ?? "")
-                            .font(.system(size: 10))
+                            .font(.caption)
                             .foregroundColor(.gray)
                     }
                 }
@@ -89,6 +89,9 @@ struct PhosphorusLineChartView: View {
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Phosphorus chart")
+        .accessibilityValue(data.isEmpty ? "No data" : "Latest: \(String(format: "%.1f", data.last!.1)) on \(data.last!.0.formatted(date: .abbreviated, time: .omitted))")
     }
 }
 
@@ -103,7 +106,11 @@ struct PhosphorusLineChartView_Previews: PreviewProvider {
             (Calendar.current.date(byAdding: .day, value: -1, to: now)!, 4.6),
             (now, 5.0)
         ]
-        return PhosphorusLineChartView(data: sample)
+            return NavigationStack {
+                PhosphorusLineChartView(data: sample)
+            }
+            .previewLayout(.sizeThatFits)
+            .padding()
             .frame(height: 320)
             .padding()
             .previewLayout(.sizeThatFits)

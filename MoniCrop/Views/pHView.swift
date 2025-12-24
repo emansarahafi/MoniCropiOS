@@ -27,6 +27,9 @@ struct PHView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("pHPickerFruit")
+            .accessibilityLabel("Select crop item for pH")
+            .accessibilityHint("Choose a crop to load available IDs")
             .onChange(of: selectedFruit) { _ in
                 loadIDsForFruit()
                 selectedID = ""
@@ -39,6 +42,9 @@ struct PHView: View {
             }
             .pickerStyle(.menu)
             .padding()
+            .accessibilityIdentifier("pHPickerID")
+            .accessibilityLabel("Select ID for pH")
+            .accessibilityHint("Choose an item identifier to show pH values")
             .disabled(selectedFruit.isEmpty)
             
             Button(action: {
@@ -48,6 +54,9 @@ struct PHView: View {
             })
             .disabled(selectedID.isEmpty)
             .padding()
+            .accessibilityIdentifier("showPHValuesButton")
+            .accessibilityLabel("Show pH values")
+            .accessibilityHint("Displays pH measurements for the selected item")
             
             if !pHValues.isEmpty {
                 PHLineChartView(data: pHValues)

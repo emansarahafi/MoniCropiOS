@@ -24,6 +24,10 @@ struct ViewItemsView_Previews: PreviewProvider {
             ItemsViewModel(item: Item(image: "apple", name: "Apple", date: "2025-12-23", price: "$1.00")),
             ItemsViewModel(item: Item(image: "carrot", name: "Carrot", date: "2025-12-22", price: "$0.50"))
         ]
-        return ContentViewItemsView().environmentObject(mock)
+        return NavigationStack {
+            ContentViewItemsView().environmentObject(mock)
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

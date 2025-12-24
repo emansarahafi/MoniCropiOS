@@ -15,29 +15,32 @@ struct LandingView: View {
                 Image("MoniCrop")
                     .frame(width: 50, height: 50)
                     .padding(.bottom, 200)
+                    .accessibilityLabel("MoniCrop logo")
                 NavigationLink(destination: SignInView()) {
                     Text("Sign In")
                     .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .foregroundColor(.white)
-                .font(.system(size: 20))
+                .primaryButtonStyle()
+                .accessibilityLabel("Sign in")
+                .accessibilityIdentifier("landingSignInButton")
+                .accessibilityHint("Go to sign in screen")
+                .bodyStyle()
                 .padding(.top)
                 NavigationLink(destination: FirstSignUpView()) {
                     Text("Sign Up")
                     .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .foregroundColor(.white)
-                .font(.system(size: 20))
+                .primaryButtonStyle()
+                .accessibilityLabel("Sign up")
+                .accessibilityIdentifier("landingSignUpButton")
+                .accessibilityHint("Go to sign up screen")
+                .bodyStyle()
                 .padding(.top)
                 NavigationLink(destination: AboutUsView()) {
                     Text("About Us")
                 }
-                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                .font(.system(size: 20))
+                .foregroundColor(Color.accent)
+                .bodyStyle()
                 .padding(.top)
             }
         }.accentColor(.black)
