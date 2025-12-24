@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		72AABBCCDD11223344556678 /* UsersViewModel.swift */ = {isa = PBXBuildFile; fileRef = 72AABBCCDD11223344556677 /* UsersViewModel.swift */; };
 		73AABBCCDD11223344556678 /* User.swift */ = {isa = PBXBuildFile; fileRef = 73AABBCCDD11223344556677 /* User.swift */; };
-		74AABBCCDD11223344556678 /* Profile.swift */ = {isa = PBXBuildFile; fileRef = 74AABBCCDD11223344556677 /* Profile.swift */; };
-		75AABBCCDD11223344556678 /* CircularProfileImageView.swift */ = {isa = PBXBuildFile; fileRef = 75AABBCCDD11223344556677 /* CircularProfileImageView.swift */; };
+
+
 		710520BE29843D26002982EA /* Item.swift */ = {isa = PBXBuildFile; fileRef = 710520BD29843D26002982EA /* Item.swift */; };
 		71096C1C29F08DD1004D5D3A /* WorkplaceDetailsView.swift */ = {isa = PBXBuildFile; fileRef = 71096C1B29F08DD1004D5D3A /* WorkplaceDetailsView.swift */; };
 		71096C1F29F0914C004D5D3A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71096C1E29F0914C004D5D3A /* FirebaseAuth */; };
@@ -43,7 +43,7 @@
 		71FE2E662969DB2A00128E61 /* ForgotPasswordView.swift */ = {isa = PBXBuildFile; fileRef = 71FE2E652969DB2A00128E61 /* ForgotPasswordView.swift */; };
 		71FE2E6A2969EE6400128E61 /* CustomerFeedbackView.swift */ = {isa = PBXBuildFile; fileRef = 71FE2E692969EE6400128E61 /* CustomerFeedbackView.swift */; };
 		0000000000008D0721CEC3E4 /* AboutUsView.swift */ = {isa = PBXBuildFile; fileRef = 8D0721CEC3E33EBC18988B26 /* AboutUsView.swift */; };
-		0000000000002CC6AA81ED27 /* AccountView.swift */ = {isa = PBXBuildFile; fileRef = 2CC6AA81ED26DBC78DF34B4D /* AccountView.swift */; };
+
 		000000000000C94178824135 /* CellItemView.swift */ = {isa = PBXBuildFile; fileRef = C94178824134450704AE59BD /* CellItemView.swift */; };
 		000000000000E3051D80664C /* ConductivityLineChartView.swift */ = {isa = PBXBuildFile; fileRef = E3051D80664B676DFE4A9E99 /* ConductivityLineChartView.swift */; };
 		0000000000003AE2D3BBCD5F /* ConfirmationView.swift */ = {isa = PBXBuildFile; fileRef = 3AE2D3BBCD5E82937065C549 /* ConfirmationView.swift */; };
@@ -83,8 +83,8 @@
 /* Begin PBXFileReference section */
 		72AABBCCDD11223344556677 /* UsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewModel.swift; sourceTree = "<group>"; };
 		73AABBCCDD11223344556677 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		74AABBCCDD11223344556677 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		75AABBCCDD11223344556677 /* CircularProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProfileImageView.swift; sourceTree = "<group>"; };
+
+
 		710520BD29843D26002982EA /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		71096C1B29F08DD1004D5D3A /* WorkplaceDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkplaceDetailsView.swift; sourceTree = "<group>"; };
 		710A0B4029F457F600E80BE1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 		71FE2E652969DB2A00128E61 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		71FE2E692969EE6400128E61 /* CustomerFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerFeedbackView.swift; sourceTree = "<group>"; };
 		8D0721CEC3E33EBC18988B26 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
-		2CC6AA81ED26DBC78DF34B4D /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+
 		C94178824134450704AE59BD /* CellItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellItemView.swift; sourceTree = "<group>"; };
 		E3051D80664B676DFE4A9E99 /* ConductivityLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConductivityLineChartView.swift; sourceTree = "<group>"; };
 		3AE2D3BBCD5E82937065C549 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 			children = (
 				710520BD29843D26002982EA /* Item.swift */,
 				73AABBCCDD11223344556677 /* User.swift */,
-				74AABBCCDD11223344556677 /* Profile.swift */,
+
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -174,7 +174,7 @@
 				71B1F04929F05783004EA5F1 /* FirstEditAccountView.swift */,
 					7163A5EF29EF334E0015E232 /* LandingView.swift */,
 					8D0721CEC3E33EBC18988B26 /* AboutUsView.swift */,
-					2CC6AA81ED26DBC78DF34B4D /* AccountView.swift */,
+
 					C94178824134450704AE59BD /* CellItemView.swift */,
 					E3051D80664B676DFE4A9E99 /* ConductivityLineChartView.swift */,
 					3AE2D3BBCD5E82937065C549 /* ConfirmationView.swift */,
@@ -187,7 +187,7 @@
 					710D6E452969D81C00DA4AEF /* ViewDataView.swift */,
 					7163A5ED29EF32D50015E232 /* ViewItemsView.swift */,
 					71FE2E692969EE6400128E61 /* CustomerFeedbackView.swift */,
-					75AABBCCDD11223344556677 /* CircularProfileImageView.swift */,
+
 					9651D1B66EDAEBC5DC05910B /* MoistureLineChartView.swift */,
 					C73A41FEEEE7E3CCB0FF5B8F /* NitrogenLineChartView.swift */,
 					D5A94CF49B2100DEF83964A1 /* PHLineChartView.swift */,
@@ -369,7 +369,7 @@
 					71EBD89029F5665A00C05B12 /* DisableDeleteView.swift */,
 					7163A5EE29EF32D50015E232 /* ViewItemsView.swift */,
 					0000000000008D0721CEC3E4 /* AboutUsView.swift */,
-					0000000000002CC6AA81ED27 /* AccountView.swift */,
+
 					000000000000C94178824135 /* CellItemView.swift */,
 					000000000000E3051D80664C /* ConductivityLineChartView.swift */,
 					0000000000003AE2D3BBCD5F /* ConfirmationView.swift */,
@@ -405,8 +405,8 @@
 				710D6E462969D81C00DA4AEF /* ViewDataView.swift */,
 				72AABBCCDD11223344556678 /* UsersViewModel.swift */,
 				73AABBCCDD11223344556678 /* User.swift */,
-				74AABBCCDD11223344556678 /* Profile.swift */,
-				75AABBCCDD11223344556678 /* CircularProfileImageView.swift */,
+
+
 				71692A3E2968507D008E9DE8 /* SignInView.swift */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

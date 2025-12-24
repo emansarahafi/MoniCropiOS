@@ -48,12 +48,12 @@ struct SignInView: View {
                     .accessibilityIdentifier("signInPasswordField")
             }
             Button(action: { verify() }) {
-                            Text("Sign in").frame(maxWidth: .infinity)
+                            Text("Sign In").frame(maxWidth: .infinity)
                         }
                             .primaryButtonStyle()
                             .bodyStyle()
                             .padding(.top)
-                            .accessibilityLabel("Sign in")
+                            .accessibilityLabel("Sign In")
                             .accessibilityIdentifier("signInButton")
                             .accessibilityHint("Sign in with your email and password")
             NavigationLink(destination: ForgotPasswordView()) {
