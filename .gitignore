@@ -89,5 +89,9 @@ fastlane/test_output
 
 iOSInjectionProject/
 
+# IMPORTANT: Keep sensitive configuration out of version control
+MoniCrop/Config.swift
+GoogleService-Info.plist
+
 # macOS
 .DS_Store

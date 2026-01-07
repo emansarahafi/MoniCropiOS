@@ -1,13 +1,13 @@
 //
-//  ViewItems.swift
+//  ViewItemsView.swift
 //  MoniCrop
 //
-//  Created by Eman Sarah Afi on 1/7/23.
+//  Created by Eman Sarah Afi on 1/7/26.
 //
 
 import SwiftUI
 
-struct ViewItemsPage: View {
+struct ViewItemsView: View {
     @EnvironmentObject var appData: ApplicationData
 
     var body: some View {
@@ -17,7 +17,7 @@ struct ViewItemsPage: View {
                 .font(.title)
                 .fontWeight(.bold)
                 List { ForEach(appData.listOfItems) { item in
-                        CellItem(item: item)
+                        CellItemView(item: item)
                 }
             }.background(Color(red: 148/255, green: 178/255, blue: 2/255))
                 .scrollContentBackground(.hidden)
@@ -28,3 +28,9 @@ struct ViewItemsPage: View {
     }
 }
 
+struct ViewItemsView_Previews: PreviewProvider {
+    static var previews: some View {
+        ViewItemsView()
+            .environmentObject(ApplicationData())
+    }
+}

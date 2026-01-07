@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ForgotPasswordPage: View {
+struct ForgotPasswordView: View {
     @State var email: String = ""
     @State var pwd: String = ""
     @State var newpwd: String = ""
@@ -21,9 +21,9 @@ struct ForgotPasswordPage: View {
             TextField("Insert Email", text: $email)
                 .keyboardType(.emailAddress).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
             Text("New Password")
-            SecureTextField(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
-            Text("Confirm New Password")
-            ReSecureTextField(text: $newpwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                SecureTextFieldView(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                Text("Confirm New Password")
+                ReSecureTextFieldView(text: $newpwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
             Button {
                 if email.isEmpty && pwd != newpwd
                 {
@@ -43,8 +43,8 @@ struct ForgotPasswordPage: View {
     }
 }
 
-struct ForgotPasswordPage_Previews: PreviewProvider {
+struct ForgotPasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ForgotPasswordPage()
+        ForgotPasswordView()
     }
 }

@@ -12,7 +12,7 @@ struct MoniCropApp: App {
     @StateObject var appData =  ApplicationData()
     var body: some Scene {
         WindowGroup {
-            LandingPage().environmentObject(appData)
+            LandingView().environmentObject(appData)
         }
     }
 }

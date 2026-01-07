@@ -1,13 +1,13 @@
 //
-//  ContentView.swift
+//  LandingView.swift
 //  MoniCrop
 //
-//  Created by Eman Sarah Afi on 12/2/22.
+//  Created by Eman Sarah Afi on 1/7/26.
 //
 
 import SwiftUI
 
-struct LandingPage: View {
+struct LandingView: View {
 
     var body: some View {
         NavigationView {
@@ -18,7 +18,7 @@ struct LandingPage: View {
                 Button {
                 }
                 label: {
-                    NavigationLink(destination: SignInPage()) {
+                    NavigationLink(destination: SignInView()) {
                         Text("Sign In")
                             .frame(maxWidth: .infinity)
                     }}.buttonStyle(.borderedProminent)
@@ -29,7 +29,7 @@ struct LandingPage: View {
                 Button {
                 }
                 label: {
-                    NavigationLink(destination: FirstSignUpPage()) {
+                    NavigationLink(destination: FirstSignUpView()) {
                         Text("Sign Up")
                             .frame(maxWidth: .infinity)
                     }}.buttonStyle(.borderedProminent)
@@ -40,7 +40,7 @@ struct LandingPage: View {
                 Button {
                 }
                 label: {
-                    NavigationLink(destination: AboutUsPage()) {
+                    NavigationLink(destination: AboutUsView()) {
                         Text("About Us")
                     }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                             .font(.system(size: 20))
@@ -51,29 +51,10 @@ struct LandingPage: View {
     }
 }
 
-struct AboutUsPage: View {
-    
-    var body: some View {
-        VStack {
-            Image("MoniCrop")
-                .frame(width: 50, height: 50)
-                .padding(.bottom, 150)
-            Text("MoniCrop is an iOS application developed by two students in 2022 from the American University of Bahrain (AUBH), Ali Abdulla & Eman Sarah Afi.")
-                .font(.system(size: 18))
-                .multilineTextAlignment(.leading)
-                .padding()
-            Text("The purpose of this application is for the user being able to monitor their crop, check any essential information, and communicate with specific users at any moment of the day.")
-                .font(.system(size: 18))
-                .multilineTextAlignment(.leading)
-                .padding()
-        }
-        .padding()
-        .padding(.top, 20)
-    }
-}
-
-struct Previews_ContentView_Previews: PreviewProvider {
+struct LandingView_Previews: PreviewProvider {
     static var previews: some View {
-        LandingPage()
+        NavigationView {
+            LandingView()
+        }
     }
 }

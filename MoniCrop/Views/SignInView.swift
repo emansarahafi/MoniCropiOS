@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignInPage: View {
+struct SignInView: View {
     @State var email: String = ""
     @State var pwd: String = ""
     @EnvironmentObject var appData: ApplicationData
@@ -30,7 +30,7 @@ struct SignInPage: View {
                 .font(.system(size: 20))
             Text("Password")
                 .font(.system(size: 20))
-            SecureTextField(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+            SecureTextFieldView(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
                 .font(.system(size: 20))
             Button {
                 if appData.userData.contains(where: { user in
@@ -54,14 +54,14 @@ struct SignInPage: View {
             Button {
             }
             label: {
-                NavigationLink(destination: ForgotPasswordPage()) {
-                    Text("Forgot Your Password Page?").underline()
+                NavigationLink(destination: ForgotPasswordView()) {
+                    Text("Forgot Your Password?").underline()
                 }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .font(.system(size: 20))
             Button {
             }
             label: {
-                NavigationLink(destination: FirstSignUpPage()) {
+                NavigationLink(destination: FirstSignUpView()) {
                     Text("Sign Up Instead")
                 }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .font(.system(size: 20))
@@ -77,16 +77,16 @@ struct SignInPage: View {
             && user.password == pwd
         }) == true
         {
-            HamburgerMenu(email : $email).navigationBarBackButtonHidden(true)
+            HamburgerMenuView(email : $email).navigationBarBackButtonHidden(true)
         }
-        else {
-            SignInPage().animation(nil)
+            else {
+            SignInView().animation(nil)
         }
     }
 }
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInPage()
+        SignInView()
     }
 }

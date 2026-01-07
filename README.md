@@ -64,24 +64,6 @@ Track key agricultural metrics in real-time:
 2. Open `MoniCrop.xcodeproj` in Xcode
 3. Build and run the project on your iOS device or simulator
 
-## Project Structure
-
-```
-MoniCrop/
-├── MoniCropApp.swift          # App entry point
-├── ContentView.swift          # Landing page
-├── SignInView.swift           # Authentication
-├── SignUpView.swift           # User registration
-├── WelcomeView.swift          # Main menu & navigation
-├── ViewData.swift             # Environmental data charts
-├── ViewItems.swift            # Crop inventory
-├── WorkplaceView.swift        # Business details
-├── CustomerView.swift         # Feedback submission
-├── EditAccountView.swift      # Profile management
-├── Components.swift           # Reusable UI components
-└── Assets.xcassets/          # Images and resources
-```
-
 ## Authors
 
 - **Ali Abdulla**

@@ -1,5 +1,5 @@
 //
-//  DeleteView.swift
+//  DisableDeleteView.swift
 //  MoniCrop
 //
 //  Created by Eman Sarah Afi on 1/7/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DisableDeletePage: View {
+struct DisableDeleteView: View {
     @State var option = ""
     @State var pwd = ""
 
@@ -21,7 +21,7 @@ struct DisableDeletePage: View {
             Text("Choose an option:")
                 .font(.system(size: 20))
             HStack{
-                RadioButtonField(
+                RadioButtonFieldView(
                     id: "Disable",
                     label: "Disable",
                     color:.black,
@@ -33,7 +33,7 @@ struct DisableDeletePage: View {
                             print("Selected option is: \(selected)")
                         }
                     )
-                RadioButtonField(
+                RadioButtonFieldView(
                     id: "Delete",
                     label: "Delete",
                     color:.black,
@@ -49,7 +49,7 @@ struct DisableDeletePage: View {
             .padding()
             Text("Please enter the password to confirm:")
                 .font(.system(size: 20))
-            SecureTextField(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+            SecureTextFieldView(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
                 .font(.system(size: 20))
             Text("Kindly note that if you choose: \nDisable: The account will be disabled & the user can reactivate it at any moment by logging again. \nDelete: The account will be deleted after 14 days unless the user logs in to their account again.")
                 .multilineTextAlignment(.leading)
@@ -58,7 +58,7 @@ struct DisableDeletePage: View {
             Button {
             }
             label: {
-                NavigationLink(destination: LandingPage().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: LandingView().navigationBarBackButtonHidden(true)) {
                     Text("Confirm")
                         .frame(maxWidth: .infinity)
                 }}.buttonStyle(.borderedProminent)
@@ -73,6 +73,7 @@ struct DisableDeletePage: View {
 
 struct DeleteView_Previews: PreviewProvider {
     static var previews: some View {
-        DisableDeletePage()
+        DisableDeleteView()
     }
 }
+

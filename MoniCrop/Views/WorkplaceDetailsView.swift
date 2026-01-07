@@ -1,13 +1,13 @@
 //
-//  WorkplaceView.swift
+//  WorkplaceDetailsView.swift
 //  MoniCrop
 //
-//  Created by Eman Sarah Afi on 1/7/23.
+//  Created by Eman Sarah Afi on 1/7/26.
 //
 
 import SwiftUI
 
-struct WorkplaceDetailsPage: View {
+struct WorkplaceDetailsView: View {
     var body: some View {
         VStack {
             Text("Workplace Details")
@@ -28,8 +28,8 @@ struct WorkplaceDetailsPage: View {
     }
 }
 
-struct WorkplaceView_Previews: PreviewProvider {
+struct WorkplaceDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkplaceDetailsPage()
+        WorkplaceDetailsView()
     }
 }
