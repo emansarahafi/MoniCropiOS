@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// Copied from ViewData.swift and renamed primary struct to match file name.
 struct ViewDataView: View {
     init() {
         UITabBar.appearance().barTintColor = UIColor.white
@@ -23,22 +22,22 @@ struct ViewDataView: View {
                 .fontWeight(.bold)
             
             TabView {
-                HumidityLevel().tabItem({
+                HumidityLevelView().tabItem({
                     Label("Humidity Level", systemImage: "humidity.fill")
                 })
-                pHLevel().tabItem({
+                PHLevelView().tabItem({
                     Label("pH Level", systemImage: "arrow.up.right")
                 })
-                SalinityLevel().tabItem({
+                SalinityLevelView().tabItem({
                     Label("Salinity Level", systemImage: "arrow.up.forward.app")
                 })
-                WaterLevel().tabItem({
+                WaterLevelView().tabItem({
                     Label("Water Level", systemImage: "drop.fill")
                 })
-                GrowthSpeed().tabItem({
+                GrowthSpeedView().tabItem({
                     Label("Growth Speed", systemImage: "speedometer")
                 })
-                SoilTemperature().tabItem({
+                SoilTemperatureView().tabItem({
                     Label("Soil temperature", systemImage: "thermometer.high")
                 })
 
