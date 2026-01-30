@@ -9,127 +9,129 @@ import SwiftUI
 
 struct MenuView: View {
     @Environment(\.openURL) var openURL
+    @EnvironmentObject var usersVM: UsersViewModel
+    
     var body: some View {
         VStack {
             Text("Main Menu")
                 .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                 .font(.title)
                 .fontWeight(.bold)
-            VStack (alignment: .leading ){
+            VStack(alignment: .leading) {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
-                    Button {
+                    NavigationLink(destination: ViewItemsView()) {
+                        Text("View Items")
                     }
-                    label: {
-                            NavigationLink(destination: ViewItemsView()) {
-                            Text("View Items")
-                        }}.foregroundColor(.black)
-                            .font(.headline)
+                    .foregroundColor(.black)
+                    .font(.headline)
                 }
                 .padding(.top, 30)
+                
                 HStack {
                     Image(systemName: "chart.bar")
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
-                    Button {
+                    NavigationLink(destination: ViewDataView()) {
+                        Text("View Data")
                     }
-                    label: {
-                        NavigationLink(destination: ViewDataView()) {
-                            Text("View Data")
-                        }}.foregroundColor(.black)
-                            .font(.headline)
+                    .foregroundColor(.black)
+                    .font(.headline)
                 }
-                    .padding(.top, 30)
+                .padding(.top, 30)
+                
                 HStack {
                     Image(systemName: "book")
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
-                    Button {
+                    NavigationLink(destination: WorkplaceDetailsView()) {
+                        Text("View Workplace Details")
                     }
-                    label: {
-                        NavigationLink(destination: WorkplaceDetailsView()) {
-                            Text("View Workplace Details")
-                        }}.foregroundColor(.black)
-                            .font(.headline)
+                    .foregroundColor(.black)
+                    .font(.headline)
                 }
-                    .padding(.top, 30)
+                .padding(.top, 30)
+                
                 HStack {
                     Image(systemName: "face.smiling")
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
-                    Button {
+                    NavigationLink(destination: CustomerFeedbackView()) {
+                        Text("Customer Feedback")
                     }
-                    label: {
-                        NavigationLink(destination: CustomerFeedbackView()) {
-                            Text("Customer Feedback")
-                        }}.foregroundColor(.black)
-                            .font(.headline)
+                    .foregroundColor(.black)
+                    .font(.headline)
                 }
-                    .padding(.top, 30)
+                .padding(.top, 30)
+                
                 HStack {
                     Image(systemName: "square.and.arrow.down")
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
                     Button("View PDF Brochure") {
-                        openURL(URL(string: "https://www.apple.com")!)
+                        if let url = URL(string: "https://www.apple.com") {
+                            openURL(url)
+                        }
                     }
-                        .foregroundColor(.black)
-                        .font(.headline)
-                        .multilineTextAlignment(.leading)
+                    .foregroundColor(.black)
+                    .font(.headline)
+                    .multilineTextAlignment(.leading)
                 }
-                    .padding(.top, 30)
+                .padding(.top, 30)
+                
                 HStack {
                     Image(systemName: "square.and.arrow.up")
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
                     Button("Access Telegram Channel") {
-                        openURL(URL(string: "https://www.apple.com")!)
+                        if let url = URL(string: "https://www.apple.com") {
+                            openURL(url)
+                        }
                     }
-                        .foregroundColor(.black)
-                        .font(.headline)
-                        .multilineTextAlignment(.leading)
+                    .foregroundColor(.black)
+                    .font(.headline)
+                    .multilineTextAlignment(.leading)
                 }
-                    .padding(.top, 30)
+                .padding(.top, 30)
+                
                 HStack {
                     Image(systemName: "person")
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
-                    Button {
+                    NavigationLink(destination: FirstEditAccountView()) {
+                        Text("Edit Account")
                     }
-                    label: {
-                        NavigationLink(destination: FirstEditAccountView()) {
-                            Text("Edit Account")
-                        }}.foregroundColor(.black)
-                            .font(.headline)
+                    .foregroundColor(.black)
+                    .font(.headline)
                 }
-                    .padding(.top, 30)
+                .padding(.top, 30)
+                
                 HStack {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
-                    Button {
+                    Button("Log Out") {
+                        usersVM.logout()
                     }
-                    label: {
-                        NavigationLink(destination: LandingView().navigationBarBackButtonHidden(true)) {
-                            Text("Log Out")
-                        }}.foregroundColor(.black)
-                            .font(.headline)
+                    .foregroundColor(.black)
+                    .font(.headline)
                 }
-                    .padding(.top, 30)
+                .padding(.top, 30)
             }
         }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .edgesIgnoringSafeArea(.all)
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             MenuView()
+                .environmentObject(UsersViewModel())
         }
     }
 }

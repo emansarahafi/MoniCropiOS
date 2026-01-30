@@ -7,8 +7,12 @@
 import SwiftUI
 
 struct CustomerFeedbackView: View {
-    @State var email: String = ""
-    @State var opinion: String = ""
+    @EnvironmentObject var usersVM: UsersViewModel
+    @State private var email: String = ""
+    @State private var opinion: String = ""
+    @State private var showConfirmation = false
+    @State private var showError = false
+    @State private var errorMessage = ""
 
     var body: some View {
         VStack {
@@ -25,18 +29,17 @@ struct CustomerFeedbackView: View {
             TextField("Insert Email", text: $email)
                 .keyboardType(.emailAddress)
                 .textFieldStyle(.roundedBorder)
-                .textInputAutocapitalization(.words)
+                .textInputAutocapitalization(.never)
             Text("Feedback or Complaint")
                 .font(.system(size: 20))
             TextField("Insert Opinion", text: $opinion)
                 .textFieldStyle(.roundedBorder)
-                .textInputAutocapitalization(.words)
+                .textInputAutocapitalization(.sentences)
             Button {
+                submitFeedback()
             } label: {
-                NavigationLink(destination: ConfirmationView(email: $email).navigationBarBackButtonHidden(true)) {
-                    Text("Submit")
-                        .frame(maxWidth: .infinity)
-                }
+                Text("Submit")
+                    .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
@@ -45,11 +48,50 @@ struct CustomerFeedbackView: View {
             .padding(.top)
         }
         .padding()
+        .onAppear {
+            if let user = usersVM.currentUser {
+                email = user.emailAccount
+            }
+        }
+        .alert("Error", isPresented: $showError) {
+            Button("OK") {}
+        } message: {
+            Text(errorMessage)
+        }
+        .navigationDestination(isPresented: $showConfirmation) {
+            ConfirmationView()
+                .navigationBarBackButtonHidden(true)
+        }
+    }
+    
+    private func submitFeedback() {
+        guard !email.isEmpty else {
+            errorMessage = "Please enter your email address."
+            showError = true
+            return
+        }
+        
+        guard email.contains("@") && email.contains(".") else {
+            errorMessage = "Please enter a valid email address."
+            showError = true
+            return
+        }
+        
+        guard !opinion.isEmpty else {
+            errorMessage = "Please enter your feedback."
+            showError = true
+            return
+        }
+        
+        showConfirmation = true
     }
 }
 
 struct CustomerFeedbackView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView { CustomerFeedbackView() }
+        NavigationStack {
+            CustomerFeedbackView()
+                .environmentObject(UsersViewModel())
+        }
     }
 }

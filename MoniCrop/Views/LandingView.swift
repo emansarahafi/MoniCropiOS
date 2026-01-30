@@ -8,53 +8,50 @@
 import SwiftUI
 
 struct LandingView: View {
-
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Image("MoniCrop")
                     .frame(width: 50, height: 50)
                     .padding(.bottom, 200)
-                Button {
+                
+                NavigationLink(destination: SignInView()) {
+                    Text("Sign In")
+                        .frame(maxWidth: .infinity)
                 }
-                label: {
-                    NavigationLink(destination: SignInView()) {
-                        Text("Sign In")
-                            .frame(maxWidth: .infinity)
-                    }}.buttonStyle(.borderedProminent)
-                            .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
-                            .padding(.top)
-                Button {
+                .buttonStyle(.borderedProminent)
+                .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .foregroundColor(.white)
+                .font(.system(size: 20))
+                .padding(.top)
+                
+                NavigationLink(destination: FirstSignUpView()) {
+                    Text("Sign Up")
+                        .frame(maxWidth: .infinity)
                 }
-                label: {
-                    NavigationLink(destination: FirstSignUpView()) {
-                        Text("Sign Up")
-                            .frame(maxWidth: .infinity)
-                    }}.buttonStyle(.borderedProminent)
-                            .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
-                            .padding(.top)
-                Button {
+                .buttonStyle(.borderedProminent)
+                .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .foregroundColor(.white)
+                .font(.system(size: 20))
+                .padding(.top)
+                
+                NavigationLink(destination: AboutUsView()) {
+                    Text("About Us")
                 }
-                label: {
-                    NavigationLink(destination: AboutUsView()) {
-                        Text("About Us")
-                    }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                            .font(.system(size: 20))
-                            .padding(.top)
+                .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+                .font(.system(size: 20))
+                .padding(.top)
             }
-        }.accentColor(.black)
-        .padding()
+            .padding()
+        }
+        .tint(.black)
     }
 }
 
 struct LandingView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            LandingView()
-        }
+        LandingView()
+            .environmentObject(ApplicationData())
+            .environmentObject(UsersViewModel())
     }
 }

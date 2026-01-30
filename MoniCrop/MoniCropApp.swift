@@ -9,10 +9,18 @@ import SwiftUI
 
 @main
 struct MoniCropApp: App {
-    @StateObject var appData =  ApplicationData()
+    @StateObject var appData = ApplicationData()
+    @StateObject var usersVM = UsersViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            LandingView().environmentObject(appData)
+            ContentView()
+                .environmentObject(appData)
+                .environmentObject(usersVM)
+                .onAppear {
+                    // Restore user session if exists
+                    usersVM.restoreUser(from: appData.userData)
+                }
         }
     }
 }

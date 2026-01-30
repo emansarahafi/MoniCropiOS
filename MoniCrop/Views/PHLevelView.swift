@@ -40,7 +40,7 @@ struct PHLevelView: View {
                         
                         BarView(value: data, cornerRadius: CGFloat(integerLiteral: 10*self.pickerSelection))
                     }
-                }.padding(.top, 24).animation(.default)
+                }.padding(.top, 24).animation(.default, value: pickerSelection)
             }
         }
     }

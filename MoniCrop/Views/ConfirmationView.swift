@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ConfirmationView: View {
-    @Binding var email: String
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack {
@@ -22,11 +22,10 @@ struct ConfirmationView: View {
                 .font(.system(size: 50))
                 .padding()
             Button {
+                dismiss()
             } label: {
-                NavigationLink(destination: HamburgerMenuView(email: $email).navigationBarBackButtonHidden(true)) {
-                    Text("Done")
-                        .frame(maxWidth: .infinity)
-                }
+                Text("Done")
+                    .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
@@ -40,6 +39,6 @@ struct ConfirmationView: View {
 
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationView(email: .constant("test@example.com"))
+        ConfirmationView()
     }
 }

@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct User: Identifiable {
-    let id = UUID()
+struct User: Identifiable, Codable {
+    var id: String = UUID().uuidString
     var emailAccount: String = ""
     var password: String = ""
     var accountType: String = ""
@@ -18,4 +18,8 @@ struct User: Identifiable {
     var workPlaceName: String = ""
     var workPlacePosition: String = ""
     var date: Date
+    
+    var fullName: String {
+        return "\(firstName) \(middleName) \(lastName)".trimmingCharacters(in: .whitespaces)
+    }
 }

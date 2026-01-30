@@ -11,6 +11,8 @@ struct ForgotPasswordView: View {
     @State var email: String = ""
     @State var pwd: String = ""
     @State var newpwd: String = ""
+    @State private var showError: Bool = false
+    @State private var errorMessage: String = ""
 
     var body: some View {
         VStack {
@@ -19,16 +21,31 @@ struct ForgotPasswordView: View {
                 .padding(.bottom, 200)
             Text("Email Address")
             TextField("Insert Email", text: $email)
-                .keyboardType(.emailAddress).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                .keyboardType(.emailAddress).textFieldStyle(.roundedBorder) .textInputAutocapitalization(.never)
             Text("New Password")
-                SecureTextFieldView(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                SecureTextFieldView(text: $pwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.never)
                 Text("Confirm New Password")
-                ReSecureTextFieldView(text: $newpwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                ReSecureTextFieldView(text: $newpwd) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.never)
+            
+            if showError {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding(.top, 5)
+            }
+            
             Button {
-                if email.isEmpty && pwd != newpwd
-                {
-                    Text("Password does not match. Try again.").foregroundColor(.red)
-                        .offset(y: -10)
+                if email.isEmpty {
+                    errorMessage = "Please enter your email address."
+                    showError = true
+                } else if pwd.isEmpty {
+                    errorMessage = "Please enter a new password."
+                    showError = true
+                } else if pwd != newpwd {
+                    errorMessage = "Password does not match. Try again."
+                    showError = true
+                } else {
+                    showError = false
+                    // TODO: Send verification link
                 }
             }
             label: {

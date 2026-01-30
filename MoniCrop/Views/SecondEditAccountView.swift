@@ -17,73 +17,137 @@ struct SecondEditAccountView: View {
     @State var lname: String = ""
     @State var wname: String = ""
     @State var position: String = ""
+    @State private var showError = false
+    @State private var errorMessage = ""
+    @State private var showSuccess = false
     @EnvironmentObject var appData: ApplicationData
+    @EnvironmentObject var usersVM: UsersViewModel
+    
+    // Computed placeholder text showing current values
+    private var currentFirstName: String {
+        usersVM.currentUser?.firstName ?? "First Name"
+    }
+    private var currentMiddleName: String {
+        usersVM.currentUser?.middleName ?? "Middle Name"
+    }
+    private var currentLastName: String {
+        usersVM.currentUser?.lastName ?? "Last Name"
+    }
+    private var currentWorkplaceName: String {
+        usersVM.currentUser?.workPlaceName ?? "Workplace Name"
+    }
+    private var currentPosition: String {
+        usersVM.currentUser?.workPlacePosition ?? "Position"
+    }
 
     var body: some View {
         VStack {
+            Text("Leave fields blank to keep current values")
+                .font(.caption)
+                .foregroundColor(.gray)
+                .padding(.bottom)
+            
             Group {
                 Text("First Name")
                     .font(.system(size: 20))
-                TextField("Insert First Name", text: $fname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                TextField(currentFirstName, text: $fname)
+                    .textFieldStyle(.roundedBorder)
+                    .textInputAutocapitalization(.words)
                     .font(.system(size: 20))
                 Text("Middle Name")
                     .font(.system(size: 20))
-                TextField("Insert Middle Name", text: $mname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                TextField(currentMiddleName, text: $mname)
+                    .textFieldStyle(.roundedBorder)
+                    .textInputAutocapitalization(.words)
                     .font(.system(size: 20))
                 Text("Last Name")
                     .font(.system(size: 20))
-                TextField("Insert Last Name", text: $lname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+                TextField(currentLastName, text: $lname)
+                    .textFieldStyle(.roundedBorder)
+                    .textInputAutocapitalization(.words)
                     .font(.system(size: 20))
             }
+            
             DatePicker("Date of Birth",
-                        selection: $date,
-                        in: ...Date(),
-                        displayedComponents: [.date])
+                       selection: $date,
+                       in: ...Date(),
+                       displayedComponents: [.date])
             .font(.system(size: 20))
-                        .padding()
+            .padding()
+            
             Text("Workplace Name")
                 .font(.system(size: 20))
-            TextField("Insert Workplace Name", text: $wname) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+            TextField(currentWorkplaceName, text: $wname)
+                .textFieldStyle(.roundedBorder)
+                .textInputAutocapitalization(.words)
                 .font(.system(size: 20))
             Text("Position")
                 .font(.system(size: 20))
-            TextField("Insert Position", text: $position) .textFieldStyle(.roundedBorder) .textInputAutocapitalization(.words)
+            TextField(currentPosition, text: $position)
+                .textFieldStyle(.roundedBorder)
+                .textInputAutocapitalization(.words)
                 .font(.system(size: 20))
-            Button {
-                if !fname.isEmpty && !mname.isEmpty && !lname.isEmpty && !wname.isEmpty && !position.isEmpty
-                {
-                    appData.userData.append(User(emailAccount: email, password: pwd, accountType: selection, firstName: fname, middleName: mname, lastName: lname, workPlaceName: wname, workPlacePosition: wname, date: date))
-                }
+            
+            Button(action: updateAccount) {
+                Text("Update Account")
+                    .frame(maxWidth: .infinity)
             }
-            label: {
-                NavigationLink(destination: chooseDestination()) {
-                    Text("Update Account")
-                        .frame(maxWidth: .infinity)
-                }}.buttonStyle(.borderedProminent)
-                        .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .padding(.top)
-            Button {
+            .buttonStyle(.borderedProminent)
+            .tint(Color(red: 148/255, green: 178/255, blue: 2/255))
+            .foregroundColor(.white)
+            .font(.system(size: 20))
+            .padding(.top)
+            
+            NavigationLink(destination: DisableDeleteView()) {
+                Text("Disable or Delete Your Account")
             }
-            label: {
-                NavigationLink(destination: DisableDeleteView()) {
-                    Text("Disable or Delete Your Account")
-                }}                        .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
-                        .font(.system(size: 20))
-                        .padding(.top)
+            .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
+            .font(.system(size: 20))
+            .padding(.top)
         }
         .padding()
+        .onAppear {
+            // Only pre-fill the date since DatePicker needs a value
+            if let user = usersVM.currentUser {
+                date = user.date
+            }
+        }
+        .alert("Error", isPresented: $showError) {
+            Button("OK") {}
+        } message: {
+            Text(errorMessage)
+        }
+        .alert("Success", isPresented: $showSuccess) {
+            Button("OK") {}
+        } message: {
+            Text("Your account has been updated successfully.")
+        }
     }
-    @ViewBuilder
-    func chooseDestination() -> some View {
-        if !fname.isEmpty && !mname.isEmpty && !lname.isEmpty && !wname.isEmpty && !position.isEmpty
-        {
-            HamburgerMenuView(email: $email).navigationBarBackButtonHidden(true)
+    
+    private func updateAccount() {
+        guard let currentUser = usersVM.currentUser else {
+            errorMessage = "No user logged in."
+            showError = true
+            return
         }
-        else {
-            SecondEditAccountView(email: $email, pwd: $pwd, selection: $selection).animation(nil)
-        }
+        
+        // Create updated user, keeping current values if new ones are empty
+        let updatedUser = User(
+            id: currentUser.id,
+            emailAccount: email.isEmpty ? currentUser.emailAccount : email,
+            password: pwd.isEmpty ? currentUser.password : pwd,
+            accountType: selection == "Select your account type" ? currentUser.accountType : selection,
+            firstName: fname.isEmpty ? currentUser.firstName : fname,
+            middleName: mname.isEmpty ? currentUser.middleName : mname,
+            lastName: lname.isEmpty ? currentUser.lastName : lname,
+            workPlaceName: wname.isEmpty ? currentUser.workPlaceName : wname,
+            workPlacePosition: position.isEmpty ? currentUser.workPlacePosition : position,
+            date: date
+        )
+        
+        // Update the user
+        usersVM.updateCurrentUser(with: updatedUser, in: appData)
+        showSuccess = true
     }
 }
 
@@ -91,5 +155,6 @@ struct SecondEditAccountView_Previews: PreviewProvider {
     static var previews: some View {
         SecondEditAccountView(email: .constant("test@example.com"), pwd: .constant("password"), selection: .constant("Farmer"))
             .environmentObject(ApplicationData())
+            .environmentObject(UsersViewModel())
     }
 }
