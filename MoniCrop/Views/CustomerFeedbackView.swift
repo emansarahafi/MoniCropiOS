@@ -14,6 +14,9 @@ import FirebaseFirestore
 struct CustomerFeedbackView: View {
     @State private var email: String = ""
     @State private var opinion: String = ""
+    @State private var showError = false
+    @State private var errorMessage = ""
+    @State private var navigateToConfirmation = false
 
     var body: some View {
         VStack {
@@ -50,38 +53,49 @@ struct CustomerFeedbackView: View {
             Button(action: {
                 submitFeedback()
             }, label: {
-                NavigationLink(destination: ConfirmationView().navigationBarBackButtonHidden(true)) {
-                    Text("Submit")
-                        .frame(maxWidth: .infinity)
-                }
-            }).primaryButtonStyle()
-                .bodyStyle()
-                .padding(.top)
-                .accessibilityIdentifier("submitFeedbackButton")
-                .accessibilityLabel("Submit feedback")
-                .accessibilityHint("Submit your feedback and proceed to confirmation")
+                Text("Submit")
+                    .frame(maxWidth: .infinity)
+            })
+            .primaryButtonStyle()
+            .bodyStyle()
+            .padding(.top)
+            .accessibilityIdentifier("submitFeedbackButton")
+            .accessibilityLabel("Submit feedback")
+            .accessibilityHint("Submit your feedback and proceed to confirmation")
+            .alert("Error", isPresented: $showError) {
+                Button("OK") {}
+            } message: {
+                Text(errorMessage)
+            }
+            .navigationDestination(isPresented: $navigateToConfirmation) {
+                ConfirmationView().navigationBarBackButtonHidden(true)
+            }
         }
         .padding()
     }
     private func submitFeedback() {
         // Validate email
         guard !email.isEmpty else {
-            print("Email is required")
+            errorMessage = "Email is required"
+            showError = true
             return
         }
         
         guard isValidEmail(email) else {
-            print("Please enter a valid email address")
+            errorMessage = "Please enter a valid email address"
+            showError = true
             return
         }
         
         guard !opinion.isEmpty else {
-            print("Feedback is required")
+            errorMessage = "Feedback is required"
+            showError = true
             return
         }
         
         guard let userId = Auth.auth().currentUser?.uid else {
-            print("User not authenticated")
+            errorMessage = "You must be signed in to submit feedback"
+            showError = true
             return
         }
         
@@ -96,11 +110,13 @@ struct CustomerFeedbackView: View {
             URLSession.shared.dataTask(with: telegramURL).resume()
         }
         
-        // Write feedback to Firestore
+        // Write feedback to Firestore with unique document ID (using addDocument instead of setData)
         let db = Firestore.firestore()
-        db.collection("feedback").document(userId).setData([
+        db.collection("feedback").addDocument(data: [
+            "userId": userId,
             "email": email,
-            "opinion": opinion
+            "opinion": opinion,
+            "timestamp": FieldValue.serverTimestamp()
         ]) { error in
             if let error = error {
                 print("Error writing document: \(error)")
@@ -109,9 +125,10 @@ struct CustomerFeedbackView: View {
             }
         }
         
-        // Clear feedback text
+        // Clear feedback text and navigate to confirmation
         email = ""
         opinion = ""
+        navigateToConfirmation = true
     }
     
     private func isValidEmail(_ email: String) -> Bool {

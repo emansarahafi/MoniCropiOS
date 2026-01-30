@@ -16,7 +16,6 @@ struct NitrogenView: View {
     @State private var ids: [String] = []
     
     private let db = Firestore.firestore()
-    private let user = Auth.auth().currentUser
     
     var body: some View {
         VStack {
@@ -69,8 +68,12 @@ struct NitrogenView: View {
     }
     
     private func loadFruits() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("No authenticated user")
+            return
+        }
         db.collection("soil_data")
-            .whereField("userId", isEqualTo: user?.uid ?? "")
+            .whereField("userId", isEqualTo: userId)
             .getDocuments { querySnapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
@@ -96,8 +99,12 @@ struct NitrogenView: View {
             ids = []
             return
         }
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("No authenticated user")
+            return
+        }
         db.collection("soil_data")
-            .whereField("userId", isEqualTo: user?.uid ?? "")
+            .whereField("userId", isEqualTo: userId)
             .whereField("fruit", isEqualTo: selectedFruit)
             .getDocuments { querySnapshot, error in
                 if let error = error {
@@ -121,8 +128,12 @@ struct NitrogenView: View {
     
     private func getnitrogenValues() {
         nitrogenValues.removeAll()
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("No authenticated user")
+            return
+        }
         db.collection("soil_data")
-            .whereField("userId", isEqualTo: user?.uid ?? "")
+            .whereField("userId", isEqualTo: userId)
             .whereField("fruit", isEqualTo: selectedFruit)
             .whereField("id", isEqualTo: selectedID)
             .getDocuments { querySnapshot, error in

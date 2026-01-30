@@ -88,10 +88,7 @@ struct SecondEditAccountView: View {
             } message: {
                 Text(self.failureMessage)
             }
-            Button {
-                // Signal deletion intent to caller (e.g. parent sheet)
-                onComplete?(.delete)
-            } label: {
+            NavigationLink(destination: DisableDeleteView()) {
                 Text("Disable or Delete Your Account")
             }
             .foregroundColor(Color.accent)

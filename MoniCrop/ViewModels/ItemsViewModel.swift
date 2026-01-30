@@ -30,12 +30,11 @@ struct ItemsViewModel: Identifiable, Hashable {
 
 class ApplicationData: ObservableObject {
     @Published var listOfItems: [ItemsViewModel] = []
-    let userId = Auth.auth().currentUser?.uid
-    let db = Firestore.firestore()
+    private let db = Firestore.firestore()
     private let itemsCollection = "items"
 
     func loadData() {
-        guard let userId = userId else {
+        guard let userId = Auth.auth().currentUser?.uid else {
             print("No authenticated user id; skipping items load")
             return
         }

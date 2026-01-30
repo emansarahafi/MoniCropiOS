@@ -14,7 +14,6 @@ struct TemperatureView: View {
     @State private var fruits: [String] = []
     
     private let db = Firestore.firestore()
-    private let user = Auth.auth().currentUser
     
     var body: some View {
         VStack {
@@ -51,8 +50,9 @@ struct TemperatureView: View {
     }
     
     private func loadFruits() {
+        let userId = Auth.auth().currentUser?.uid ?? ""
         db.collection("soil_data")
-            .whereField("userId", isEqualTo: user?.uid ?? "")
+            .whereField("userId", isEqualTo: userId)
             .getDocuments { querySnapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
@@ -75,8 +75,9 @@ struct TemperatureView: View {
     
     private func gettemperatureValues() {
         temperatureValues.removeAll()
+        let userId = Auth.auth().currentUser?.uid ?? ""
         db.collection("soil_data")
-            .whereField("userId", isEqualTo: user?.uid ?? "")
+            .whereField("userId", isEqualTo: userId)
             .whereField("fruit", isEqualTo: selectedFruit)
             .getDocuments { querySnapshot, error in
                 if let error = error {

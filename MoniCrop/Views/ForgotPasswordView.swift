@@ -10,10 +10,9 @@ import FirebaseAuth
 
 struct ForgotPasswordView: View {
     @State var email: String = ""
-    @State var pwd: String = ""
-    @State var newpwd: String = ""
     @State var error = ""
-    @State var alert = false
+    @State var showAlert = false
+    @State var isSuccess = false
 
     var body: some View {
         VStack {
@@ -40,29 +39,41 @@ struct ForgotPasswordView: View {
                     .accessibilityHint("Sends a password reset link to the provided email address")
         }
         .padding()
+        .alert(isSuccess ? "Success" : "Error", isPresented: $showAlert) {
+            Button("OK") {
+                if isSuccess {
+                    email = ""
+                }
+            }
+        } message: {
+            Text(isSuccess ? "Password reset email sent! Check your inbox." : error)
+        }
     }
     func reset() {
         guard !email.isEmpty else {
-            self.error = "Email Id is empty"
-            self.alert.toggle()
+            self.error = "Email is required"
+            self.isSuccess = false
+            self.showAlert = true
             return
         }
         
         guard isValidEmail(email) else {
             self.error = "Please enter a valid email address"
-            self.alert.toggle()
+            self.isSuccess = false
+            self.showAlert = true
             return
         }
         
         Auth.auth().sendPasswordReset(withEmail: self.email) { (err) in
             if let err = err {
                 self.error = err.localizedDescription
-                self.alert.toggle()
+                self.isSuccess = false
+                self.showAlert = true
                 return
             }
             
-            self.error = "RESET"
-            self.alert.toggle()
+            self.isSuccess = true
+            self.showAlert = true
         }
     }
     

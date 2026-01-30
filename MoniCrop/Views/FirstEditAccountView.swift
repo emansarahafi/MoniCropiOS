@@ -92,6 +92,12 @@ struct FirstEditAccountView: View {
         errorMessage = ""
         alertMessage = ""
 
+        // Require at least one field to be filled
+        if email.isEmpty && pwd.isEmpty {
+            alertMessage = "Please enter an email or password to update"
+            return false
+        }
+
         // Validate passwords match
         if !pwd.isEmpty && pwd != cpwd {
             alertMessage = "Passwords do not match"
