@@ -71,7 +71,7 @@ struct MenuView: View {
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
                     Button("View PDF Brochure") {
-                        if let url = URL(string: "https://www.apple.com") {
+                        if let url = URL(string: "https://www.canva.com/design/DAFOn23KpfE/Eueuve2e40uBRa0V7cRz9w/view?utm_content=DAFOn23KpfE&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink") {
                             openURL(url)
                         }
                     }
@@ -86,7 +86,7 @@ struct MenuView: View {
                         .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                         .imageScale(.large)
                     Button("Access Telegram Channel") {
-                        if let url = URL(string: "https://www.apple.com") {
+                        if let url = URL(string: "https://t.me/MoniCropFeedback") {
                             openURL(url)
                         }
                     }

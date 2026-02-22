@@ -8,11 +8,13 @@ import SwiftUI
 
 struct CustomerFeedbackView: View {
     @EnvironmentObject var usersVM: UsersViewModel
+    @EnvironmentObject var feedbacksVM: FeedbacksViewModel
     @State private var email: String = ""
     @State private var opinion: String = ""
     @State private var showConfirmation = false
     @State private var showError = false
     @State private var errorMessage = ""
+    @FocusState private var isOpinionFocused: Bool
 
     var body: some View {
         VStack {
@@ -32,8 +34,14 @@ struct CustomerFeedbackView: View {
                 .textInputAutocapitalization(.never)
             Text("Feedback or Complaint")
                 .font(.system(size: 20))
-            TextField("Insert Opinion", text: $opinion)
-                .textFieldStyle(.roundedBorder)
+            TextEditor(text: $opinion)
+                .frame(height: 120)
+                .padding(4)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+                )
+                .focused($isOpinionFocused)
                 .textInputAutocapitalization(.sentences)
             Button {
                 submitFeedback()
@@ -83,7 +91,14 @@ struct CustomerFeedbackView: View {
             return
         }
         
+        // Save feedback using ViewModel
+        feedbacksVM.addFeedback(email: email, message: opinion)
+        
         showConfirmation = true
+        
+        // Clear the opinion field after submission
+        opinion = ""
+        isOpinionFocused = false
     }
 }
 
@@ -92,6 +107,7 @@ struct CustomerFeedbackView_Previews: PreviewProvider {
         NavigationStack {
             CustomerFeedbackView()
                 .environmentObject(UsersViewModel())
+                .environmentObject(FeedbacksViewModel())
         }
     }
 }

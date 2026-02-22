@@ -8,6 +8,8 @@ import SwiftUI
 
 struct ConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
+    var message: String = "Feedback Received!"
+    var subtitle: String = "Thank you for your feedback. Your submission has been saved locally."
 
     var body: some View {
         VStack {
@@ -16,11 +18,16 @@ struct ConfirmationView: View {
                 .imageScale(.large)
                 .font(.system(size: 120))
                 .padding()
-            Text("Feedback Received!")
+            Text(message)
                 .foregroundColor(Color(red: 148/255, green: 178/255, blue: 2/255))
                 .fontWeight(.bold)
                 .font(.system(size: 50))
                 .padding()
+            Text(subtitle)
+                .foregroundColor(.gray)
+                .font(.system(size: 16))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
             Button {
                 dismiss()
             } label: {

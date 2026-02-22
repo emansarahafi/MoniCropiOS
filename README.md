@@ -51,8 +51,11 @@ Track key agricultural metrics in real-time:
 
 ### Branches
 
-- **basic-version**: Original implementation with local data storage
-- **firebase-version**: [Enhanced version](https://github.com/emansarahafi/MoniCropiOS/tree/firebase-version) with Firebase backend integration for authentication and real-time data synchronization
+- **basic-version**: Original implementation with local data storage (current branch)
+  - Fully functional demo with UserDefaults persistence
+  - All features work locally without requiring backend services
+  - Placeholder configurations are intentional for demo purposes
+- **firebase-version**: [Enhanced version](https://github.com/emansarahafi/MoniCropiOS/tree/firebase-version) with Firebase backend integration for authentication and real-time data synchronization (default/production branch)
 
 ## Poster
 

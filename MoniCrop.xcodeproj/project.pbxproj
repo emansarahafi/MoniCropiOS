@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		71692A3E2968507D008E9DE8 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71692A3D2968507D008E9DE8 /* SignInView.swift */; };
+		AA28000000000000000000AA /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB28000000000000000000BB /* Feedback.swift */; };
+		AA29000000000000000000AA /* FeedbacksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB29000000000000000000BB /* FeedbacksViewModel.swift */; };
 		718419AF293A5C2A00D77CE3 /* MoniCropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718419AE293A5C2A00D77CE3 /* MoniCropApp.swift */; };
 		718419B3293A5C2F00D77CE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 718419B2293A5C2F00D77CE3 /* Assets.xcassets */; };
 		718419B6293A5C2F00D77CE3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 718419B5293A5C2F00D77CE3 /* Preview Assets.xcassets */; };
@@ -50,6 +52,8 @@
 
 /* Begin PBXFileReference section */
 		71692A3D2968507D008E9DE8 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		BB28000000000000000000BB /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		BB29000000000000000000BB /* FeedbacksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbacksViewModel.swift; sourceTree = "<group>"; };
 		718419AB293A5C2A00D77CE3 /* MoniCrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoniCrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		718419AE293A5C2A00D77CE3 /* MoniCropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoniCropApp.swift; sourceTree = "<group>"; };
 		718419B2293A5C2F00D77CE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 			children = (
 				BB23000000000000000000BB /* User.swift */,
 				BB24000000000000000000BB /* Item.swift */,
+				BB28000000000000000000BB /* Feedback.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 			children = (
 				BB25000000000000000000BB /* ItemsViewModel.swift */,
 				BB26000000000000000000BB /* UsersViewModel.swift */,
+				BB29000000000000000000BB /* FeedbacksViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -292,8 +298,10 @@
 				AA22000000000000000000AA /* Config.swift in Sources */,
 				AA23000000000000000000AA /* User.swift in Sources */,
 				AA24000000000000000000AA /* Item.swift in Sources */,
+				AA28000000000000000000AA /* Feedback.swift in Sources */,
 				AA25000000000000000000AA /* ItemsViewModel.swift in Sources */,
 				AA26000000000000000000AA /* UsersViewModel.swift in Sources */,
+				AA29000000000000000000AA /* FeedbacksViewModel.swift in Sources */,
 				AA27000000000000000000AA /* ContentView.swift in Sources */,
 				A13C3DA7A9444724BA845FF9 /* HumidityLevelView.swift in Sources */,
 				DC87D8E91E1B4789862B3324 /* PHLevelView.swift in Sources */,
