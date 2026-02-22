@@ -12,6 +12,7 @@
 
 
 		710520BE29843D26002982EA /* Item.swift */ = {isa = PBXBuildFile; fileRef = 710520BD29843D26002982EA /* Item.swift */; };
+		AA0000001111222233334441 /* Feedback.swift */ = {isa = PBXBuildFile; fileRef = AA0000001111222233334440 /* Feedback.swift */; };
 		71096C1C29F08DD1004D5D3A /* WorkplaceDetailsView.swift */ = {isa = PBXBuildFile; fileRef = 71096C1B29F08DD1004D5D3A /* WorkplaceDetailsView.swift */; };
 		71096C1F29F0914C004D5D3A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71096C1E29F0914C004D5D3A /* FirebaseAuth */; };
 		71096C2129F0914C004D5D3A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 71096C2029F0914C004D5D3A /* FirebaseFirestore */; };
@@ -37,7 +38,6 @@
 		71B1F04A29F05784004EA5F1 /* FirstEditAccountView.swift */ = {isa = PBXBuildFile; fileRef = 71B1F04929F05783004EA5F1 /* FirstEditAccountView.swift */; };
 		71BA98D22EDB5F760068CAEF /* Config.swift */ = {isa = PBXBuildFile; fileRef = 71BA98D12EDB5F760068CAEF /* Config.swift */; };
 		71D3744F2988365300755046 /* HomeView.swift */ = {isa = PBXBuildFile; fileRef = 71D3744E2988365300755046 /* HomeView.swift */; };
-		71D9452029854E330092C58B /* ErrorView.swift */ = {isa = PBXBuildFile; fileRef = 71D9451F29854E330092C58B /* ErrorView.swift */; };
 		71EA242C29855FDC0009F1A5 /* ItemsViewModel.swift */ = {isa = PBXBuildFile; fileRef = 71EA242B29855FDC0009F1A5 /* ItemsViewModel.swift */; };
 		71EBD89029F5665A00C05B12 /* DisableDeleteView.swift */ = {isa = PBXBuildFile; fileRef = 71EBD88F29F5665A00C05B12 /* DisableDeleteView.swift */; };
 		71FE2E662969DB2A00128E61 /* ForgotPasswordView.swift */ = {isa = PBXBuildFile; fileRef = 71FE2E652969DB2A00128E61 /* ForgotPasswordView.swift */; };
@@ -49,7 +49,6 @@
 		0000000000003AE2D3BBCD5F /* ConfirmationView.swift */ = {isa = PBXBuildFile; fileRef = 3AE2D3BBCD5E82937065C549 /* ConfirmationView.swift */; };
 		0000000000000A5B720D205F /* ContentViewItemsView.swift */ = {isa = PBXBuildFile; fileRef = 0A5B720D205EBB6663A51B24 /* ContentViewItemsView.swift */; };
 		00000000000003F12F7656F0 /* DistanceLineChartView.swift */ = {isa = PBXBuildFile; fileRef = 03F12F7656EF6B92F49BF8F4 /* DistanceLineChartView.swift */; };
-		0000000000004CF9C46E22D5 /* FruitPickerView.swift */ = {isa = PBXBuildFile; fileRef = 4CF9C46E22D49B9E8FC16D3D /* FruitPickerView.swift */; };
 		0000000000006FDDDA6C64DE /* HamburgerMenuView.swift */ = {isa = PBXBuildFile; fileRef = 6FDDDA6C64DD8473787139C2 /* HamburgerMenuView.swift */; };
 		00000000000088FB6B6190E1 /* MainView.swift */ = {isa = PBXBuildFile; fileRef = 88FB6B6190E033C9C862B4E9 /* MainView.swift */; };
 		0000000000009B432D9CA434 /* MenuView.swift */ = {isa = PBXBuildFile; fileRef = 9B432D9CA433316FA44CF878 /* MenuView.swift */; };
@@ -86,6 +85,7 @@
 
 
 		710520BD29843D26002982EA /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		AA0000001111222233334440 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		71096C1B29F08DD1004D5D3A /* WorkplaceDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkplaceDetailsView.swift; sourceTree = "<group>"; };
 		710A0B4029F457F600E80BE1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		710A0B4229F480FB00E80BE1 /* PHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHView.swift; sourceTree = "<group>"; };
@@ -109,7 +109,6 @@
 		71B1F04929F05783004EA5F1 /* FirstEditAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstEditAccountView.swift; sourceTree = "<group>"; };
 		71BA98D12EDB5F760068CAEF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		71D3744E2988365300755046 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		71D9451F29854E330092C58B /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		71EA242B29855FDC0009F1A5 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
 		71EBD88F29F5665A00C05B12 /* DisableDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableDeleteView.swift; sourceTree = "<group>"; };
 		71FE2E652969DB2A00128E61 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -121,7 +120,7 @@
 		3AE2D3BBCD5E82937065C549 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		0A5B720D205EBB6663A51B24 /* ContentViewItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewItemsView.swift; sourceTree = "<group>"; };
 		03F12F7656EF6B92F49BF8F4 /* DistanceLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceLineChartView.swift; sourceTree = "<group>"; };
-		4CF9C46E22D49B9E8FC16D3D /* FruitPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitPickerView.swift; sourceTree = "<group>"; };
+
 		6FDDDA6C64DD8473787139C2 /* HamburgerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerMenuView.swift; sourceTree = "<group>"; };
 		88FB6B6190E033C9C862B4E9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9B432D9CA433316FA44CF878 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -159,6 +158,7 @@
 			children = (
 				710520BD29843D26002982EA /* Item.swift */,
 				73AABBCCDD11223344556677 /* User.swift */,
+				AA0000001111222233334440 /* Feedback.swift */,
 
 			);
 			path = Models;
@@ -180,7 +180,6 @@
 					3AE2D3BBCD5E82937065C549 /* ConfirmationView.swift */,
 					0A5B720D205EBB6663A51B24 /* ContentViewItemsView.swift */,
 					03F12F7656EF6B92F49BF8F4 /* DistanceLineChartView.swift */,
-					4CF9C46E22D49B9E8FC16D3D /* FruitPickerView.swift */,
 					6FDDDA6C64DD8473787139C2 /* HamburgerMenuView.swift */,
 					88FB6B6190E033C9C862B4E9 /* MainView.swift */,
 					9B432D9CA433316FA44CF878 /* MenuView.swift */,
@@ -199,7 +198,7 @@
 					804FCBD53FD285502240E444 /* SecureTextFieldView.swift */,
 					B8B8D731F1DDB2D415008BAB /* TemperatureLineChartView.swift */,
 					F2A1B2C3D4E5F67890123456 /* Style.swift */,
-				71D9451F29854E330092C58B /* ErrorView.swift */,
+
 				71D3744E2988365300755046 /* HomeView.swift */,
 					710A0B4229F480FB00E80BE1 /* PHView.swift */,
 					710A0B4429F484B700E80BE1 /* MoistureView.swift */,
@@ -308,7 +307,6 @@
 			packageReferences = (
 				71096C1D29F0914C004D5D3A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				71096C3529F0AAA3004D5D3A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				7191559229F3FE63006A8601 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 718419A2293A5C2A00D77CE3;
 			projectDirPath = "";
@@ -362,7 +360,7 @@
 					F2A1B2C3D4E5F67890123457 /* Style.swift */,
 					71FE2E6A2969EE6400128E61 /* CustomerFeedbackView.swift */,
 				71692A3C29685063008E9DE8 /* FirstSignUpView.swift */,
-				71D9452029854E330092C58B /* ErrorView.swift */,
+
 				710A0B4329F480FB00E80BE1 /* PHView.swift */,
 				710A0B4B29F48BE800E80BE1 /* DistanceView.swift */,
 				710A0B5129F48D6400E80BE1 /* PotassiumView.swift */,
@@ -375,7 +373,6 @@
 					0000000000003AE2D3BBCD5F /* ConfirmationView.swift */,
 					0000000000000A5B720D205F /* ContentViewItemsView.swift */,
 					00000000000003F12F7656F0 /* DistanceLineChartView.swift */,
-					0000000000004CF9C46E22D5 /* FruitPickerView.swift */,
 					0000000000006FDDDA6C64DE /* HamburgerMenuView.swift */,
 					00000000000088FB6B6190E1 /* MainView.swift */,
 					0000000000009B432D9CA434 /* MenuView.swift */,
@@ -401,6 +398,7 @@
 				71BA98D22EDB5F760068CAEF /* Config.swift */,
 				718419AF293A5C2A00D77CE3 /* MoniCropApp.swift */,
 				710520BE29843D26002982EA /* Item.swift */,
+				AA0000001111222233334441 /* Feedback.swift */,
 				710A0B4929F48B6700E80BE1 /* TemperatureView.swift */,
 				710D6E462969D81C00DA4AEF /* ViewDataView.swift */,
 				72AABBCCDD11223344556678 /* UsersViewModel.swift */,
@@ -634,14 +632,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
-			};
-		};
-		7191559229F3FE63006A8601 /* XCRemoteSwiftPackageReference "Charts" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielgindi/Charts.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

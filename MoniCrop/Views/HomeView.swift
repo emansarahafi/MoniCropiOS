@@ -6,36 +6,17 @@
 //
 
 import SwiftUI
-import Firebase
 
 struct HomeView: View {
-    @State var show = false
-    @State var status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
-        var body: some View{
-            
-            NavigationStack{
-                
-                VStack{
-                    
-                    if self.status{
-                        
-                        HamburgerMenuView()
-                    }
-                    else{
-                        
-                        LandingView()
-                    }
-                }
-                .navigationBarBackButtonHidden(true)
-                .onAppear {
-                    NotificationCenter.default.addObserver(forName: NSNotification.Name("status"), object: nil, queue: .main) { (_) in
-                        
-                        self.status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
-                    }
-                }
+    @EnvironmentObject var usersVM: UsersViewModel
+
+    var body: some View {
+        HamburgerMenuView()
+            .onAppear {
+                usersVM.loadCurrentUser()
             }
-        }
     }
+}
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

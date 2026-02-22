@@ -5,7 +5,6 @@
 //  Created by Eman Sarah Afi on 1/7/23.
 //
 
-import Foundation
 import SwiftUI
 import Firebase
 import FirebaseAuth
@@ -13,7 +12,7 @@ import FirebaseFirestore
 
 struct CustomerFeedbackView: View {
     @State private var email: String = ""
-    @State private var opinion: String = ""
+    @State private var message: String = ""
     @State private var showError = false
     @State private var errorMessage = ""
     @State private var navigateToConfirmation = false
@@ -43,7 +42,7 @@ struct CustomerFeedbackView: View {
             VStack (alignment: .leading) {
                 Text("Feedback or Complaint")
                     .bodyStyle()
-                TextField("Insert Opinion", text: $opinion)
+                TextField("Insert Feedback", text: $message)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .textContentType(.none)
                     .autocorrectionDisabled(true)
@@ -87,7 +86,7 @@ struct CustomerFeedbackView: View {
             return
         }
         
-        guard !opinion.isEmpty else {
+        guard !message.isEmpty else {
             errorMessage = "Feedback is required"
             showError = true
             return
@@ -99,24 +98,21 @@ struct CustomerFeedbackView: View {
             return
         }
         
-        let feedbackText = "\(email) says: \(opinion)"
-        
+        let feedback = Feedback(email: email, message: message, timestamp: Date())
+
         // Send feedback to Telegram channel using Config
-        let telegramMessage = "User \(userId) submitted feedback: \(feedbackText)"
-        
-        // Send message to Telegram
+        let telegramMessage = "User \(userId) submitted feedback: \(feedback.email) says: \(feedback.message)"
         if let encodedMessage = telegramMessage.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
            let telegramURL = URL(string: "https://api.telegram.org/bot\(Config.telegramBotToken)/sendMessage?chat_id=\(Config.telegramChatID)&text=\(encodedMessage)") {
             URLSession.shared.dataTask(with: telegramURL).resume()
         }
-        
-        // Write feedback to Firestore with unique document ID (using addDocument instead of setData)
-        let db = Firestore.firestore()
-        db.collection("feedback").addDocument(data: [
+
+        // Write feedback to Firestore with unique document ID
+        Firestore.firestore().collection("feedback").addDocument(data: [
             "userId": userId,
-            "email": email,
-            "opinion": opinion,
-            "timestamp": FieldValue.serverTimestamp()
+            "email": feedback.email,
+            "message": feedback.message,
+            "timestamp": Timestamp(date: feedback.timestamp)
         ]) { error in
             if let error = error {
                 print("Error writing document: \(error)")
@@ -127,7 +123,7 @@ struct CustomerFeedbackView: View {
         
         // Clear feedback text and navigate to confirmation
         email = ""
-        opinion = ""
+        message = ""
         navigateToConfirmation = true
     }
     
@@ -137,9 +133,6 @@ struct CustomerFeedbackView: View {
         return emailPredicate.evaluate(with: email)
     }
 }
-
-
-
 
 struct CustomerFeedbackView_Previews: PreviewProvider {
     static var previews: some View {

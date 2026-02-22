@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ConfirmationView: View {
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack {
@@ -22,19 +23,18 @@ struct ConfirmationView: View {
                 .titleStyle()
                 .padding()
             .padding()
-            Button(action: {
-                // Action for Done button
-            }, label: {
-                NavigationLink(destination: HamburgerMenuView().navigationBarBackButtonHidden(true)) {
-                    Text("Done")
-                        .frame(maxWidth: .infinity)
-                }
-            }).primaryButtonStyle()
-                .bodyStyle()
-                .padding(.top)
-                .accessibilityLabel("Done - return to menu")
-                .accessibilityIdentifier("confirmationDoneButton")
-                .accessibilityHint("Returns to the main menu")
+            Button {
+                dismiss()
+            } label: {
+                Text("Done")
+                    .frame(maxWidth: .infinity)
+            }
+            .primaryButtonStyle()
+            .bodyStyle()
+            .padding(.top)
+            .accessibilityLabel("Done - return to menu")
+            .accessibilityIdentifier("confirmationDoneButton")
+            .accessibilityHint("Returns to the feedback form")
         }
         .padding()
     }

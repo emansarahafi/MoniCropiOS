@@ -10,6 +10,7 @@ import Firebase
 
 struct SecondEditAccountView: View {
     var onComplete: ((EditAction) -> Void)? = nil
+    @Environment(\.dismiss) private var dismiss
     @State var date = Date()
     @State var fname: String = ""
     @State var mname: String = ""
@@ -19,7 +20,6 @@ struct SecondEditAccountView: View {
     @State var isLoading: Bool = false
     @State var showError: Bool = false
     @State var errorMessage: String = ""
-    @State private var navigateToMenu = false
     @State private var showSuccess = false
     @State private var showFailure = false
     @State private var failureMessage = ""
@@ -62,8 +62,6 @@ struct SecondEditAccountView: View {
                     .padding(.top, 5)
             }
 
-            // hidden navigation link controlled by update success
-
             Button {
                 updateAccount()
             } label: {
@@ -78,7 +76,7 @@ struct SecondEditAccountView: View {
             .accessibilityHint("Saves your account changes and returns to the menu")
             .alert("Success", isPresented: $showSuccess) {
                 Button("Continue") {
-                    navigateToMenu = true
+                    dismiss()
                 }
             } message: {
                 Text("Account updated successfully.")
@@ -99,9 +97,6 @@ struct SecondEditAccountView: View {
             .accessibilityHint("Choose to disable or delete your account")
         }
         .padding()
-        .navigationDestination(isPresented: $navigateToMenu) {
-            HamburgerMenuView()
-        }
     }
 
     private func updateAccount() {
